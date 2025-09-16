@@ -2,6 +2,7 @@ package com.example.motorcyclemanager.presentation.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.motorcyclemanager.data.repositories.BikeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(private val bikeRepository: BikeRepository) : ViewModel() {
     private val _inputText = MutableStateFlow("")
     private val _inputText2 = MutableStateFlow("")
 
