@@ -20,10 +20,10 @@ import com.example.motorcyclemanager.ui.theme.MotorcycleManagerTheme
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Profile(val name: String)
+object Home
 
 @Serializable
-object FriendsList
+object BikeDetail
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,26 +31,26 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MotorcycleManagerTheme {
-                ZManager()
+                MotorcycleManager()
             }
         }
     }
 }
 
 @Composable
-private fun ZManager() {
+private fun MotorcycleManager() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Profile("John Smith")) {
-        composable<Profile> { backStackEntry ->
-            val profile: Profile = backStackEntry.toRoute()
-            ProfileScreen(profile = profile, onNavigateToFriendsList = {
-                navController.navigate(route = FriendsList)
+    NavHost(navController = navController, startDestination = Home) {
+        composable<Home> { backStackEntry ->
+            val home: Home = backStackEntry.toRoute()
+            HomeScreen(home = home, onNavigateToBikeDetail = {
+                navController.navigate(route = BikeDetail)
             })
         }
-        composable<FriendsList> {
-            FriendsListScreen(onNavigateToProfile = {
+        composable<BikeDetail> {
+            BikeDetailScreen(onNavigateToHomeScreen = {
                 navController.navigate(
-                    route = Profile(name = "Aisha Devi")
+                    route = Home
                 )
             })
         }
@@ -58,27 +58,27 @@ private fun ZManager() {
 }
 
 @Composable
-fun ProfileScreen(
-    profile: Profile,
-    onNavigateToFriendsList: () -> Unit,
+fun HomeScreen(
+    home: Home,
+    onNavigateToBikeDetail: () -> Unit,
 ) {
     Scaffold() { padding ->
         Column(modifier = Modifier.padding(padding)) {
-            Text("Profile for ${profile.name}")
-            Button(onClick = { onNavigateToFriendsList() }) {
-                Text("Go to Friends List")
+            Text("Home Page")
+            Button(onClick = { onNavigateToBikeDetail() }) {
+                Text("Go to Bike")
             }
         }
     }
 }
 
 @Composable
-fun FriendsListScreen(onNavigateToProfile: () -> Unit) {
+fun BikeDetailScreen(onNavigateToHomeScreen: () -> Unit) {
     Scaffold() { padding ->
         Column(modifier = Modifier.padding(padding)) {
-            Text("Friends List")
-            Button(onClick = { onNavigateToProfile() }) {
-                Text("Go to Profile")
+            Text("Bike Page")
+            Button(onClick = { onNavigateToHomeScreen() }) {
+                Text("Go to Home")
             }
         }
     }
