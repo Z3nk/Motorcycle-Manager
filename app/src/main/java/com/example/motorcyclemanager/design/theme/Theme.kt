@@ -1,6 +1,5 @@
-package com.example.motorcyclemanager.ui.theme
+package com.example.motorcyclemanager.design.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

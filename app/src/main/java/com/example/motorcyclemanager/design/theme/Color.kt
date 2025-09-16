@@ -1,4 +1,4 @@
-package com.example.motorcyclemanager.ui.theme
+package com.example.motorcyclemanager.design.theme
 
 import androidx.compose.ui.graphics.Color
 
