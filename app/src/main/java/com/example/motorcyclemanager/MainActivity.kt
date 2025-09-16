@@ -22,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.motorcyclemanager.ui.theme.MotorcycleManagerTheme
@@ -99,13 +101,13 @@ fun MotorCycleBottomBar(navController: NavHostController) {
         BottomNavItem("Profile", Icons.Default.Person, BikeDetail),
         BottomNavItem("Settings", Icons.Default.Settings, Settings)
     )
-    val selectedItem = remember { mutableIntStateOf(0) }
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
     BottomAppBar(
         actions = {
-            navItems.forEachIndexed { index, item ->
+            navItems.forEach { item ->
                 IconButton(
                     onClick = {
-                        selectedItem.intValue = index
                         navController.navigate(item.route) {
                             popUpTo(navController.graph.startDestinationId)
                             launchSingleTop = true
@@ -115,7 +117,7 @@ fun MotorCycleBottomBar(navController: NavHostController) {
                     Icon(
                         imageVector = item.icon,
                         contentDescription = item.label,
-                        tint = if (selectedItem.intValue == index) {
+                        tint = if (item.route::class.qualifiedName == currentRoute) {
                             MaterialTheme.colorScheme.primary
                         } else {
                             MaterialTheme.colorScheme.onSurfaceVariant
