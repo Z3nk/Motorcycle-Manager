@@ -2,6 +2,8 @@ package com.example.motorcyclemanager.presentation.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.motorcyclemanager.data.models.CheckEntity
+import com.example.motorcyclemanager.data.models.ConsumableEntity
 import com.example.motorcyclemanager.data.repositories.BikeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +39,11 @@ class HomeViewModel @Inject constructor(private val bikeRepository: BikeReposito
     init {
         viewModelScope.launch(Dispatchers.Main) {
             _inputText.value = "1"
+            bikeRepository.createBike(
+                name = "Test Bike",
+                consumables = listOf(ConsumableEntity(name = "Oil", time = 1000, bikeId = 0)),
+                checks = listOf(CheckEntity(name = "Tire Check", done = false, bikeId = 0))
+            )
         }
     }
 }

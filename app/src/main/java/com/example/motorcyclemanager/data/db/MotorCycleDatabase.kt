@@ -7,7 +7,7 @@ import com.example.motorcyclemanager.data.models.BikeEntity
 import com.example.motorcyclemanager.data.models.CheckEntity
 import com.example.motorcyclemanager.data.models.ConsumableEntity
 
-@Database(entities = [BikeEntity::class, ConsumableEntity::class, CheckEntity::class], version = 1, exportSchema = false)
+@Database(entities = [BikeEntity::class, ConsumableEntity::class, CheckEntity::class], version = 1, exportSchema = true)
 abstract class MotorCycleDatabase : RoomDatabase() {
     abstract fun bikeDao(): BikeDao
 }
