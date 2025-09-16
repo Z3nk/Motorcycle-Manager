@@ -20,6 +20,7 @@ import com.example.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import com.example.motorcyclemanager.presentation.bikedetails.ui.BikeDetailsScreen
 import com.example.motorcyclemanager.presentation.home.ui.HomeScreen
 import com.example.motorcyclemanager.presentation.settings.ui.SettingsScreen
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -32,6 +33,7 @@ object BikeDetail
 @Serializable
 object Settings
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

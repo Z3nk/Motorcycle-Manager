@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.motorcyclemanager.presentation.home.ui.screens.HomeStateScreen
 
@@ -29,7 +30,7 @@ sealed class HomeScreenUiState {
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = viewModel(),
+    viewModel: HomeViewModel = hiltViewModel(),
     onNavigateToBikeDetail: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()
