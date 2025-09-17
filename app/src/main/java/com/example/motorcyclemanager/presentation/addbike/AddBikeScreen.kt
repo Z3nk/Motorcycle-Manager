@@ -36,7 +36,7 @@ fun AddBikeScreen(
     ) {
         when (uiState) {
             is AddBikeScreenUiState.AddBikeScreenState -> AddBikeStateScreen(
-                uiState as AddBikeScreenUiState.AddBikeScreenState
+                viewModel::onBikeAdded
             )
 
             AddBikeScreenUiState.LoadingState -> Box(

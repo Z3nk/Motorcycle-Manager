@@ -2,6 +2,7 @@ package com.example.motorcyclemanager.presentation.addbike;
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.motorcyclemanager.presentation.addbike.models.BikeAdded
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -31,5 +32,9 @@ class AddBikeViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.Main) {
 
         }
+    }
+
+    fun onBikeAdded(bikeAdded: BikeAdded){
+
     }
 }
