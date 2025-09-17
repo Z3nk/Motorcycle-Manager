@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.motorcyclemanager.data.models.CheckEntity
 import com.example.motorcyclemanager.data.models.ConsumableEntity
 import com.example.motorcyclemanager.data.repositories.bikes.BikeRepository
+import com.example.motorcyclemanager.domain.home.GetHomeStateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -19,31 +20,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val bikeRepository: BikeRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val getHomeStateUseCase: GetHomeStateUseCase) :
+    ViewModel() {
     private val _inputText = MutableStateFlow("")
     private val _inputText2 = MutableStateFlow("")
 
-    val uiState: StateFlow<HomeScreenUiState> = combine(
-        _inputText,
-        _inputText2
-    ) { i1, i2 ->
-        HomeScreenUiState.HomeScreenState(i1)
-    }.flowOn(Dispatchers.Main).stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        HomeScreenUiState.LoadingState
-    )
-
+    val uiState: StateFlow<HomeScreenUiState> =
+        getHomeStateUseCase(_inputText,_inputText2).flowOn(Dispatchers.Main).stateIn(
+            viewModelScope,
+            SharingStarted.Eagerly, HomeScreenUiState.LoadingState
+        )
 
 
     init {
         viewModelScope.launch(Dispatchers.Main) {
             _inputText.value = "1"
-            bikeRepository.createBike(
-                name = "Test Bike",
-                consumables = listOf(ConsumableEntity(name = "Oil", time = 1000, bikeId = 0)),
-                checks = listOf(CheckEntity(name = "Tire Check", done = false, bikeId = 0))
-            )
         }
     }
 }

@@ -1,7 +1,8 @@
 package com.example.motorcyclemanager.domain.bikes.models
 
-data class Check(
+
+data class ConsumableDomain(
     val id: Long,
     val name: String,
-    val done: Boolean
+    val time: Int
 )

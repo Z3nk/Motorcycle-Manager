@@ -12,8 +12,8 @@ class BikeRepository @Inject constructor(
     private val bikeDao: BikeDao
 ) {
     // Example: Create a new bike with consumables and checks
-    suspend fun createBike(name: String, consumables: List<ConsumableEntity>, checks: List<CheckEntity>) {
-        val bike = BikeEntity(name = name)
+    suspend fun createBike(name: String, time: Int, consumables: List<ConsumableEntity>, checks: List<CheckEntity>) {
+        val bike = BikeEntity(name = name, time = time)
         val bikeId = bikeDao.insertBike(bike)
 
         // Assign bikeId to consumables and checks
