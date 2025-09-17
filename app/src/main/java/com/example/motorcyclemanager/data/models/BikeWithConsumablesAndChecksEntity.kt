@@ -3,7 +3,7 @@ package com.example.motorcyclemanager.data.models
 import androidx.room.Embedded
 import androidx.room.Relation
 
-data class BikeWithConsumablesAndChecks(
+data class BikeWithConsumablesAndChecksEntity(
     @Embedded val bike: BikeEntity,
     @Relation(
         parentColumn = "id",

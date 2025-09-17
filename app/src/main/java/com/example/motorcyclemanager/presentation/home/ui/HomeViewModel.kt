@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.motorcyclemanager.data.models.CheckEntity
 import com.example.motorcyclemanager.data.models.ConsumableEntity
-import com.example.motorcyclemanager.data.repositories.BikeRepository
+import com.example.motorcyclemanager.data.repositories.bikes.BikeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

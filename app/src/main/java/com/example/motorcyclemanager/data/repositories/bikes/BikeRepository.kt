@@ -1,8 +1,8 @@
-package com.example.motorcyclemanager.data.repositories
+package com.example.motorcyclemanager.data.repositories.bikes
 
 import com.example.motorcyclemanager.data.doa.BikeDao
 import com.example.motorcyclemanager.data.models.BikeEntity
-import com.example.motorcyclemanager.data.models.BikeWithConsumablesAndChecks
+import com.example.motorcyclemanager.data.models.BikeWithConsumablesAndChecksEntity
 import com.example.motorcyclemanager.data.models.CheckEntity
 import com.example.motorcyclemanager.data.models.ConsumableEntity
 import kotlinx.coroutines.flow.Flow
@@ -24,6 +24,6 @@ class BikeRepository @Inject constructor(
         bikeDao.insertChecks(checksWithId)
     }
 
-    fun getAllBikes(): Flow<List<BikeWithConsumablesAndChecks>> = bikeDao.getAllBikesWithDetails()
+    fun getAllBikes(): Flow<List<BikeWithConsumablesAndChecksEntity>> = bikeDao.getAllBikesWithDetails()
 
 }

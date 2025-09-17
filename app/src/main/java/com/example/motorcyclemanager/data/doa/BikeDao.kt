@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import com.example.motorcyclemanager.data.models.BikeEntity
-import com.example.motorcyclemanager.data.models.BikeWithConsumablesAndChecks
+import com.example.motorcyclemanager.data.models.BikeWithConsumablesAndChecksEntity
 import com.example.motorcyclemanager.data.models.CheckEntity
 import com.example.motorcyclemanager.data.models.ConsumableEntity
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 interface BikeDao {
 
     @Insert
-    suspend fun insertBike(bike: BikeEntity): Long // Returns the inserted ID
+    suspend fun insertBike(bike: BikeEntity): Long
 
     @Insert
     suspend fun insertConsumables(consumables: List<ConsumableEntity>)
@@ -22,15 +22,12 @@ interface BikeDao {
     @Insert
     suspend fun insertChecks(checks: List<CheckEntity>)
 
-    // Example query to get all bikes with their consumables and checks
     @Transaction
     @Query("SELECT * FROM bikes")
-    fun getAllBikesWithDetails(): Flow<List<BikeWithConsumablesAndChecks>>
+    fun getAllBikesWithDetails(): Flow<List<BikeWithConsumablesAndChecksEntity>>
 
-    // Add more queries as needed, e.g., by ID
     @Transaction
     @Query("SELECT * FROM bikes WHERE id = :bikeId")
-    suspend fun getBikeWithDetails(bikeId: Long): BikeWithConsumablesAndChecks?
+    suspend fun getBikeWithDetails(bikeId: Long): BikeWithConsumablesAndChecksEntity?
 
-    // Update, delete, etc., as needed
 }

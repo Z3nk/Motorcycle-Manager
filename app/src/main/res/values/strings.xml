@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Motorcycle Manager</string>
+    <string name="bike_list">Your motorcycles :</string>
 </resources>
