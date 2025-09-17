@@ -17,12 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.motorcyclemanager.presentation.home.ui.models.BikeWithConsumableAndChecks
 import com.example.motorcyclemanager.presentation.home.ui.screens.HomeStateScreen
 
 sealed class HomeScreenUiState {
 
     data class HomeScreenState(
-        val inputText: String = ""
+        val bikeList: List<BikeWithConsumableAndChecks>?
     ) : HomeScreenUiState()
 
     object LoadingState : HomeScreenUiState()

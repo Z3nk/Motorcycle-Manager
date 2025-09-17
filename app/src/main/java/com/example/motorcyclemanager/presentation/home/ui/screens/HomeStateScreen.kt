@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.motorcyclemanager.R
 import com.example.motorcyclemanager.presentation.home.ui.HomeScreenUiState
+import com.example.motorcyclemanager.presentation.home.ui.composables.BikeCard
 
 @Composable
 fun HomeStateScreen(
@@ -26,12 +27,16 @@ fun HomeStateScreen(
             stringResource(R.string.bike_list),
             style = MaterialTheme.typography.titleMedium
         )
-        LazyColumn() {
-
-        }
-        Text("Home Page with state : ${homeScreenState.inputText}")
-        Button(onClick = { onNavigateToBikeDetail() }) {
-            Text("Go to Bike")
+        homeScreenState.bikeList?.let { lBikeList ->
+            LazyColumn(modifier = Modifier) {
+                items(lBikeList.size) { index ->
+                    BikeCard(lBikeList[index])
+                }
+            }
+        } ?: run {
+            Button(onClick = { onNavigateToBikeDetail() }) {
+                Text("Add a bike")
+            }
         }
     }
 }

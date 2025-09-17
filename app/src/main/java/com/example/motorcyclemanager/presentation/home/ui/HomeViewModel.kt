@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.motorcyclemanager.data.models.CheckEntity
 import com.example.motorcyclemanager.data.models.ConsumableEntity
 import com.example.motorcyclemanager.data.repositories.bikes.BikeRepository
+import com.example.motorcyclemanager.domain.bikes.GetBikeListUseCase
+import com.example.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
 import com.example.motorcyclemanager.domain.home.GetHomeStateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,20 +15,24 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val getHomeStateUseCase: GetHomeStateUseCase) :
+class HomeViewModel @Inject constructor(
+    private val getHomeStateUseCase: GetHomeStateUseCase,
+    private val getBikeListUseCase: GetBikeListUseCase
+) :
     ViewModel() {
-    private val _inputText = MutableStateFlow("")
-    private val _inputText2 = MutableStateFlow("")
+    private val bikeList = MutableStateFlow<List<BikeWithConsumablesAndChecksDomain>?>(null)
 
     val uiState: StateFlow<HomeScreenUiState> =
-        getHomeStateUseCase(_inputText,_inputText2).flowOn(Dispatchers.Main).stateIn(
+        getHomeStateUseCase(bikeList).flowOn(Dispatchers.Main).stateIn(
             viewModelScope,
             SharingStarted.Eagerly, HomeScreenUiState.LoadingState
         )
@@ -34,7 +40,9 @@ class HomeViewModel @Inject constructor(private val getHomeStateUseCase: GetHome
 
     init {
         viewModelScope.launch(Dispatchers.Main) {
-            _inputText.value = "1"
+            getBikeListUseCase().collectLatest { mBikeList ->
+                bikeList.update { mBikeList }
+            }
         }
     }
 }
