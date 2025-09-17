@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,7 +17,7 @@ import androidx.navigation.toRoute
 import com.example.motorcyclemanager.composables.bottombar.MotorCycleBottomBar
 import com.example.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import com.example.motorcyclemanager.presentation.bikedetails.ui.BikeDetailsScreen
-import com.example.motorcyclemanager.presentation.home.ui.HomeScreen
+import com.example.motorcyclemanager.presentation.home.HomeScreen
 import com.example.motorcyclemanager.presentation.settings.ui.SettingsScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable

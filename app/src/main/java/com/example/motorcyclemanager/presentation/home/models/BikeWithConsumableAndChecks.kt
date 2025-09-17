@@ -1,4 +1,4 @@
-package com.example.motorcyclemanager.presentation.home.ui.models
+package com.example.motorcyclemanager.presentation.home.models
 
 import com.example.motorcyclemanager.domain.bikes.models.BikeDomain
 import com.example.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain

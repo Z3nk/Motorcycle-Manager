@@ -1,4 +1,4 @@
-package com.example.motorcyclemanager.presentation.home.ui.screens
+package com.example.motorcyclemanager.presentation.home.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,8 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.motorcyclemanager.R
-import com.example.motorcyclemanager.presentation.home.ui.HomeScreenUiState
-import com.example.motorcyclemanager.presentation.home.ui.composables.BikeCard
+import com.example.motorcyclemanager.presentation.home.HomeScreenUiState
+import com.example.motorcyclemanager.presentation.home.composables.BikeCard
 
 @Composable
 fun HomeStateScreen(

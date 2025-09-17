@@ -1,4 +1,4 @@
-package com.example.motorcyclemanager.presentation.home.ui.composables
+package com.example.motorcyclemanager.presentation.home.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,7 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.motorcyclemanager.presentation.home.ui.models.BikeWithConsumableAndChecks
+import com.example.motorcyclemanager.presentation.home.models.BikeWithConsumableAndChecks
 
 @Composable
 fun BikeCard(bike: BikeWithConsumableAndChecks) {

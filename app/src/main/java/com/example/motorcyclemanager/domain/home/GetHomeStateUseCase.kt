@@ -1,8 +1,8 @@
 package com.example.motorcyclemanager.domain.home
 
 import com.example.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
-import com.example.motorcyclemanager.presentation.home.ui.HomeScreenUiState
-import com.example.motorcyclemanager.presentation.home.ui.models.BikeWithConsumableAndChecks
+import com.example.motorcyclemanager.presentation.home.HomeScreenUiState
+import com.example.motorcyclemanager.presentation.home.models.BikeWithConsumableAndChecks
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine

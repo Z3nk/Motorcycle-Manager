@@ -1,22 +1,16 @@
-package com.example.motorcyclemanager.presentation.home.ui
+package com.example.motorcyclemanager.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.motorcyclemanager.data.models.CheckEntity
-import com.example.motorcyclemanager.data.models.ConsumableEntity
-import com.example.motorcyclemanager.data.repositories.bikes.BikeRepository
 import com.example.motorcyclemanager.domain.bikes.GetBikeListUseCase
 import com.example.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
 import com.example.motorcyclemanager.domain.home.GetHomeStateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -34,7 +28,7 @@ class HomeViewModel @Inject constructor(
     val uiState: StateFlow<HomeScreenUiState> =
         getHomeStateUseCase(bikeList).flowOn(Dispatchers.Main).stateIn(
             viewModelScope,
-            SharingStarted.Eagerly, HomeScreenUiState.LoadingState
+            SharingStarted.Companion.Eagerly, HomeScreenUiState.LoadingState
         )
 
 
