@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e783276d46a375fdc2047fca9f3ecb0b",
+    "identityHash": "b91d40c2a13cb6e4963bab2af1f55add",
     "entities": [
       {
         "tableName": "bikes",
@@ -36,7 +36,7 @@
       },
       {
         "tableName": "consumables",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bikeId` INTEGER NOT NULL, `name` TEXT NOT NULL, `time` INTEGER NOT NULL, FOREIGN KEY(`bikeId`) REFERENCES `bikes`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bikeId` INTEGER NOT NULL, `name` TEXT NOT NULL, `time` REAL NOT NULL, `currentTime` REAL NOT NULL, FOREIGN KEY(`bikeId`) REFERENCES `bikes`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -59,7 +59,13 @@
           {
             "fieldPath": "time",
             "columnName": "time",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentTime",
+            "columnName": "currentTime",
+            "affinity": "REAL",
             "notNull": true
           }
         ],
@@ -157,7 +163,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e783276d46a375fdc2047fca9f3ecb0b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b91d40c2a13cb6e4963bab2af1f55add')"
     ]
   }
 }

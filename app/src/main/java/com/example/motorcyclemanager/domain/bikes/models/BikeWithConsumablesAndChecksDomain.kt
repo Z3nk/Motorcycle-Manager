@@ -9,7 +9,7 @@ data class BikeWithConsumablesAndChecksDomain(
 ) {
     constructor(entity: BikeWithConsumablesAndChecksEntity) : this(
         bike = BikeDomain(entity.bike.id, entity.bike.name, entity.bike.time),
-        consumables = entity.consumables.map { ConsumableDomain(it.id, it.name, it.time) },
+        consumables = entity.consumables.map { ConsumableDomain(it.id, it.name, it.time, it.currentTime) },
         checks = entity.checks.map { CheckDomain(it.id, it.name, it.done) }
     )
 }
