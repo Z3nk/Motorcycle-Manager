@@ -15,7 +15,7 @@ hilt = "2.57.1"
 hiltNavigationCompose = "1.3.0"
 room = "2.8.0"
 ksp = "2.2.20-2.0.3"
-javapoet = "1.13.0"
+materialExtended = "1.7.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,7 +40,7 @@ hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-com
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
-javapoet = { group = "com.squareup", name = "javapoet", version.ref = "javapoet" }
+material-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialExtended" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

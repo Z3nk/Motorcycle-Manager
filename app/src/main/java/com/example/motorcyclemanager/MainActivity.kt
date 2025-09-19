@@ -19,7 +19,7 @@ import androidx.navigation.toRoute
 import com.example.motorcyclemanager.composables.bottombar.MotorCycleBottomBar
 import com.example.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import com.example.motorcyclemanager.presentation.addbike.AddBikeScreen
-import com.example.motorcyclemanager.presentation.bikedetails.ui.BikeDetailsScreen
+import com.example.motorcyclemanager.presentation.bikedetails.BikeDetailsScreen
 import com.example.motorcyclemanager.presentation.home.HomeScreen
 import com.example.motorcyclemanager.presentation.settings.ui.SettingsScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,13 +76,6 @@ private fun MotorcycleManager() {
                                 saveState = true
                             }; launchSingleTop = true
                         }
-                    })
-                }
-                composable<BikeDetail> {
-                    BikeDetailsScreen(onNavigateToHomeScreen = {
-                        navController.navigate(
-                            route = Home
-                        )
                     })
                 }
                 composable<BikeDetail> {
