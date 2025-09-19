@@ -18,7 +18,7 @@ import com.example.motorcyclemanager.presentation.addbike.screens.AddBikeStateSc
 sealed class AddBikeScreenUiState {
 
     data class AddBikeScreenState(
-        val text: String
+        val loading: Boolean
     ) : AddBikeScreenUiState()
 
     object LoadingState : AddBikeScreenUiState()
@@ -26,7 +26,8 @@ sealed class AddBikeScreenUiState {
 
 @Composable
 fun AddBikeScreen(
-    viewModel: AddBikeViewModel = hiltViewModel()
+    viewModel: AddBikeViewModel = hiltViewModel(),
+    onNavigateToHomeScreen: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     Surface(
@@ -35,9 +36,11 @@ fun AddBikeScreen(
         shadowElevation = 2.dp
     ) {
         when (uiState) {
-            is AddBikeScreenUiState.AddBikeScreenState -> AddBikeStateScreen(
-                viewModel::onBikeAdded
-            )
+            is AddBikeScreenUiState.AddBikeScreenState -> AddBikeStateScreen {
+                viewModel.onBikeAdded(it) {
+                    onNavigateToHomeScreen()
+                }
+            }
 
             AddBikeScreenUiState.LoadingState -> Box(
                 modifier = Modifier.fillMaxSize(),

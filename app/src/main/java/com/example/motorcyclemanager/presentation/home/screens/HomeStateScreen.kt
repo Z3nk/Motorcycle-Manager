@@ -17,7 +17,8 @@ import com.example.motorcyclemanager.presentation.home.composables.BikeCard
 @Composable
 fun HomeStateScreen(
     homeScreenState: HomeScreenUiState.HomeScreenState,
-    onNavigateToBikeDetail: () -> Unit
+    onNavigateToBikeDetail: () -> Unit,
+    onNavigateToAddBike: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -27,15 +28,17 @@ fun HomeStateScreen(
             stringResource(R.string.bike_list),
             style = MaterialTheme.typography.titleMedium
         )
-        homeScreenState.bikeList?.let { lBikeList ->
-            LazyColumn(modifier = Modifier) {
-                items(lBikeList.size) { index ->
-                    BikeCard(lBikeList[index])
-                }
-            }
-        } ?: run {
-            Button(onClick = { onNavigateToBikeDetail() }) {
+        if (homeScreenState.bikeList?.isEmpty() == true) {
+            Button(onClick = { onNavigateToAddBike() }) {
                 Text("Add a bike")
+            }
+        } else {
+            homeScreenState.bikeList?.let { lBikeList ->
+                LazyColumn(modifier = Modifier) {
+                    items(lBikeList.size) { index ->
+                        BikeCard(lBikeList[index])
+                    }
+                }
             }
         }
     }
