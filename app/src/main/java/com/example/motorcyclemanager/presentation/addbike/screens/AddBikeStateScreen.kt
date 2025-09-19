@@ -1,4 +1,5 @@
 package com.example.motorcyclemanager.presentation.addbike.screens;
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.motorcyclemanager.presentation.addbike.AddBikeScreenUiState
 import com.example.motorcyclemanager.presentation.addbike.models.BikeAdded
 
 @Composable
@@ -73,13 +73,13 @@ fun AddBikeStateScreen(
                     errorMessage = "Le temps est requis"
                     return@Button
                 }
-                val timeInt = time.toIntOrNull()
-                if (timeInt == null || timeInt <= 0) {
+                val fTime = time.toFloatOrNull()
+                if (fTime == null || fTime <= 0) {
                     errorMessage = "Le temps doit être un nombre positif"
                     return@Button
                 }
                 errorMessage = null
-                onNewBike(BikeAdded(name, timeInt))
+                onNewBike(BikeAdded(name, fTime))
             },
             modifier = Modifier.padding(top = 16.dp)
         ) {

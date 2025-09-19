@@ -6,6 +6,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -25,25 +26,31 @@ sealed class BikeDetailsScreenUiState {
 
 @Composable
 fun BikeDetailsScreen(
+    bikeId: Long,
     viewModel: BikeDetailsViewModel = hiltViewModel(),
     onNavigateToHomeScreen: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    LaunchedEffect(bikeId) {
+        viewModel.initBike(bikeId)
+    }
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
         shadowElevation = 2.dp
     ) {
         when (uiState) {
-            is BikeDetailsScreenUiState.BikeDetailsScreenState -> BikeDetailsStateScreen(
-                uiState as BikeDetailsScreenUiState.BikeDetailsScreenState,
-                onBackClick = onNavigateToHomeScreen,
-                onAddHours = {},
-                onAddCheck = {},
-                onAddConsumable = {},
-                onEditCheck = {},
-                onEditConsumable = {}
-            )
+            is BikeDetailsScreenUiState.BikeDetailsScreenState -> {
+                BikeDetailsStateScreen(
+                    uiState as BikeDetailsScreenUiState.BikeDetailsScreenState,
+                    onBackClick = onNavigateToHomeScreen,
+                    onAddHours = {},
+                    onAddCheck = {},
+                    onAddConsumable = {},
+                    onEditCheck = {},
+                    onEditConsumable = {}
+                )
+            }
 
             BikeDetailsScreenUiState.LoadingState -> Box(
                 modifier = Modifier.fillMaxSize(),

@@ -17,7 +17,7 @@ import com.example.motorcyclemanager.presentation.home.composables.BikeCard
 @Composable
 fun HomeStateScreen(
     homeScreenState: HomeScreenUiState.HomeScreenState,
-    onNavigateToBikeDetail: () -> Unit,
+    onNavigateToBikeDetail: (Long) -> Unit,
     onNavigateToAddBike: () -> Unit
 ) {
     Column(
@@ -36,7 +36,10 @@ fun HomeStateScreen(
             homeScreenState.bikeList?.let { lBikeList ->
                 LazyColumn(modifier = Modifier) {
                     items(lBikeList.size) { index ->
-                        BikeCard(lBikeList[index])
+                        BikeCard(lBikeList[index], onClick = {
+
+                                onNavigateToBikeDetail(lBikeList[index].id)
+                        })
                     }
                 }
             }

@@ -8,7 +8,7 @@ import com.example.motorcyclemanager.domain.bikes.models.ConsumableDomain
 data class BikeWithConsumableAndChecks(
     val id: Long,
     val name: String,
-    val time: Int,
+    val time: Float,
     val consumablesSize: Int,
     val checksSize: Int
 ) {

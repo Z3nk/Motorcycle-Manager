@@ -41,6 +41,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -101,7 +102,8 @@ fun BikeDetailsStateScreen(
                 onAddCheck = onAddCheck
             )
         }
-    }}
+    }
+}
 
 @Composable
 private fun BikeHeader(
@@ -257,14 +259,15 @@ private fun ConsumablesSection(
                 }
             }
         }
-    }}
+    }
+}
 
 @Composable
 private fun ConsumableItem(
     consumable: Consumable,
     onEditClick: () -> Unit
 ) {
-    val hoursRemaining = consumable.time - (consumable.currentTime?:0.0f)
+    val hoursRemaining = consumable.time - (consumable.currentTime ?: 0.0f)
     val progress = if (consumable.time > 0 && consumable.currentTime != null) {
         (consumable.currentTime / consumable.time).coerceIn(0f, 1f)
     } else {
@@ -405,7 +408,8 @@ private fun ChecklistSection(
                 }
             }
         }
-    }}
+    }
+}
 
 @Composable
 private fun ChecklistItem(
@@ -529,19 +533,19 @@ fun BikeDetailsPreview() {
         BikeDetailsStateScreen(
             screenState = BikeDetailsScreenUiState.BikeDetailsScreenState(
                 Bike(
-                    id = "1",
+                    id = 1,
                     name = "KTM 450 SX-F",
                     totalHours = 32f,
                     consumables = listOf(
-                        Consumable("1", "Oil Change", 6.0f, 4.0f),
-                        Consumable("2", "Piston", 50f, 28f),
-                        Consumable("3", "Chaine", 20f, 5f),
+                        Consumable(1, "Oil Change", 6.0f, 4.0f),
+                        Consumable(2, "Piston", 50f, 28f),
+                        Consumable(3, "Chaine", 20f, 5f),
                     ),
                     checks = listOf(
-                        Check("1", "Grease chain", false),
-                        Check("2", "WD40 on engine", false),
-                        Check("3", "Blow bike", false),
-                        Check("4", "Blow bike", false),
+                        Check(1, "Grease chain", false),
+                        Check(2, "WD40 on engine", false),
+                        Check(3, "Blow bike", false),
+                        Check(4, "Blow bike", false),
                     )
                 )
             ),

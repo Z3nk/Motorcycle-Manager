@@ -60,7 +60,7 @@ fun MotorCycleBottomBar(navController: NavHostController) {
                 onClick = { /* Action du FAB */ },
                 containerColor = MaterialTheme.colorScheme.secondary,
                 contentColor = MaterialTheme.colorScheme.onSecondary,
-                modifier = Modifier.offset(y = 16.dp) // Décalage pour alignement visuel
+                modifier = Modifier.offset() // Décalage pour alignement visuel
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add")
             }

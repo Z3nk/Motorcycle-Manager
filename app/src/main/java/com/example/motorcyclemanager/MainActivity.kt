@@ -32,7 +32,7 @@ object Home
 object AddBike
 
 @Serializable
-object BikeDetail
+data class BikeDetail(val id: Long)
 
 @Serializable
 object Settings
@@ -54,7 +54,6 @@ class MainActivity : ComponentActivity() {
 private fun MotorcycleManager() {
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = currentBackStackEntry?.destination?.route
 
     Scaffold(bottomBar = { MotorCycleBottomBar(navController) }) { padding ->
         Column(modifier = Modifier.padding(padding)) {
@@ -62,8 +61,8 @@ private fun MotorcycleManager() {
                 composable<Home> { backStackEntry ->
                     val home: Home = backStackEntry.toRoute()
                     HomeScreen(
-                        onNavigateToBikeDetail = {
-                            navController.navigate(route = BikeDetail)
+                        onNavigateToBikeDetail = { id ->
+                            navController.navigate(route = BikeDetail(id))
                         },
                         onNavigateToAddBike = {
                             navController.navigate(route = AddBike)
@@ -78,12 +77,15 @@ private fun MotorcycleManager() {
                         }
                     })
                 }
-                composable<BikeDetail> {
-                    BikeDetailsScreen(onNavigateToHomeScreen = {
-                        navController.navigate(
-                            route = Home
-                        )
-                    })
+                composable<BikeDetail> { backStackEntry ->
+                    val bikeDetail: BikeDetail = backStackEntry.toRoute()
+                    BikeDetailsScreen(
+                        bikeId = bikeDetail.id,
+                        onNavigateToHomeScreen = {
+                            navController.navigate(
+                                route = Home
+                            )
+                        })
                 }
                 composable<Settings> {
                     SettingsScreen(onNavigateToHomeScreen = {

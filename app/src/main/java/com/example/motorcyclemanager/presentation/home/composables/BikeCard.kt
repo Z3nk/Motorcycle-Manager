@@ -1,5 +1,6 @@
 package com.example.motorcyclemanager.presentation.home.composables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,12 +20,13 @@ import androidx.compose.ui.unit.dp
 import com.example.motorcyclemanager.presentation.home.models.BikeWithConsumableAndChecks
 
 @Composable
-fun BikeCard(bike: BikeWithConsumableAndChecks) {
+fun BikeCard(bike: BikeWithConsumableAndChecks, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable(onClick = onClick),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Box(

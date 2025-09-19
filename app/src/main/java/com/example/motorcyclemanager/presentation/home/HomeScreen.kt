@@ -27,7 +27,7 @@ sealed class HomeScreenUiState {
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onNavigateToBikeDetail: () -> Unit,
+    onNavigateToBikeDetail: (Long) -> Unit,
     onNavigateToAddBike: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
