@@ -20,4 +20,8 @@ class CheckRepository @Inject constructor(
         checkDao.insertCheck(check)
     }
 
+    suspend fun resetAllChecksForBike(bikeId: Long){
+        checkDao.resetAllChecksForBike(bikeId)
+    }
+
 }

@@ -19,4 +19,16 @@ class ConsumableRepository @Inject constructor(
         consumableDao.insertConsumable(consumable)
     }
 
+    suspend fun addTimeTo(bikeId: Long, hoursToAdd: Float){
+        consumableDao.addTimeToAllConsumables(bikeId, hoursToAdd)
+    }
+
+    suspend fun resetConsumable(consumableId: Long) {
+        val consumable = consumableDao.getConsumableById(consumableId)
+        consumable?.let {
+            val resetConsumable = it.copy(currentTime = 0f)
+            consumableDao.updateConsumable(resetConsumable)
+        }
+    }
+
 }

@@ -29,6 +29,7 @@ fun BikeDetailsScreen(
     bikeId: Long,
     viewModel: BikeDetailsViewModel = hiltViewModel(),
     onNavigateToHomeScreen: () -> Unit,
+    onNavigateToAddHourScreen: (idBike: Long) -> Unit,
     onNavigateToAddConsumableScreen: (idBike: Long) -> Unit,
     onNavigateToAddCheckScreen: (idBike: Long) -> Unit
 ) {
@@ -47,7 +48,7 @@ fun BikeDetailsScreen(
                     uiState as BikeDetailsScreenUiState.BikeDetailsScreenState,
                     onBackClick = onNavigateToHomeScreen,
                     onAddHours = {
-
+                        onNavigateToAddHourScreen(bikeId)
                     },
                     onAddCheck = {
                         onNavigateToAddCheckScreen(bikeId)

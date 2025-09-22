@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.example.motorcyclemanager.data.models.BikeEntity
 import com.example.motorcyclemanager.data.models.BikeWithConsumablesAndChecksEntity
 import com.example.motorcyclemanager.data.models.CheckEntity
@@ -15,6 +16,9 @@ interface BikeDao {
 
     @Insert
     suspend fun insertBike(bike: BikeEntity): Long
+
+    @Update
+    suspend fun updateBike(bike: BikeEntity): Int
 
     @Transaction
     @Query("SELECT * FROM bikes")

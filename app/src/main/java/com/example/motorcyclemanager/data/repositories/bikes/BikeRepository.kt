@@ -1,5 +1,6 @@
 package com.example.motorcyclemanager.data.repositories.bikes
 
+import androidx.room.Transaction
 import com.example.motorcyclemanager.data.doa.BikeDao
 import com.example.motorcyclemanager.data.doa.CheckDao
 import com.example.motorcyclemanager.data.doa.ConsumableDao
@@ -30,6 +31,15 @@ class BikeRepository @Inject constructor(
 
         consumableDao.insertConsumables(consumablesWithId)
         checkDao.insertChecks(checksWithId)
+    }
+
+    @Transaction
+    suspend fun addHourToBike(bikeId: Long, hoursToAdd: Float) {
+        val currentBike = bikeDao.getBikeWithDetails(bikeId)
+        if (currentBike != null) {
+            val updatedBike = currentBike.bike.copy(time = currentBike.bike.time + hoursToAdd)
+            bikeDao.updateBike(updatedBike)
+        }
     }
 
     fun getAllBikes(): Flow<List<BikeWithConsumablesAndChecksEntity>> =

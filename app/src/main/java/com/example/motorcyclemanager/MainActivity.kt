@@ -21,6 +21,7 @@ import com.example.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import com.example.motorcyclemanager.presentation.addbike.AddBikeScreen
 import com.example.motorcyclemanager.presentation.addcheck.AddCheckScreen
 import com.example.motorcyclemanager.presentation.addconsumable.AddConsumableScreen
+import com.example.motorcyclemanager.presentation.addhour.AddHourScreen
 import com.example.motorcyclemanager.presentation.bikedetails.BikeDetailsScreen
 import com.example.motorcyclemanager.presentation.home.HomeScreen
 import com.example.motorcyclemanager.presentation.settings.ui.SettingsScreen
@@ -35,6 +36,9 @@ object AddBike
 
 @Serializable
 data class BikeDetail(val id: Long)
+
+@Serializable
+data class AddHour(val bikeId: Long)
 
 @Serializable
 data class AddConsumable(val bikeId: Long)
@@ -100,6 +104,21 @@ private fun MotorcycleManager() {
                     )
                 }
 
+                composable<AddHour> { backStackEntry ->
+                    val addHour: AddHour = backStackEntry.toRoute()
+                    AddHourScreen(
+                        bikeId = addHour.bikeId,
+                        goBackToBikeDetail = {
+                            navController.navigate(BikeDetail(addHour.bikeId)) {
+                                popUpTo(BikeDetail(addHour.bikeId)) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                            }
+                        }
+                    )
+                }
+
                 composable<AddConsumable> { backStackEntry ->
                     val addConsumable: AddConsumable = backStackEntry.toRoute()
                     AddConsumableScreen(
@@ -123,6 +142,11 @@ private fun MotorcycleManager() {
                                 route = Home
                             )
                         },
+                        onNavigateToAddHourScreen = { bikeId ->
+                            navController.navigate(
+                                route = AddHour(bikeId)
+                            )
+                        },
                         onNavigateToAddConsumableScreen = { bikeId ->
                             navController.navigate(
                                 route = AddConsumable(bikeId)
@@ -132,7 +156,6 @@ private fun MotorcycleManager() {
                             navController.navigate(
                                 route = AddCheck(bikeId)
                             )
-
                         })
                 }
                 composable<Settings> {
