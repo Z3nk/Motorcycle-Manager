@@ -19,6 +19,7 @@ import androidx.navigation.toRoute
 import com.example.motorcyclemanager.composables.bottombar.MotorCycleBottomBar
 import com.example.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import com.example.motorcyclemanager.presentation.addbike.AddBikeScreen
+import com.example.motorcyclemanager.presentation.addcheck.AddCheckScreen
 import com.example.motorcyclemanager.presentation.addconsumable.AddConsumableScreen
 import com.example.motorcyclemanager.presentation.bikedetails.BikeDetailsScreen
 import com.example.motorcyclemanager.presentation.home.HomeScreen
@@ -83,6 +84,20 @@ private fun MotorcycleManager() {
                             launchSingleTop = true
                         }
                     })
+                }
+                composable<AddCheck> { backStackEntry ->
+                    val addCheck: AddCheck = backStackEntry.toRoute()
+                    AddCheckScreen(
+                        bikeId = addCheck.bikeId,
+                        goBackToBikeDetail = {
+                            navController.navigate(BikeDetail(addCheck.bikeId)) {
+                                popUpTo(BikeDetail(addCheck.bikeId)) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                            }
+                        }
+                    )
                 }
 
                 composable<AddConsumable> { backStackEntry ->
