@@ -60,7 +60,9 @@ fun BikeDetailsScreen(
 
                     },
                     onEditConsumable = {},
-                    onClickCheck = {}
+                    onClickCheck = { check ->
+                        viewModel.checkOn(check)
+                    }
                 )
             }
 

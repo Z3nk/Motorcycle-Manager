@@ -3,13 +3,18 @@ package com.example.motorcyclemanager.presentation.bikedetails;
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.motorcyclemanager.data.repositories.bikes.BikeRepository
+import com.example.motorcyclemanager.data.repositories.checks.CheckRepository
+import com.example.motorcyclemanager.domain.bikes.checks.CheckCheckUseCaseUseCase
 import com.example.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
+import com.example.motorcyclemanager.models.Resource
 import com.example.motorcyclemanager.presentation.bikedetails.models.Bike
+import com.example.motorcyclemanager.presentation.bikedetails.models.Check
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
@@ -18,7 +23,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BikeDetailsViewModel @Inject constructor(private val bikeRepository: BikeRepository) :
+class BikeDetailsViewModel @Inject constructor(
+    private val bikeRepository: BikeRepository,
+    private val checkCheckUseCaseUseCase: CheckCheckUseCaseUseCase
+) :
     ViewModel() {
     private val bikeWithConsumablesAndChecksDomain =
         MutableStateFlow<BikeWithConsumablesAndChecksDomain?>(null)
@@ -43,6 +51,27 @@ class BikeDetailsViewModel @Inject constructor(private val bikeRepository: BikeR
     )
 
     fun initScreen(bikeId: Long) {
+        refreshBikeWith(bikeId)
+    }
+
+    fun checkOn(check: Check) {
+        viewModelScope.launch(Dispatchers.Main) {
+            bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->
+                checkCheckUseCaseUseCase(bikeId, check).collectLatest {res ->
+                    when(res){
+                        is Resource.Error<*> -> {}
+                        is Resource.Loading<*> -> {}
+                        is Resource.Success<*> -> {
+                            refreshBikeWith(bikeId)
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    private fun refreshBikeWith(bikeId: Long) {
         viewModelScope.launch(Dispatchers.Main) {
             bikeWithConsumablesAndChecksDomain.update { bikeRepository.getBikeById(bikeId) }
         }
