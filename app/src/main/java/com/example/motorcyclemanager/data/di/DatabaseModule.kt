@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.motorcyclemanager.data.db.MotorCycleDatabase
 import com.example.motorcyclemanager.data.doa.BikeDao
+import com.example.motorcyclemanager.data.doa.CheckDao
+import com.example.motorcyclemanager.data.doa.ConsumableDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +31,17 @@ object DatabaseModule {
     @Singleton
     fun provideBikeDao(database: MotorCycleDatabase): BikeDao {
         return database.bikeDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideConsumableDao(database: MotorCycleDatabase): ConsumableDao {
+        return database.consumableDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCheckDao(database: MotorCycleDatabase): CheckDao {
+        return database.checkDao()
     }
 }

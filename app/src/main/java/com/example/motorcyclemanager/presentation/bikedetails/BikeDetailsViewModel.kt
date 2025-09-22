@@ -5,9 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.motorcyclemanager.data.repositories.bikes.BikeRepository
 import com.example.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
 import com.example.motorcyclemanager.presentation.bikedetails.models.Bike
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,7 +42,7 @@ class BikeDetailsViewModel @Inject constructor(private val bikeRepository: BikeR
         BikeDetailsScreenUiState.LoadingState
     )
 
-    fun initBike(bikeId: Long) {
+    fun initScreen(bikeId: Long) {
         viewModelScope.launch(Dispatchers.Main) {
             bikeWithConsumablesAndChecksDomain.update { bikeRepository.getBikeById(bikeId) }
         }

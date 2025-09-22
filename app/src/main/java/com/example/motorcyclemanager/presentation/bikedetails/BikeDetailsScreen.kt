@@ -28,11 +28,13 @@ sealed class BikeDetailsScreenUiState {
 fun BikeDetailsScreen(
     bikeId: Long,
     viewModel: BikeDetailsViewModel = hiltViewModel(),
-    onNavigateToHomeScreen: () -> Unit
+    onNavigateToHomeScreen: () -> Unit,
+    onNavigateToAddConsumableScreen: (idBike: Long) -> Unit,
+    onNavigateToAddCheckScreen: (idBike: Long) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     LaunchedEffect(bikeId) {
-        viewModel.initBike(bikeId)
+        viewModel.initScreen(bikeId)
     }
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -44,10 +46,18 @@ fun BikeDetailsScreen(
                 BikeDetailsStateScreen(
                     uiState as BikeDetailsScreenUiState.BikeDetailsScreenState,
                     onBackClick = onNavigateToHomeScreen,
-                    onAddHours = {},
-                    onAddCheck = {},
-                    onAddConsumable = {},
-                    onEditCheck = {},
+                    onAddHours = {
+
+                    },
+                    onAddCheck = {
+                        onNavigateToAddCheckScreen(bikeId)
+                    },
+                    onAddConsumable = {
+                        onNavigateToAddConsumableScreen(bikeId)
+                    },
+                    onEditCheck = {
+
+                    },
                     onEditConsumable = {}
                 )
             }

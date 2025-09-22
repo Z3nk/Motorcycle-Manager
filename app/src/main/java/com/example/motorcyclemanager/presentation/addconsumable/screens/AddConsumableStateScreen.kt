@@ -38,7 +38,7 @@ fun AddConsumableStateScreen(
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Nom de la moto") },
+            label = { Text("Nom de la conso") },
             modifier = Modifier.fillMaxWidth(),
             isError = errorMessage != null
         )
@@ -84,7 +84,7 @@ fun AddConsumableStateScreen(
             },
             modifier = Modifier.padding(top = 16.dp)
         ) {
-            Text("Ajouter la moto")
+            Text("Ajouter la conso")
         }
     }
 

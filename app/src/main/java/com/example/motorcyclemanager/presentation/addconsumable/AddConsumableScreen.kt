@@ -6,6 +6,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -25,9 +26,15 @@ sealed class AddConsumableScreenUiState {
 
 @Composable
 fun AddConsumableScreen(
-    viewModel: AddConsumableViewModel = hiltViewModel()
+    bikeId: Long,
+    viewModel: AddConsumableViewModel = hiltViewModel(),
+    goBackToBikeDetail: () -> Unit
+
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    LaunchedEffect(bikeId) {
+        viewModel.initScreen(bikeId)
+    }
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
@@ -35,7 +42,11 @@ fun AddConsumableScreen(
     ) {
         when (uiState) {
             is AddConsumableScreenUiState.AddConsumableScreenState -> AddConsumableStateScreen(
-                viewModel::onNewConsumable
+                onNewConsumable = {
+                    viewModel.onNewConsumable(it) {
+                        goBackToBikeDetail()
+                    }
+                }
             )
 
             AddConsumableScreenUiState.LoadingState -> Box(

@@ -11,17 +11,12 @@ import com.example.motorcyclemanager.data.models.ConsumableEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface BikeDao {
+interface ConsumableDao {
 
     @Insert
-    suspend fun insertBike(bike: BikeEntity): Long
+    suspend fun insertConsumable(consumable: ConsumableEntity): Long
 
-    @Transaction
-    @Query("SELECT * FROM bikes")
-    fun getAllBikesWithDetails(): Flow<List<BikeWithConsumablesAndChecksEntity>>
-
-    @Transaction
-    @Query("SELECT * FROM bikes WHERE id = :bikeId")
-    suspend fun getBikeWithDetails(bikeId: Long): BikeWithConsumablesAndChecksEntity?
+    @Insert
+    suspend fun insertConsumables(consumables: List<ConsumableEntity>)
 
 }

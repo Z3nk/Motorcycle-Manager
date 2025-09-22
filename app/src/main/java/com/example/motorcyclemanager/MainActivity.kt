@@ -19,6 +19,7 @@ import androidx.navigation.toRoute
 import com.example.motorcyclemanager.composables.bottombar.MotorCycleBottomBar
 import com.example.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import com.example.motorcyclemanager.presentation.addbike.AddBikeScreen
+import com.example.motorcyclemanager.presentation.addconsumable.AddConsumableScreen
 import com.example.motorcyclemanager.presentation.bikedetails.BikeDetailsScreen
 import com.example.motorcyclemanager.presentation.home.HomeScreen
 import com.example.motorcyclemanager.presentation.settings.ui.SettingsScreen
@@ -33,6 +34,12 @@ object AddBike
 
 @Serializable
 data class BikeDetail(val id: Long)
+
+@Serializable
+data class AddConsumable(val bikeId: Long)
+
+@Serializable
+data class AddCheck(val bikeId: Long)
 
 @Serializable
 object Settings
@@ -59,7 +66,6 @@ private fun MotorcycleManager() {
         Column(modifier = Modifier.padding(padding)) {
             NavHost(navController = navController, startDestination = Home) {
                 composable<Home> { backStackEntry ->
-                    val home: Home = backStackEntry.toRoute()
                     HomeScreen(
                         onNavigateToBikeDetail = { id ->
                             navController.navigate(route = BikeDetail(id))
@@ -73,9 +79,25 @@ private fun MotorcycleManager() {
                         navController.navigate(Home) {
                             popUpTo(Home) {
                                 saveState = true
-                            }; launchSingleTop = true
+                            }
+                            launchSingleTop = true
                         }
                     })
+                }
+
+                composable<AddConsumable> { backStackEntry ->
+                    val addConsumable: AddConsumable = backStackEntry.toRoute()
+                    AddConsumableScreen(
+                        bikeId = addConsumable.bikeId,
+                        goBackToBikeDetail = {
+                            navController.navigate(BikeDetail(addConsumable.bikeId)) {
+                                popUpTo(BikeDetail(addConsumable.bikeId)) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                            }
+                        }
+                    )
                 }
                 composable<BikeDetail> { backStackEntry ->
                     val bikeDetail: BikeDetail = backStackEntry.toRoute()
@@ -85,6 +107,17 @@ private fun MotorcycleManager() {
                             navController.navigate(
                                 route = Home
                             )
+                        },
+                        onNavigateToAddConsumableScreen = { bikeId ->
+                            navController.navigate(
+                                route = AddConsumable(bikeId)
+                            )
+                        },
+                        onNavigateToAddCheckScreen = { bikeId ->
+                            navController.navigate(
+                                route = AddCheck(bikeId)
+                            )
+
                         })
                 }
                 composable<Settings> {

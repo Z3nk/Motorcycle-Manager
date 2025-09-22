@@ -36,10 +36,23 @@ fun AddBikeScreen(
         shadowElevation = 2.dp
     ) {
         when (uiState) {
-            is AddBikeScreenUiState.AddBikeScreenState -> AddBikeStateScreen {
-                viewModel.onBikeAdded(it) {
-                    onNavigateToHomeScreen()
+            is AddBikeScreenUiState.AddBikeScreenState -> {
+                if ((uiState as AddBikeScreenUiState.AddBikeScreenState).loading) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+
+                } else {
+                    AddBikeStateScreen {
+                        viewModel.onBikeAdded(it) {
+                            onNavigateToHomeScreen()
+                        }
+                    }
                 }
+
             }
 
             AddBikeScreenUiState.LoadingState -> Box(
