@@ -2,7 +2,7 @@ package com.example.motorcyclemanager.presentation.bikedetails;
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,23 +16,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Inventory2
-import androidx.compose.material.icons.filled.Motorcycle
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.filled.SportsMotorsports
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -41,11 +40,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -64,43 +66,56 @@ fun BikeDetailsStateScreen(
     onEditConsumable: (Consumable) -> Unit,
     onAddCheck: () -> Unit,
     onEditCheck: (Check) -> Unit,
-    onAddHours: (Float) -> Unit
+    onClickCheck: (Check) -> Unit,
+    onAddHours: () -> Unit
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(bottom = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(0.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp)
-    ) {
-        item {
-            BikeHeader(
-                bike = screenState.bike,
-                onBackClick = onBackClick,
-                onAddHours = onAddHours
-            )
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = onBackClick) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Retour",
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
         }
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(0.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp)
+        ) {
+            item {
+                BikeHeader(
+                    bike = screenState.bike,
+                    onBackClick = onBackClick,
+                    onAddHours = onAddHours
+                )
+            }
 
-        item {
-            ConsumablesSection(
-                consumables = screenState.bike.consumables,
-                totalHours = screenState.bike.totalHours,
-                onEditConsumable = onEditConsumable,
-                onAddConsumable = onAddConsumable
-            )
-        }
-
-        item {
-            Spacer(modifier = Modifier.height(24.dp))
-        }
-
-        item {
-            ChecklistSection(
-                checks = screenState.bike.checks,
-                onEditCheck = onEditCheck,
-                onAddCheck = onAddCheck
-            )
+            item {
+                ConsumablesSection(
+                    consumables = screenState.bike.consumables,
+                    totalHours = screenState.bike.totalHours,
+                    onEditConsumable = onEditConsumable,
+                    onAddConsumable = onAddConsumable
+                )
+            }
+            item {
+                ChecklistSection(
+                    checks = screenState.bike.checks,
+                    onEditCheck = onEditCheck,
+                    onClickCheck = onClickCheck,
+                    onAddCheck = onAddCheck
+                )
+            }
         }
     }
 }
@@ -109,95 +124,49 @@ fun BikeDetailsStateScreen(
 private fun BikeHeader(
     bike: Bike,
     onBackClick: () -> Unit,
-    onAddHours: (Float) -> Unit
+    onAddHours: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Retour",
-                    tint = MaterialTheme.colorScheme.onSurface
-                )
-            }
-        }
-
-//        Box(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(200.dp)
-//                .background(
-//                    color = MaterialTheme.colorScheme.surfaceVariant,
-//                    shape = RoundedCornerShape(12.dp)
-//                ),
-//            contentAlignment = Alignment.Center
-//        ) {
-//            Column(
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//                verticalArrangement = Arrangement.Center
-//            ) {
-//                Icon(
-//                    imageVector = Icons.Default.SportsMotorsports,
-//                    contentDescription = "Moto",
-//                    modifier = Modifier.size(64.dp),
-//                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-//                )
-//                Spacer(modifier = Modifier.height(8.dp))
-//                Text(
-//                    text = "Image de la moto",
-//                    style = MaterialTheme.typography.bodySmall,
-//                    color = MaterialTheme.colorScheme.onSurfaceVariant
-//                )
-//            }
-//        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
-                Text(
-                    text = bike.name,
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = "${bike.totalHours} h",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Medium
-                )
-            }
-
-            FloatingActionButton(
-                onClick = { onAddHours(0f) },
-                modifier = Modifier.size(48.dp),
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Ajouter des heures",
-                    modifier = Modifier.size(20.dp)
-                )
-            }
+            Text(
+                text = bike.name,
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = "${bike.totalHours} h",
+                style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Medium
+            )
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Button(
+            onClick = { onAddHours() },
+            modifier = Modifier.clip(RoundedCornerShape(12.dp)),
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            )
+        ) {
+            Text(
+                modifier = Modifier.padding(12.dp),
+                text = "Ajouter des heures",
+                style = MaterialTheme.typography.titleLarge
+            )
+        }
     }
 }
 
@@ -209,10 +178,9 @@ private fun ConsumablesSection(
     onAddConsumable: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
         )
     ) {
         Column(
@@ -355,13 +323,13 @@ private fun ConsumableItem(
 private fun ChecklistSection(
     checks: List<Check>,
     onEditCheck: (Check) -> Unit,
+    onClickCheck: (Check) -> Unit,
     onAddCheck: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
         )
     ) {
         Column(
@@ -402,6 +370,7 @@ private fun ChecklistSection(
                     checks.forEach { check ->
                         ChecklistItem(
                             check = check,
+                            onClickCheck = { onClickCheck(check) },
                             onEditClick = { onEditCheck(check) }
                         )
                     }
@@ -414,12 +383,18 @@ private fun ChecklistSection(
 @Composable
 private fun ChecklistItem(
     check: Check,
+    onClickCheck: () -> Unit,
     onEditClick: () -> Unit
 ) {
+    var showMenu by remember { mutableStateOf(false) }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onEditClick() },
+            .combinedClickable(
+                onClick = onClickCheck,
+                onLongClick = { showMenu = true }
+            ),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         ),
@@ -434,7 +409,7 @@ private fun ChecklistItem(
             Checkbox(
                 checked = check.isCompleted,
                 onCheckedChange = null,
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier.size(24.dp),
                 colors = CheckboxDefaults.colors(
                     checkedColor = MaterialTheme.colorScheme.primary,
                     uncheckedColor = MaterialTheme.colorScheme.outline
@@ -450,16 +425,40 @@ private fun ChecklistItem(
                 modifier = Modifier.weight(1f)
             )
 
-            IconButton(
-                onClick = onEditClick,
-                modifier = Modifier.size(24.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Edit,
-                    contentDescription = "Modifier",
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(16.dp)
-                )
+            // Dropdown Menu
+            Box {
+                IconButton(
+                    onClick = { showMenu = true },
+                    modifier = Modifier.size(24.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = "Plus d'options",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+
+                DropdownMenu(
+                    expanded = showMenu,
+                    onDismissRequest = { showMenu = false },
+                    modifier = Modifier.align(Alignment.TopEnd)
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Modifier") },
+                        onClick = {
+                            showMenu = false
+                            onEditClick()
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Supprimer") },
+                        onClick = {
+                            showMenu = false
+                            onEditClick()
+                        }
+                    )
+                }
             }
         }
     }
@@ -554,7 +553,8 @@ fun BikeDetailsPreview() {
             onEditConsumable = {},
             onAddCheck = {},
             onEditCheck = {},
-            onAddHours = {}
+            onAddHours = {},
+            onClickCheck = {}
         )
     }
 }

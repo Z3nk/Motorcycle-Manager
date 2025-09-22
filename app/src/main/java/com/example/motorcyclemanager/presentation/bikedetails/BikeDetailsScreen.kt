@@ -59,7 +59,8 @@ fun BikeDetailsScreen(
                     onEditCheck = {
 
                     },
-                    onEditConsumable = {}
+                    onEditConsumable = {},
+                    onClickCheck = {}
                 )
             }
 
