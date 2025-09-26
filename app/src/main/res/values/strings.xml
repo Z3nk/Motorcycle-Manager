@@ -2,4 +2,17 @@
     <string name="app_name">Motorcycle Manager</string>
     <string name="bike_list">Your motorcycles :</string>
     <string name="validate">Validate</string>
+    <string name="add_a_dirtbike">Add a dirtbike</string>
+    <string name="add_hours">Add time spent on the dirtbike</string>
+    <string name="consommables">Consumables</string>
+    <string name="add_consumable">Add consumable</string>
+    <string name="no_consumables">No consumables</string>
+    <string name="consumables_examples">Example : oil change, oil filter, pistons, etc. A consumable is simply something that has a lifespan on your dirtbike and you want to know how much you\re up to</string>
+    <string name="no_check_points">No check points</string>
+    <string name="checks_examples">Example : check torque, check chain tension, etc. Any actions you want to do before and/or after a ride</string>
+    <string name="checklist">Check list</string>
+    <string name="add_check">Add check point</string>
+    <string name="more_options">More options</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
 </resources>

@@ -19,9 +19,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Inventory2
+import androidx.compose.material.icons.filled.Checklist
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Timelapse
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -45,11 +45,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.motorcyclemanager.R
 import com.example.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import com.example.motorcyclemanager.presentation.bikedetails.models.Bike
 import com.example.motorcyclemanager.presentation.bikedetails.models.Check
@@ -162,11 +164,24 @@ private fun BikeHeader(
                 contentColor = MaterialTheme.colorScheme.onPrimary
             )
         ) {
-            Text(
+            Row(
                 modifier = Modifier.padding(12.dp),
-                text = "Ajouter des heures",
-                style = MaterialTheme.typography.titleLarge
-            )
+                horizontalArrangement = Arrangement.spacedBy(
+                    12.dp,
+                    Alignment.CenterHorizontally
+                ),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = stringResource(R.string.add_a_dirtbike)
+                )
+                Text(
+                    modifier = Modifier,
+                    text = stringResource(R.string.add_hours),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
     }
 }
@@ -200,7 +215,7 @@ private fun ConsumablesSection(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Consommables",
+                    text = stringResource(R.string.consommables),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
@@ -209,7 +224,7 @@ private fun ConsumablesSection(
                 IconButton(onClick = onAddConsumable) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Ajouter consommable",
+                        contentDescription = stringResource(R.string.add_consumable),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -333,14 +348,14 @@ private fun ConsumableItem(
                     modifier = Modifier.align(Alignment.TopEnd)
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Modifier") },
+                        text = { stringResource(R.string.update) },
                         onClick = {
                             showMenu = false
                             onEditClick()
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text("Supprimer") },
+                        text = { stringResource(R.string.delete) },
                         onClick = {
                             showMenu = false
                             onDeleteClick()
@@ -381,7 +396,7 @@ private fun ChecklistSection(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Checklist",
+                    text = stringResource(R.string.checklist),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
@@ -390,7 +405,7 @@ private fun ChecklistSection(
                 IconButton(onClick = onAddCheck) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Ajouter check",
+                        contentDescription = stringResource(R.string.add_check),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -470,7 +485,7 @@ private fun ChecklistItem(
                 ) {
                     Icon(
                         imageVector = Icons.Default.MoreVert,
-                        contentDescription = "Plus d'options",
+                        contentDescription = stringResource(R.string.more_options),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(18.dp)
                     )
@@ -482,14 +497,14 @@ private fun ChecklistItem(
                     modifier = Modifier.align(Alignment.TopEnd)
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Modifier") },
+                        text = { Text(stringResource(R.string.update)) },
                         onClick = {
                             showMenu = false
                             onEditClick()
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text("Supprimer") },
+                        text = { Text(stringResource(R.string.delete)) },
                         onClick = {
                             showMenu = false
                             onDeleteClick()
@@ -505,28 +520,30 @@ private fun ChecklistItem(
 private fun EmptyConsumablesState() {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 32.dp),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            imageVector = Icons.Default.Inventory2,
+            imageVector = Icons.Default.Timelapse,
             contentDescription = null,
-            modifier = Modifier.size(48.dp),
+            modifier = Modifier
+                .padding(12.dp)
+                .size(48.dp),
             tint = MaterialTheme.colorScheme.outline
         )
-        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Aucun consommable",
+            modifier = Modifier.padding(12.dp),
+            text = stringResource(R.string.no_consumables),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
-        Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = "Ajoutez vos vidanges, pistons, etc.",
+            modifier = Modifier.padding(12.dp),
+            text = stringResource(R.string.consumables_examples),
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.outline
+            color = MaterialTheme.colorScheme.outline,
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -535,28 +552,30 @@ private fun EmptyConsumablesState() {
 private fun EmptyChecklistState() {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 32.dp),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            imageVector = Icons.Default.CheckCircle,
+            imageVector = Icons.Default.Checklist,
             contentDescription = null,
-            modifier = Modifier.size(48.dp),
+            modifier = Modifier
+                .padding(12.dp)
+                .size(48.dp),
             tint = MaterialTheme.colorScheme.outline
         )
-        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Aucune checklist",
+            modifier = Modifier.padding(12.dp),
+            text = stringResource(R.string.no_check_points),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
-        Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = "Ajoutez vos vérifications pré-sortie",
+            modifier = Modifier.padding(12.dp),
+            text = stringResource(R.string.checks_examples),
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.outline
+            color = MaterialTheme.colorScheme.outline,
+            textAlign = TextAlign.Center
         )
     }
 }

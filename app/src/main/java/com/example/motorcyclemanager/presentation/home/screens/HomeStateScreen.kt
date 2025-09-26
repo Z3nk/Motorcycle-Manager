@@ -1,15 +1,25 @@
 package com.example.motorcyclemanager.presentation.home.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.example.motorcyclemanager.R
 import com.example.motorcyclemanager.presentation.home.HomeScreenUiState
 import com.example.motorcyclemanager.presentation.home.composables.BikeCard
@@ -24,23 +34,41 @@ fun HomeStateScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            stringResource(R.string.bike_list),
-            style = MaterialTheme.typography.titleMedium
-        )
-        if (homeScreenState.bikeList?.isEmpty() == true) {
-            Button(onClick = { onNavigateToAddBike() }) {
-                Text("Add a bike")
-            }
-        } else {
-            homeScreenState.bikeList?.let { lBikeList ->
-                LazyColumn(modifier = Modifier) {
-                    items(lBikeList.size) { index ->
-                        BikeCard(lBikeList[index], onClick = {
+        Button(
+            onClick = { onNavigateToAddBike() },
+            modifier = Modifier.clip(RoundedCornerShape(12.dp)),
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            ),
+            content = {
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        12.dp,
+                        Alignment.CenterHorizontally
+                    ),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = stringResource(R.string.add_a_dirtbike)
+                    )
+                    Text(
+                        modifier = Modifier,
+                        text = stringResource(R.string.add_a_dirtbike),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+            })
 
-                                onNavigateToBikeDetail(lBikeList[index].id)
-                        })
-                    }
+        homeScreenState.bikeList?.let { lBikeList ->
+            LazyColumn(modifier = Modifier) {
+                items(lBikeList.size) { index ->
+                    BikeCard(lBikeList[index], onClick = {
+                        onNavigateToBikeDetail(lBikeList[index].id)
+                    })
                 }
             }
         }
