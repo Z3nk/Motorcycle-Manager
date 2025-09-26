@@ -5,9 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.motorcyclemanager.data.repositories.bikes.BikeRepository
 import com.example.motorcyclemanager.domain.checks.CheckCheckUseCase
 import com.example.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
+import com.example.motorcyclemanager.domain.checks.DeleteCheckUseCase
+import com.example.motorcyclemanager.domain.consumables.DeleteConsumableUseCase
 import com.example.motorcyclemanager.models.Resource
 import com.example.motorcyclemanager.presentation.bikedetails.models.Bike
 import com.example.motorcyclemanager.presentation.bikedetails.models.Check
+import com.example.motorcyclemanager.presentation.bikedetails.models.Consumable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +27,9 @@ import javax.inject.Inject
 @HiltViewModel
 class BikeDetailsViewModel @Inject constructor(
     private val bikeRepository: BikeRepository,
-    private val checkCheckUseCase: CheckCheckUseCase
+    private val checkCheckUseCase: CheckCheckUseCase,
+    private val deleteCheckUseCase: DeleteCheckUseCase,
+    private val deleteConsumableUseCase: DeleteConsumableUseCase,
 ) :
     ViewModel() {
     private val bikeWithConsumablesAndChecksDomain =
@@ -53,11 +58,44 @@ class BikeDetailsViewModel @Inject constructor(
         refreshBikeWith(bikeId)
     }
 
+    fun onDeleteCheck(check: Check) {
+        viewModelScope.launch(Dispatchers.Main) {
+            bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->
+                deleteCheckUseCase(check).collectLatest { res ->
+                    when (res) {
+                        is Resource.Error<*> -> {}
+                        is Resource.Loading<*> -> {}
+                        is Resource.Success<*> -> {
+                            refreshBikeWith(bikeId)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun onDeleteConsumable(consumable: Consumable) {
+        viewModelScope.launch(Dispatchers.Main) {
+            bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->
+                deleteConsumableUseCase(consumable).collectLatest { res ->
+                    when (res) {
+                        is Resource.Error<*> -> {}
+                        is Resource.Loading<*> -> {}
+                        is Resource.Success<*> -> {
+                            refreshBikeWith(bikeId)
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
     fun checkOn(check: Check) {
         viewModelScope.launch(Dispatchers.Main) {
             bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->
                 checkCheckUseCase(bikeId, check).collectLatest { res ->
-                    when(res){
+                    when (res) {
                         is Resource.Error<*> -> {}
                         is Resource.Loading<*> -> {}
                         is Resource.Success<*> -> {

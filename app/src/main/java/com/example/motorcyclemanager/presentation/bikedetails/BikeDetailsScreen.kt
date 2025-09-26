@@ -32,10 +32,8 @@ fun BikeDetailsScreen(
     onNavigateToAddHourScreen: (idBike: Long) -> Unit,
     onNavigateToAddConsumableScreen: (idBike: Long) -> Unit,
     onNavigateToEditConsumableScreen: (idConsumable: Long) -> Unit,
-    onNavigateToDeleteConsumableScreen: (idConsumable: Long) -> Unit,
     onNavigateToAddCheckScreen: (idBike: Long) -> Unit,
     onNavigateToEditCheckScreen: (idCheck: Long) -> Unit,
-    onNavigateToDeleteCheckScreen: (idCheck: Long) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()
     LaunchedEffect(bikeId) {
@@ -61,7 +59,7 @@ fun BikeDetailsScreen(
                         onNavigateToEditCheckScreen(check.id)
                     },
                     onDeleteCheck = { check->
-                        onNavigateToDeleteCheckScreen(check.id)
+                        viewModel.onDeleteCheck(check)
                     },
                     onAddConsumable = {
                         onNavigateToAddConsumableScreen(bikeId)
@@ -70,7 +68,7 @@ fun BikeDetailsScreen(
                         onNavigateToEditConsumableScreen(consumable.id)
                     },
                     onDeleteConsumable = { consumable ->
-                        onNavigateToDeleteConsumableScreen(consumable.id)
+                        viewModel.onDeleteConsumable(consumable)
                     },
                     onClickCheck = { check ->
                         viewModel.checkOn(check)

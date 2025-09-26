@@ -32,6 +32,9 @@ interface CheckDao {
     @Delete
     suspend fun deleteCheck(check: CheckEntity): Int
 
+    @Query("DELETE FROM checks WHERE id = :checkId")
+    suspend fun deleteCheckById(checkId: Long): Int
+
     @Query("SELECT * FROM checks WHERE bikeId = :bikeId")
     fun getChecksForBike(bikeId: Long): Flow<List<CheckEntity>>
 

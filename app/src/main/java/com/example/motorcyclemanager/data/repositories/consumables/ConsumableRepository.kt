@@ -36,4 +36,8 @@ class ConsumableRepository @Inject constructor(
         consumableDao.updateConsumable(consumableEntity)
     }
 
+    suspend fun deleteConsumableById(consumableId: Long) {
+        consumableDao.deleteConsumableById(consumableId)
+    }
+
 }

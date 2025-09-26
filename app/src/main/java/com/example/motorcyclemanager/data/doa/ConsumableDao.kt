@@ -35,4 +35,7 @@ interface ConsumableDao {
 
     @Delete
     suspend fun deleteConsumable(consumable: ConsumableEntity): Int
+
+    @Query("DELETE FROM consumables WHERE id = :consumableId")
+    suspend fun deleteConsumableById(consumableId: Long): Int
 }

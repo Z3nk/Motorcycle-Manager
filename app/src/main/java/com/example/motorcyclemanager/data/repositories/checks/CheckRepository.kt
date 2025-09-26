@@ -29,6 +29,11 @@ class CheckRepository @Inject constructor(
         checkDao.updateCheck(checkEntity)
     }
 
+    suspend fun deleteCheckById(checkId: Long) {
+        checkDao.deleteCheckById(checkId = checkId)
+    }
+
+
     suspend fun resetAllChecksForBike(bikeId: Long) {
         checkDao.resetAllChecksForBike(bikeId)
     }

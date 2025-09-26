@@ -164,7 +164,6 @@ private fun MotorcycleManager() {
                                 route = AddOrUpdateCheck(bikeId = bikeDetail.id, checkId = checkId)
                             )
                         },
-                        onNavigateToDeleteCheckScreen = {},
                         onNavigateToEditConsumableScreen = { consumableId ->
                             navController.navigate(
                                 route = AddOrUpdateConsumable(
@@ -173,7 +172,6 @@ private fun MotorcycleManager() {
                                 )
                             )
                         },
-                        onNavigateToDeleteConsumableScreen = {}
                     )
                 }
                 composable<Settings> {
