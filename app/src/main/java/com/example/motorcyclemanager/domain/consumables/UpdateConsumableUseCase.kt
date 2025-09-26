@@ -3,7 +3,7 @@ package com.example.motorcyclemanager.domain.consumables
 import com.example.motorcyclemanager.data.models.ConsumableEntity
 import com.example.motorcyclemanager.data.repositories.consumables.ConsumableRepository
 import com.example.motorcyclemanager.models.Resource
-import com.example.motorcyclemanager.presentation.addconsumable.models.AddConsumable
+import com.example.motorcyclemanager.presentation.addconsumable.models.AddOrUpdateConsumable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -11,19 +11,19 @@ import javax.inject.Inject
 class UpdateConsumableUseCase @Inject constructor(private val consumableRepository: ConsumableRepository) {
     operator fun invoke(
         bikeId: Long,
-        checkId: Long,
-        addConsumable: AddConsumable
+        consumableId: Long,
+        addOrUpdateConsumable: AddOrUpdateConsumable
     ): Flow<Resource<Unit>> {
         return flow {
             try {
                 emit(Resource.Loading())
                 consumableRepository.updateConsumable(
                     ConsumableEntity(
-                        id = checkId,
+                        id = consumableId,
                         bikeId = bikeId,
-                        name = addConsumable.name,
-                        time = addConsumable.time,
-                        currentTime = addConsumable.currentTime
+                        name = addOrUpdateConsumable.name,
+                        time = addOrUpdateConsumable.time,
+                        currentTime = addOrUpdateConsumable.currentTime
                     )
                 )
                 emit(Resource.Success(Unit))

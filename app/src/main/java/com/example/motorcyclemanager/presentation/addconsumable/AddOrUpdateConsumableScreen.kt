@@ -18,22 +18,26 @@ import com.example.motorcyclemanager.presentation.addconsumable.screens.AddConsu
 sealed class AddConsumableScreenUiState {
 
     data class AddConsumableScreenState(
-        val isLoading: Boolean
+        val isLoading: Boolean,
+        val name: String?,
+        val time: Float?,
+        val currentTime: Float?
     ) : AddConsumableScreenUiState()
 
     object LoadingState : AddConsumableScreenUiState()
 }
 
 @Composable
-fun AddConsumableScreen(
+fun AddOrUpdateConsumableScreen(
     bikeId: Long,
-    viewModel: AddConsumableViewModel = hiltViewModel(),
+    consumableId: Long?,
+    viewModel: AddOrUpdateConsumableViewModel = hiltViewModel(),
     goBackToBikeDetail: () -> Unit
 
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    LaunchedEffect(bikeId) {
-        viewModel.initScreen(bikeId)
+    LaunchedEffect(bikeId, consumableId) {
+        viewModel.initScreen(bikeId, consumableId)
     }
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -42,6 +46,9 @@ fun AddConsumableScreen(
     ) {
         when (uiState) {
             is AddConsumableScreenUiState.AddConsumableScreenState -> AddConsumableStateScreen(
+                (uiState as AddConsumableScreenUiState.AddConsumableScreenState).name,
+                (uiState as AddConsumableScreenUiState.AddConsumableScreenState).time,
+                (uiState as AddConsumableScreenUiState.AddConsumableScreenState).currentTime,
                 onNewConsumable = {
                     viewModel.onNewConsumable(it) {
                         goBackToBikeDetail()

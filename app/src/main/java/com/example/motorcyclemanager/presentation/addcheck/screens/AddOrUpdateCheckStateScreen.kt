@@ -3,8 +3,6 @@ package com.example.motorcyclemanager.presentation.addcheck.screens;
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -17,17 +15,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.motorcyclemanager.R
-import com.example.motorcyclemanager.presentation.addcheck.AddCheckScreenUiState
-import com.example.motorcyclemanager.presentation.addcheck.models.AddCheck
-import com.example.motorcyclemanager.presentation.addconsumable.models.AddConsumable
+import com.example.motorcyclemanager.presentation.addcheck.models.AddOrUpdateCheck
 
 @Composable
 fun AddCheckStateScreen(
     checkName: String?,
-    onNewCheck: (AddCheck) -> Unit
+    onNewCheck: (AddOrUpdateCheck) -> Unit
 ) {
     var name by remember { mutableStateOf(checkName?:"") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
@@ -61,7 +56,7 @@ fun AddCheckStateScreen(
                     return@Button
                 }
                 errorMessage = null
-                onNewCheck(AddCheck(name))
+                onNewCheck(AddOrUpdateCheck(name))
             },
             modifier = Modifier.padding(top = 16.dp)
         ) {

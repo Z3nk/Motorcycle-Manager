@@ -1,3 +1,3 @@
 package com.example.motorcyclemanager.presentation.addcheck.models
 
-data class AddCheck (val name: String)
+data class AddOrUpdateCheck (val name: String)

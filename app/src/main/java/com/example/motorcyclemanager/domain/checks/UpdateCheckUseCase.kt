@@ -3,13 +3,13 @@ package com.example.motorcyclemanager.domain.checks
 import com.example.motorcyclemanager.data.models.CheckEntity
 import com.example.motorcyclemanager.data.repositories.checks.CheckRepository
 import com.example.motorcyclemanager.models.Resource
-import com.example.motorcyclemanager.presentation.addcheck.models.AddCheck
+import com.example.motorcyclemanager.presentation.addcheck.models.AddOrUpdateCheck
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class UpdateCheckUseCase @Inject constructor(val checkRepository: CheckRepository) {
-    operator fun invoke(bikeId: Long, checkId: Long, addCheck: AddCheck): Flow<Resource<Unit>> {
+    operator fun invoke(bikeId: Long, checkId: Long, addOrUpdateCheck: AddOrUpdateCheck): Flow<Resource<Unit>> {
         return flow {
             try {
                 emit(Resource.Loading())
@@ -17,7 +17,7 @@ class UpdateCheckUseCase @Inject constructor(val checkRepository: CheckRepositor
                     CheckEntity(
                         bikeId = bikeId,
                         id = checkId,
-                        name = addCheck.name,
+                        name = addOrUpdateCheck.name,
                         done = false
                     )
                 )

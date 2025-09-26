@@ -17,16 +17,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.motorcyclemanager.presentation.addbike.models.BikeAdded
-import com.example.motorcyclemanager.presentation.addconsumable.AddConsumableScreenUiState
-import com.example.motorcyclemanager.presentation.addconsumable.models.AddConsumable
+import com.example.motorcyclemanager.presentation.addconsumable.models.AddOrUpdateConsumable
 
 @Composable
 fun AddConsumableStateScreen(
-    onNewConsumable: (AddConsumable) -> Unit
+    consumableName: String?,
+    consumableTime: Float?,
+    consumableCurrentTime: Float?,
+    onNewConsumable: (AddOrUpdateConsumable) -> Unit
 ) {
-    var name by remember { mutableStateOf("") }
-    var time by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf(consumableName ?: "") }
+    var time by remember { mutableStateOf(consumableTime?.toString() ?: "") }
+    var currentTime by remember { mutableStateOf(consumableCurrentTime?.toString()) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
     Column(
@@ -56,6 +58,21 @@ fun AddConsumableStateScreen(
             isError = errorMessage != null
         )
 
+        currentTime?.let { lCurrentTime ->
+            OutlinedTextField(
+                value = lCurrentTime,
+                onValueChange = {
+                    if (it.isEmpty() || it.all { char -> char.isDigit() }) {
+                        currentTime = it
+                    }
+                },
+                label = { Text("Heures déjà faites") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth(),
+                isError = errorMessage != null
+            )
+        }
+
         errorMessage?.let {
             Text(
                 text = it,
@@ -79,8 +96,17 @@ fun AddConsumableStateScreen(
                     errorMessage = "Le temps doit être un nombre positif"
                     return@Button
                 }
+
+                val currentTime = currentTime?.toFloatOrNull()
+                if (consumableCurrentTime != null) {
+                    if (currentTime == null || currentTime < 0) {
+                        errorMessage = "Le temps déjà utilisé doit être un nombre non négatif"
+                        return@Button
+                    }
+                }
+
                 errorMessage = null
-                onNewConsumable(AddConsumable(name, fTime))
+                onNewConsumable(AddOrUpdateConsumable(name, fTime, currentTime ?: 0.0f))
             },
             modifier = Modifier.padding(top = 16.dp)
         ) {

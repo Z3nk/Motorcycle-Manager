@@ -1,13 +1,14 @@
-package com.example.motorcyclemanager.presentation.addcheck
+package com.example.motorcyclemanager.presentation.addconsumable;
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.motorcyclemanager.domain.checks.AddCheckUseCase
-import com.example.motorcyclemanager.domain.checks.GetCheckUseCase
-import com.example.motorcyclemanager.domain.checks.UpdateCheckUseCase
 import com.example.motorcyclemanager.domain.bikes.models.CheckDomain
+import com.example.motorcyclemanager.domain.bikes.models.ConsumableDomain
+import com.example.motorcyclemanager.domain.consumables.AddConsumableUseCase
+import com.example.motorcyclemanager.domain.consumables.GetConsumableUseCase
+import com.example.motorcyclemanager.domain.consumables.UpdateConsumableUseCase
 import com.example.motorcyclemanager.models.Resource
-import com.example.motorcyclemanager.presentation.addcheck.models.AddOrUpdateCheck
+import com.example.motorcyclemanager.presentation.addconsumable.models.AddOrUpdateConsumable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,31 +23,35 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddOrUpdateCheckViewModel @Inject constructor(
-    private val addCheckUseCase: AddCheckUseCase,
-    private val getCheckUseCase: GetCheckUseCase,
-    private val updateCheckUseCase: UpdateCheckUseCase
+class AddOrUpdateConsumableViewModel @Inject constructor(
+    private val addConsumableUseCase: AddConsumableUseCase,
+    private val getConsumableUseCase: GetConsumableUseCase,
+    private val updateConsumableUseCase: UpdateConsumableUseCase,
 ) :
     ViewModel() {
     private val mLoading = MutableStateFlow(false)
+    private val mName = MutableStateFlow<String?>(null)
+    private val mTime = MutableStateFlow<Float?>(null)
+    private val mCurrentTime = MutableStateFlow<Float?>(null)
     private val mBikeId = MutableStateFlow<Long?>(null)
-    private val mCheckId = MutableStateFlow<Long?>(null)
-    private val mCheckName = MutableStateFlow<String?>(null)
+    private val mConsumableId = MutableStateFlow<Long?>(null)
 
-    val uiState: StateFlow<AddCheckScreenUiState> = combine(
+    val uiState: StateFlow<AddConsumableScreenUiState> = combine(
         mLoading,
-        mCheckName
-    ) { loading, checkName ->
-        if (loading) {
-            AddCheckScreenUiState.LoadingState
+        mName,
+        mTime,
+        mCurrentTime
+    ) { mLoading, name, time, currentTime ->
+        if (mLoading) {
+            AddConsumableScreenUiState.LoadingState
         } else {
-            AddCheckScreenUiState.AddCheckScreenState(loading, checkName)
+            AddConsumableScreenUiState.AddConsumableScreenState(mLoading, name, time, currentTime)
         }
 
     }.flowOn(Dispatchers.Main).stateIn(
         viewModelScope,
-        SharingStarted.Companion.Eagerly,
-        AddCheckScreenUiState.LoadingState
+        SharingStarted.Eagerly,
+        AddConsumableScreenUiState.LoadingState
     )
 
 
@@ -57,12 +62,12 @@ class AddOrUpdateCheckViewModel @Inject constructor(
     }
 
 
-    fun initScreen(bikeId: Long, checkId: Long?) {
+    fun initScreen(bikeId: Long, consumableId: Long?) {
         mBikeId.update { bikeId }
-        checkId?.let { lCheckId ->
-            mCheckId.update { lCheckId }
+        consumableId?.let { lconsumableId ->
+            mConsumableId.update { lconsumableId }
             viewModelScope.launch(Dispatchers.Main) {
-                getCheckUseCase(checkId = lCheckId).collectLatest { res ->
+                getConsumableUseCase(consumableId = lconsumableId).collectLatest { res ->
                     when (res) {
                         is Resource.Error<*> -> {
                             mLoading.update { false }
@@ -71,22 +76,42 @@ class AddOrUpdateCheckViewModel @Inject constructor(
                         is Resource.Loading<*> ->
                             mLoading.update { true }
 
-                        is Resource.Success<CheckDomain> -> {
-                            mCheckName.update { res.data?.name }
+                        is Resource.Success<ConsumableDomain> -> {
+                            mName.update { res.data?.name }
+                            mTime.update { res.data?.time }
+                            mCurrentTime.update { res.data?.currentTime }
                             mLoading.update { false }
                         }
                     }
                 }
             }
         }
+
     }
 
-    fun onNewCheck(addOrUpdateCheck: AddOrUpdateCheck, onSuccess: () -> Unit) {
+    fun onNewConsumable(addOrUpdateConsumable: AddOrUpdateConsumable, onSuccess: () -> Unit) {
         viewModelScope.launch(Dispatchers.Main) {
             mLoading.update { true }
-            mBikeId.value?.let { lBikeId ->
-                mCheckId.value?.let { lCheckId ->
-                    updateCheckUseCase(lBikeId, lCheckId, addOrUpdateCheck).collectLatest { res ->
+            mBikeId.value?.let { bikeId ->
+                mConsumableId.value?.let { lConsumableId ->
+                    updateConsumableUseCase(bikeId, consumableId = lConsumableId, addOrUpdateConsumable).collectLatest { res ->
+                        when (res) {
+                            is Resource.Error<*> -> {
+                                mLoading.update { false }
+                            }
+
+                            is Resource.Loading<*> -> {
+                                mLoading.update { true }
+                            }
+
+                            is Resource.Success<*> -> {
+                                mLoading.update { true }
+                                onSuccess()
+                            }
+                        }
+                    }
+                }?:run{
+                    addConsumableUseCase(bikeId, addOrUpdateConsumable).collectLatest { res ->
                         when (res) {
                             is Resource.Error<*> -> {
                                 mLoading.update { false }
@@ -103,24 +128,7 @@ class AddOrUpdateCheckViewModel @Inject constructor(
                         }
 
                     }
-                } ?: run {
-                    addCheckUseCase(lBikeId, addOrUpdateCheck).collectLatest { res ->
-                        when (res) {
-                            is Resource.Error<*> -> {
-                                mLoading.update { false }
-                            }
 
-                            is Resource.Loading<*> -> {
-                                mLoading.update { true }
-                            }
-
-                            is Resource.Success<*> -> {
-                                mLoading.update { true }
-                                onSuccess()
-                            }
-                        }
-
-                    }
                 }
 
             }

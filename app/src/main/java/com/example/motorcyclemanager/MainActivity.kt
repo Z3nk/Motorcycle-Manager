@@ -20,7 +20,7 @@ import com.example.motorcyclemanager.composables.bottombar.MotorCycleBottomBar
 import com.example.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import com.example.motorcyclemanager.presentation.addbike.AddBikeScreen
 import com.example.motorcyclemanager.presentation.addcheck.AddOrUpdateCheckScreen
-import com.example.motorcyclemanager.presentation.addconsumable.AddConsumableScreen
+import com.example.motorcyclemanager.presentation.addconsumable.AddOrUpdateConsumableScreen
 import com.example.motorcyclemanager.presentation.addhour.AddHourScreen
 import com.example.motorcyclemanager.presentation.bikedetails.BikeDetailsScreen
 import com.example.motorcyclemanager.presentation.home.HomeScreen
@@ -41,7 +41,7 @@ data class BikeDetail(val id: Long)
 data class AddHour(val bikeId: Long)
 
 @Serializable
-data class AddConsumable(val bikeId: Long)
+data class AddOrUpdateConsumable(val bikeId: Long, val consumableId: Long? = null)
 
 @Serializable
 data class AddOrUpdateCheck(val bikeId: Long, val checkId: Long? = null)
@@ -120,13 +120,14 @@ private fun MotorcycleManager() {
                     )
                 }
 
-                composable<AddConsumable> { backStackEntry ->
-                    val addConsumable: AddConsumable = backStackEntry.toRoute()
-                    AddConsumableScreen(
-                        bikeId = addConsumable.bikeId,
+                composable<AddOrUpdateConsumable> { backStackEntry ->
+                    val addOrUpdateConsumable: AddOrUpdateConsumable = backStackEntry.toRoute()
+                    AddOrUpdateConsumableScreen(
+                        bikeId = addOrUpdateConsumable.bikeId,
+                        consumableId = addOrUpdateConsumable.consumableId,
                         goBackToBikeDetail = {
-                            navController.navigate(BikeDetail(addConsumable.bikeId)) {
-                                popUpTo(BikeDetail(addConsumable.bikeId)) {
+                            navController.navigate(BikeDetail(addOrUpdateConsumable.bikeId)) {
+                                popUpTo(BikeDetail(addOrUpdateConsumable.bikeId)) {
                                     saveState = true
                                 }
                                 launchSingleTop = true
@@ -150,7 +151,7 @@ private fun MotorcycleManager() {
                         },
                         onNavigateToAddConsumableScreen = { bikeId ->
                             navController.navigate(
-                                route = AddConsumable(bikeId)
+                                route = AddOrUpdateConsumable(bikeId = bikeId)
                             )
                         },
                         onNavigateToAddCheckScreen = { bikeId ->
@@ -164,7 +165,14 @@ private fun MotorcycleManager() {
                             )
                         },
                         onNavigateToDeleteCheckScreen = {},
-                        onNavigateToEditConsumableScreen = {},
+                        onNavigateToEditConsumableScreen = { consumableId ->
+                            navController.navigate(
+                                route = AddOrUpdateConsumable(
+                                    bikeId = bikeDetail.id,
+                                    consumableId = consumableId
+                                )
+                            )
+                        },
                         onNavigateToDeleteConsumableScreen = {}
                     )
                 }
