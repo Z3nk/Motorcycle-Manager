@@ -156,7 +156,12 @@ private fun MotorcycleManager() {
                             navController.navigate(
                                 route = AddCheck(bikeId)
                             )
-                        })
+                        },
+                        onNavigateToEditCheckScreen = {},
+                        onNavigateToDeleteCheckScreen = {},
+                        onNavigateToEditConsumableScreen = {},
+                        onNavigateToDeleteConsumableScreen = {}
+                    )
                 }
                 composable<Settings> {
                     SettingsScreen(onNavigateToHomeScreen = {

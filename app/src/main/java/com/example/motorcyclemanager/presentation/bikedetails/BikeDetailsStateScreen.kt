@@ -1,7 +1,6 @@
 package com.example.motorcyclemanager.presentation.bikedetails;
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +19,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Inventory2
 import androidx.compose.material.icons.filled.MoreVert
@@ -32,7 +30,6 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -64,8 +61,10 @@ fun BikeDetailsStateScreen(
     onBackClick: () -> Unit,
     onAddConsumable: () -> Unit,
     onEditConsumable: (Consumable) -> Unit,
+    onDeleteConsumable: (Consumable) -> Unit,
     onAddCheck: () -> Unit,
     onEditCheck: (Check) -> Unit,
+    onDeleteCheck: (Check) -> Unit,
     onClickCheck: (Check) -> Unit,
     onAddHours: () -> Unit
 ) {
@@ -105,13 +104,15 @@ fun BikeDetailsStateScreen(
                     consumables = screenState.bike.consumables,
                     totalHours = screenState.bike.totalHours,
                     onEditConsumable = onEditConsumable,
-                    onAddConsumable = onAddConsumable
+                    onAddConsumable = onAddConsumable,
+                    onDeleteConsumable = onDeleteConsumable
                 )
             }
             item {
                 ChecklistSection(
                     checks = screenState.bike.checks,
                     onEditCheck = onEditCheck,
+                    onDeleteCheck = onDeleteCheck,
                     onClickCheck = onClickCheck,
                     onAddCheck = onAddCheck
                 )
@@ -175,10 +176,13 @@ private fun ConsumablesSection(
     consumables: List<Consumable>,
     totalHours: Float,
     onEditConsumable: (Consumable) -> Unit,
+    onDeleteConsumable: (Consumable) -> Unit,
     onAddConsumable: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
         )
@@ -221,7 +225,8 @@ private fun ConsumablesSection(
                     consumables.forEach { consumable ->
                         ConsumableItem(
                             consumable = consumable,
-                            onEditClick = { onEditConsumable(consumable) }
+                            onEditClick = { onEditConsumable(consumable) },
+                            onDeleteClick = { onDeleteConsumable(consumable) }
                         )
                     }
                 }
@@ -233,8 +238,10 @@ private fun ConsumablesSection(
 @Composable
 private fun ConsumableItem(
     consumable: Consumable,
-    onEditClick: () -> Unit
+    onEditClick: () -> Unit,
+    onDeleteClick: () -> Unit
 ) {
+    var showMenu by remember { mutableStateOf(false) }
     val hoursRemaining = consumable.time - (consumable.currentTime ?: 0.0f)
     val progress = if (consumable.time > 0 && consumable.currentTime != null) {
         (consumable.currentTime / consumable.time).coerceIn(0f, 1f)
@@ -246,7 +253,9 @@ private fun ConsumableItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onEditClick() },
+            .combinedClickable(
+                onClick = onEditClick,
+                onLongClick = { showMenu = true }),
         colors = CardDefaults.cardColors(
             containerColor = if (isUrgent)
                 MaterialTheme.colorScheme.errorContainer
@@ -315,6 +324,30 @@ private fun ConsumableItem(
                     drawStopIndicator = {}
                 )
             }
+
+
+            Box {
+                DropdownMenu(
+                    expanded = showMenu,
+                    onDismissRequest = { showMenu = false },
+                    modifier = Modifier.align(Alignment.TopEnd)
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Modifier") },
+                        onClick = {
+                            showMenu = false
+                            onEditClick()
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Supprimer") },
+                        onClick = {
+                            showMenu = false
+                            onDeleteClick()
+                        }
+                    )
+                }
+            }
         }
     }
 }
@@ -322,12 +355,15 @@ private fun ConsumableItem(
 @Composable
 private fun ChecklistSection(
     checks: List<Check>,
+    onDeleteCheck: (Check) -> Unit,
     onEditCheck: (Check) -> Unit,
     onClickCheck: (Check) -> Unit,
     onAddCheck: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
         )
@@ -371,7 +407,8 @@ private fun ChecklistSection(
                         ChecklistItem(
                             check = check,
                             onClickCheck = { onClickCheck(check) },
-                            onEditClick = { onEditCheck(check) }
+                            onEditClick = { onEditCheck(check) },
+                            onDeleteClick = { onDeleteCheck(check) }
                         )
                     }
                 }
@@ -384,7 +421,8 @@ private fun ChecklistSection(
 private fun ChecklistItem(
     check: Check,
     onClickCheck: () -> Unit,
-    onEditClick: () -> Unit
+    onEditClick: () -> Unit,
+    onDeleteClick: () -> Unit
 ) {
     var showMenu by remember { mutableStateOf(false) }
 
@@ -425,7 +463,6 @@ private fun ChecklistItem(
                 modifier = Modifier.weight(1f)
             )
 
-            // Dropdown Menu
             Box {
                 IconButton(
                     onClick = { showMenu = true },
@@ -455,7 +492,7 @@ private fun ChecklistItem(
                         text = { Text("Supprimer") },
                         onClick = {
                             showMenu = false
-                            onEditClick()
+                            onDeleteClick()
                         }
                     )
                 }
@@ -551,8 +588,10 @@ fun BikeDetailsPreview() {
             onBackClick = {},
             onAddConsumable = {},
             onEditConsumable = {},
+            onDeleteConsumable = {},
             onAddCheck = {},
             onEditCheck = {},
+            onDeleteCheck = {},
             onAddHours = {},
             onClickCheck = {}
         )
