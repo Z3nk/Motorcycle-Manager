@@ -1,4 +1,4 @@
-package com.example.motorcyclemanager.domain.bikes.checks;
+package com.example.motorcyclemanager.domain.checks
 
 import com.example.motorcyclemanager.data.models.CheckEntity
 import com.example.motorcyclemanager.data.repositories.checks.CheckRepository
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class CheckCheckUseCaseUseCase @Inject constructor(private val checkRepository: CheckRepository) {
+class CheckCheckUseCase @Inject constructor(private val checkRepository: CheckRepository) {
     operator fun invoke(bikeId: Long, check: Check): Flow<Resource<Unit>> {
         return flow {
             try {

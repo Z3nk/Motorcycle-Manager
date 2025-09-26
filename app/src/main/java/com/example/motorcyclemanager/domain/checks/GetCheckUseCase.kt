@@ -1,4 +1,4 @@
-package com.example.motorcyclemanager.domain.bikes.checks
+package com.example.motorcyclemanager.domain.checks
 
 import com.example.motorcyclemanager.data.models.CheckEntity
 import com.example.motorcyclemanager.data.repositories.checks.CheckRepository

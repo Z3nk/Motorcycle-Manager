@@ -2,9 +2,9 @@ package com.example.motorcyclemanager.presentation.addcheck
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.motorcyclemanager.domain.bikes.checks.AddCheckUseCase
-import com.example.motorcyclemanager.domain.bikes.checks.GetCheckUseCase
-import com.example.motorcyclemanager.domain.bikes.checks.UpdateCheckUseCase
+import com.example.motorcyclemanager.domain.checks.AddCheckUseCase
+import com.example.motorcyclemanager.domain.checks.GetCheckUseCase
+import com.example.motorcyclemanager.domain.checks.UpdateCheckUseCase
 import com.example.motorcyclemanager.domain.bikes.models.CheckDomain
 import com.example.motorcyclemanager.models.Resource
 import com.example.motorcyclemanager.presentation.addcheck.models.AddCheck

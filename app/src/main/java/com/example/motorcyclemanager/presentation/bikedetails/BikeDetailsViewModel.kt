@@ -3,8 +3,7 @@ package com.example.motorcyclemanager.presentation.bikedetails;
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.motorcyclemanager.data.repositories.bikes.BikeRepository
-import com.example.motorcyclemanager.data.repositories.checks.CheckRepository
-import com.example.motorcyclemanager.domain.bikes.checks.CheckCheckUseCaseUseCase
+import com.example.motorcyclemanager.domain.checks.CheckCheckUseCase
 import com.example.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
 import com.example.motorcyclemanager.models.Resource
 import com.example.motorcyclemanager.presentation.bikedetails.models.Bike
@@ -25,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BikeDetailsViewModel @Inject constructor(
     private val bikeRepository: BikeRepository,
-    private val checkCheckUseCaseUseCase: CheckCheckUseCaseUseCase
+    private val checkCheckUseCase: CheckCheckUseCase
 ) :
     ViewModel() {
     private val bikeWithConsumablesAndChecksDomain =
@@ -57,7 +56,7 @@ class BikeDetailsViewModel @Inject constructor(
     fun checkOn(check: Check) {
         viewModelScope.launch(Dispatchers.Main) {
             bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->
-                checkCheckUseCaseUseCase(bikeId, check).collectLatest {res ->
+                checkCheckUseCase(bikeId, check).collectLatest { res ->
                     when(res){
                         is Resource.Error<*> -> {}
                         is Resource.Loading<*> -> {}
