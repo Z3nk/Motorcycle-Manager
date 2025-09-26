@@ -19,7 +19,7 @@ import androidx.navigation.toRoute
 import com.example.motorcyclemanager.composables.bottombar.MotorCycleBottomBar
 import com.example.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import com.example.motorcyclemanager.presentation.addbike.AddBikeScreen
-import com.example.motorcyclemanager.presentation.addcheck.AddCheckScreen
+import com.example.motorcyclemanager.presentation.addcheck.AddOrUpdateCheckScreen
 import com.example.motorcyclemanager.presentation.addconsumable.AddConsumableScreen
 import com.example.motorcyclemanager.presentation.addhour.AddHourScreen
 import com.example.motorcyclemanager.presentation.bikedetails.BikeDetailsScreen
@@ -44,7 +44,7 @@ data class AddHour(val bikeId: Long)
 data class AddConsumable(val bikeId: Long)
 
 @Serializable
-data class AddCheck(val bikeId: Long)
+data class AddOrUpdateCheck(val bikeId: Long, val checkId: Long? = null)
 
 @Serializable
 object Settings
@@ -89,13 +89,14 @@ private fun MotorcycleManager() {
                         }
                     })
                 }
-                composable<AddCheck> { backStackEntry ->
-                    val addCheck: AddCheck = backStackEntry.toRoute()
-                    AddCheckScreen(
-                        bikeId = addCheck.bikeId,
+                composable<AddOrUpdateCheck> { backStackEntry ->
+                    val addOrUpdateCheck: AddOrUpdateCheck = backStackEntry.toRoute()
+                    AddOrUpdateCheckScreen(
+                        bikeId = addOrUpdateCheck.bikeId,
+                        checkId = addOrUpdateCheck.checkId,
                         goBackToBikeDetail = {
-                            navController.navigate(BikeDetail(addCheck.bikeId)) {
-                                popUpTo(BikeDetail(addCheck.bikeId)) {
+                            navController.navigate(BikeDetail(addOrUpdateCheck.bikeId)) {
+                                popUpTo(BikeDetail(addOrUpdateCheck.bikeId)) {
                                     saveState = true
                                 }
                                 launchSingleTop = true
@@ -154,10 +155,14 @@ private fun MotorcycleManager() {
                         },
                         onNavigateToAddCheckScreen = { bikeId ->
                             navController.navigate(
-                                route = AddCheck(bikeId)
+                                route = AddOrUpdateCheck(bikeId = bikeId)
                             )
                         },
-                        onNavigateToEditCheckScreen = {},
+                        onNavigateToEditCheckScreen = { checkId ->
+                            navController.navigate(
+                                route = AddOrUpdateCheck(bikeId = bikeDetail.id, checkId = checkId)
+                            )
+                        },
                         onNavigateToDeleteCheckScreen = {},
                         onNavigateToEditConsumableScreen = {},
                         onNavigateToDeleteConsumableScreen = {}

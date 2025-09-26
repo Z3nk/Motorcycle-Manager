@@ -18,21 +18,23 @@ import com.example.motorcyclemanager.presentation.addcheck.screens.AddCheckState
 sealed class AddCheckScreenUiState {
 
     data class AddCheckScreenState(
-        val loading: Boolean
+        val loading: Boolean,
+        val checkName: String?
     ) : AddCheckScreenUiState()
 
     object LoadingState : AddCheckScreenUiState()
 }
 
 @Composable
-fun AddCheckScreen(
+fun AddOrUpdateCheckScreen(
     bikeId: Long,
-    viewModel: AddCheckViewModel = hiltViewModel(),
+    checkId: Long?,
+    viewModel: AddOrUpdateCheckViewModel = hiltViewModel(),
     goBackToBikeDetail: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    LaunchedEffect(bikeId) {
-        viewModel.initScreen(bikeId)
+    LaunchedEffect(bikeId, checkId) {
+        viewModel.initScreen(bikeId, checkId)
     }
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -41,6 +43,7 @@ fun AddCheckScreen(
     ) {
         when (uiState) {
             is AddCheckScreenUiState.AddCheckScreenState -> AddCheckStateScreen(
+                checkName = (uiState as AddCheckScreenUiState.AddCheckScreenState).checkName,
                 onNewCheck = {
                     viewModel.onNewCheck(it) {
                         goBackToBikeDetail()

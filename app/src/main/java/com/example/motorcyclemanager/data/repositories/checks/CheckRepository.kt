@@ -14,6 +14,11 @@ import javax.inject.Inject
 class CheckRepository @Inject constructor(
     private val checkDao: CheckDao
 ) {
+    suspend fun getCheck(
+        checkId: Long
+    ): CheckEntity? {
+        return checkDao.getCheck(checkId)
+    }
     suspend fun createCheck(
         check: CheckEntity
     ) {

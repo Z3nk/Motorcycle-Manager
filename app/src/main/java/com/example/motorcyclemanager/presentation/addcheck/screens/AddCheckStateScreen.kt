@@ -26,9 +26,10 @@ import com.example.motorcyclemanager.presentation.addconsumable.models.AddConsum
 
 @Composable
 fun AddCheckStateScreen(
+    checkName: String?,
     onNewCheck: (AddCheck) -> Unit
 ) {
-    var name by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf(checkName?:"") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
     Column(
@@ -64,7 +65,7 @@ fun AddCheckStateScreen(
             },
             modifier = Modifier.padding(top = 16.dp)
         ) {
-            Text("Ajouter le point de controle")
+            Text(stringResource(R.string.validate))
         }
     }
 

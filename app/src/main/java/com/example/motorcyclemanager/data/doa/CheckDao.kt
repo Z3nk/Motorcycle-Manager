@@ -15,6 +15,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CheckDao {
 
+
+    @Transaction
+    @Query("SELECT * FROM checks WHERE id = :checkId")
+    suspend fun getCheck(checkId: Long): CheckEntity?
+
     @Insert
     suspend fun insertCheck(check: CheckEntity): Long
 
