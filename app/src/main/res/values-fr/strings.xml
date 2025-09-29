@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="bike_list">Vos motos :</string>
+    <string name="bike_list">Vos motocross :</string>
     <string name="validate">Valider</string>
     <string name="add_a_dirtbike">Ajouter une motocross</string>
     <string name="add_hours">Ajouter des heures de roulage</string>
@@ -15,4 +15,16 @@
     <string name="more_options">Plus d\'options</string>
     <string name="update">Modifier</string>
     <string name="delete">Supprimer</string>
+    <string name="time_in_hour">Temps (en heures)</string>
+    <string name="reset_checklist">Décocher tous les points de contrôle</string>
+    <string name="time_is_mandatory">Le temps est requis</string>
+    <string name="time_should_be_above_0">Le temps doit être un nombre positif</string>
+    <string name="add_ride_time">Ajouter des heures de roulage</string>
+    <string name="name_consumable">Nom de la conso</string>
+    <string name="time_already_spent">Heures déjà faites</string>
+    <string name="name_is_mandatory">Le nom est requis</string>
+    <string name="time_should_not_be_negative">Le temps déjà utilisé doit être un nombre non négatif</string>
+    <string name="name_checkpoint">Nom du point de controle</string>
+    <string name="bike_name">Nom de votre motocross</string>
+    <string name="add_dirtbike">Ajouter la moto</string>
 </resources>

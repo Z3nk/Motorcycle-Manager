@@ -96,7 +96,6 @@ fun BikeDetailsStateScreen(
             item {
                 BikeHeader(
                     bike = screenState.bike,
-                    onBackClick = onBackClick,
                     onAddHours = onAddHours
                 )
             }
@@ -104,7 +103,6 @@ fun BikeDetailsStateScreen(
             item {
                 ConsumablesSection(
                     consumables = screenState.bike.consumables,
-                    totalHours = screenState.bike.totalHours,
                     onEditConsumable = onEditConsumable,
                     onAddConsumable = onAddConsumable,
                     onDeleteConsumable = onDeleteConsumable
@@ -126,7 +124,6 @@ fun BikeDetailsStateScreen(
 @Composable
 private fun BikeHeader(
     bike: Bike,
-    onBackClick: () -> Unit,
     onAddHours: () -> Unit
 ) {
     Column(
@@ -189,7 +186,6 @@ private fun BikeHeader(
 @Composable
 private fun ConsumablesSection(
     consumables: List<Consumable>,
-    totalHours: Float,
     onEditConsumable: (Consumable) -> Unit,
     onDeleteConsumable: (Consumable) -> Unit,
     onAddConsumable: () -> Unit

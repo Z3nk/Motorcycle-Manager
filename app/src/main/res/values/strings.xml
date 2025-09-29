@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Motorcycle Manager</string>
-    <string name="bike_list">Your motorcycles :</string>
+    <string name="app_name" translatable="false">Dirtbike Manager</string>
+    <string name="bike_list">Your dirtbikes :</string>
     <string name="validate">Validate</string>
     <string name="add_a_dirtbike">Add a dirtbike</string>
     <string name="add_hours">Add time spent on the dirtbike</string>
@@ -15,4 +15,16 @@
     <string name="more_options">More options</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="time_in_hour">Time (in hours)</string>
+    <string name="reset_checklist">Unchecked every checks points</string>
+    <string name="time_is_mandatory">Time is mandatory</string>
+    <string name="time_should_be_above_0">Time should be above 0</string>
+    <string name="add_ride_time">Add ride time on the bike</string>
+    <string name="name_consumable">Name of the consumable</string>
+    <string name="time_already_spent">Time already spent</string>
+    <string name="name_is_mandatory">Name is mandatory</string>
+    <string name="time_should_not_be_negative">Time already spent should not be negative</string>
+    <string name="name_checkpoint">Checkpoint name</string>
+    <string name="bike_name">Name of the dirtbike</string>
+    <string name="add_dirtbike">Add dirtbike</string>
 </resources>

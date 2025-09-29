@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.motorcyclemanager.R
@@ -24,6 +25,7 @@ fun AddCheckStateScreen(
     checkName: String?,
     onNewCheck: (AddOrUpdateCheck) -> Unit
 ) {
+    val context = LocalContext.current
     var name by remember { mutableStateOf(checkName?:"") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
@@ -36,7 +38,7 @@ fun AddCheckStateScreen(
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Nom du point de controle") },
+            label = { Text(stringResource(R.string.name_checkpoint)) },
             modifier = Modifier.fillMaxWidth(),
             isError = errorMessage != null
         )
@@ -52,7 +54,7 @@ fun AddCheckStateScreen(
         Button(
             onClick = {
                 if (name.isBlank()) {
-                    errorMessage = "Le nom est requis"
+                    errorMessage = context.getString(R.string.name_is_mandatory)
                     return@Button
                 }
                 errorMessage = null

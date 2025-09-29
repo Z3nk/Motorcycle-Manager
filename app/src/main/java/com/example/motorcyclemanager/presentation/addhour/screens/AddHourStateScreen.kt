@@ -19,17 +19,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.motorcyclemanager.R
 import com.example.motorcyclemanager.presentation.addhour.models.AddHour
 
 @Composable
 fun AddHourStateScreen(
     onNewHour: (AddHour) -> Unit
 ) {
-    var time by remember { mutableStateOf("") }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
-
+    val context = LocalContext.current
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -55,7 +56,7 @@ fun AddHourStateScreen(
                         time = it
                     }
                 },
-                label = { Text("Temps (en heures)") },
+                label = { Text(stringResource(R.string.time_in_hour)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth(),
                 isError = errorMessage != null
@@ -81,7 +82,7 @@ fun AddHourStateScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Remettre à 0 tous les points de contrôle",
+                    text = stringResource(R.string.reset_checklist),
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
@@ -89,12 +90,12 @@ fun AddHourStateScreen(
             Button(
                 onClick = {
                     if (time.isBlank()) {
-                        errorMessage = "Le temps est requis"
+                        errorMessage = context.getString(R.string.time_is_mandatory)
                         return@Button
                     }
                     val fTime = time.toFloatOrNull()
                     if (fTime == null || fTime <= 0) {
-                        errorMessage = "Le temps doit être un nombre positif"
+                        errorMessage = context.getString(R.string.time_should_be_above_0)
                         return@Button
                     }
                     errorMessage = null
@@ -102,8 +103,9 @@ fun AddHourStateScreen(
                 },
                 modifier = Modifier.padding(top = 16.dp)
             ) {
-                Text("Ajouter les heures de roulage")
+                Text(stringResource(R.string.add_ride_time))
             }
-        }    }
+        }
+    }
 
 }

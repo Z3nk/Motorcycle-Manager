@@ -15,8 +15,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.example.motorcyclemanager.R
 import com.example.motorcyclemanager.presentation.addconsumable.models.AddOrUpdateConsumable
 
 @Composable
@@ -26,6 +29,7 @@ fun AddConsumableStateScreen(
     consumableCurrentTime: Float?,
     onNewConsumable: (AddOrUpdateConsumable) -> Unit
 ) {
+    val context = LocalContext.current
     var name by remember { mutableStateOf(consumableName ?: "") }
     var time by remember { mutableStateOf(consumableTime?.toString() ?: "") }
     var currentTime by remember { mutableStateOf(consumableCurrentTime?.toString()) }
@@ -40,7 +44,7 @@ fun AddConsumableStateScreen(
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Nom de la conso") },
+            label = { Text(stringResource(R.string.name_consumable)) },
             modifier = Modifier.fillMaxWidth(),
             isError = errorMessage != null
         )
@@ -52,7 +56,7 @@ fun AddConsumableStateScreen(
                     time = it
                 }
             },
-            label = { Text("Temps (en heures)") },
+            label = { Text(stringResource(R.string.time_in_hour)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth(),
             isError = errorMessage != null
@@ -66,7 +70,7 @@ fun AddConsumableStateScreen(
                         currentTime = it
                     }
                 },
-                label = { Text("Heures déjà faites") },
+                label = { Text(stringResource(R.string.time_already_spent)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth(),
                 isError = errorMessage != null
@@ -84,23 +88,23 @@ fun AddConsumableStateScreen(
         Button(
             onClick = {
                 if (name.isBlank()) {
-                    errorMessage = "Le nom est requis"
+                    errorMessage = context.getString(R.string.name_is_mandatory)
                     return@Button
                 }
                 if (time.isBlank()) {
-                    errorMessage = "Le temps est requis"
+                    errorMessage = context.getString(R.string.time_is_mandatory)
                     return@Button
                 }
                 val fTime = time.toFloatOrNull()
                 if (fTime == null || fTime <= 0) {
-                    errorMessage = "Le temps doit être un nombre positif"
+                    errorMessage = context.getString(R.string.time_should_be_above_0)
                     return@Button
                 }
 
                 val currentTime = currentTime?.toFloatOrNull()
                 if (consumableCurrentTime != null) {
                     if (currentTime == null || currentTime < 0) {
-                        errorMessage = "Le temps déjà utilisé doit être un nombre non négatif"
+                        errorMessage = context.getString(R.string.time_should_not_be_negative)
                         return@Button
                     }
                 }
@@ -110,7 +114,7 @@ fun AddConsumableStateScreen(
             },
             modifier = Modifier.padding(top = 16.dp)
         ) {
-            Text("Ajouter la conso")
+            Text(stringResource(R.string.add_consumable))
         }
     }
 
