@@ -28,4 +28,7 @@
     <string name="name_checkpoint">Checkpoint name</string>
     <string name="bike_name">Name of the dirtbike</string>
     <string name="add_dirtbike">Add dirtbike</string>
+    <string name="time_remaining">%1$.1f hours remaining</string>
+    <string name="time_remining_exceed">%1$.1f hours over</string>
+    <string name="consommable_hours">%1$.1f hours</string>
 </resources>

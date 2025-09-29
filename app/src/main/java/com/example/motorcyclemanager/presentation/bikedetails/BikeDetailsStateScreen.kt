@@ -297,7 +297,7 @@ private fun ConsumableItem(
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
-                    text = "${hoursRemaining}h restantes",
+                    text = stringResource(R.string.consommable_hours, consumable.time),
                     style = MaterialTheme.typography.bodySmall,
                     color = if (isUrgent)
                         MaterialTheme.colorScheme.onErrorContainer
@@ -307,17 +307,30 @@ private fun ConsumableItem(
             }
 
             Column(
-                horizontalAlignment = Alignment.End
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
             ) {
-                Text(
-                    text = "${consumable.time}h",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.End
-                )
-
-                Spacer(modifier = Modifier.height(4.dp))
-
+                if (hoursRemaining > 0) {
+                    Text(
+                        text = stringResource(
+                            R.string.time_remaining,
+                            hoursRemaining
+                        ),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.End
+                    )
+                } else {
+                    Text(
+                        text = stringResource(
+                            R.string.time_remining_exceed,
+                            ((consumable.currentTime ?: 0.0f) - consumable.time)
+                        ),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.End
+                    )
+                }
                 LinearProgressIndicator(
                     progress = { progress },
                     modifier = Modifier
@@ -328,12 +341,23 @@ private fun ConsumableItem(
                     else if (progress < 0.5f)
                         Color.Green
                     else
-                        Color(0xFFFFA500), // Orange
+                        Color(0xFFFFA500),
                     trackColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
                     gapSize = 0.dp,
                     drawStopIndicator = {}
                 )
+                Text(
+                    text = stringResource(
+                        R.string.consommable_hours,
+                        consumable.currentTime ?: 0.0f
+                    ),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.End
+                )
+
+
             }
 
 
