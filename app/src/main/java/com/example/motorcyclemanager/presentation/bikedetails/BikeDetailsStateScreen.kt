@@ -344,14 +344,25 @@ private fun ConsumableItem(
                     modifier = Modifier.align(Alignment.TopEnd)
                 ) {
                     DropdownMenuItem(
-                        text = { stringResource(R.string.update) },
+                        text = {
+                            Text(
+                                stringResource(R.string.update),
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        },
                         onClick = {
                             showMenu = false
                             onEditClick()
                         }
                     )
+
                     DropdownMenuItem(
-                        text = { stringResource(R.string.delete) },
+                        text = {
+                            Text(
+                                stringResource(R.string.delete),
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        },
                         onClick = {
                             showMenu = false
                             onDeleteClick()
@@ -493,14 +504,24 @@ private fun ChecklistItem(
                     modifier = Modifier.align(Alignment.TopEnd)
                 ) {
                     DropdownMenuItem(
-                        text = { Text(stringResource(R.string.update)) },
+                        text = {
+                            Text(
+                                stringResource(R.string.update),
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        },
                         onClick = {
                             showMenu = false
                             onEditClick()
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text(stringResource(R.string.delete)) },
+                        text = {
+                            Text(
+                                stringResource(R.string.delete),
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        },
                         onClick = {
                             showMenu = false
                             onDeleteClick()
