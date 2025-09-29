@@ -48,7 +48,8 @@ fun AddOrUpdateCheckScreen(
                     viewModel.onNewCheck(it) {
                         goBackToBikeDetail()
                     }
-                }
+                },
+                onBackClick = goBackToBikeDetail
 
             )
 

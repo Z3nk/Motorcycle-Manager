@@ -2,6 +2,7 @@
 <resources>
     <string name="bike_list">Vos motocross :</string>
     <string name="validate">Valider</string>
+    <string name="back">Retour</string>
     <string name="add_a_dirtbike">Ajouter une motocross</string>
     <string name="add_hours">Ajouter des heures de roulage</string>
     <string name="consommables">Consommables</string>

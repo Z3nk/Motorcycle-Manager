@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Dirtbike Manager</string>
     <string name="bike_list">Your dirtbikes :</string>
+    <string name="back">Back</string>
     <string name="validate">Validate</string>
     <string name="add_a_dirtbike">Add a dirtbike</string>
     <string name="add_hours">Add time spent on the dirtbike</string>

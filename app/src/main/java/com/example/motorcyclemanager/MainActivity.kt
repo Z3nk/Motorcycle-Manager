@@ -67,7 +67,7 @@ private fun MotorcycleManager() {
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
 
-    Scaffold(bottomBar = { MotorCycleBottomBar(navController) }) { padding ->
+    Scaffold(bottomBar = {  }) { padding ->
         Column(modifier = Modifier.padding(padding)) {
             NavHost(navController = navController, startDestination = Home) {
                 composable<Home> { backStackEntry ->

@@ -46,11 +46,14 @@ fun AddBikeScreen(
                     }
 
                 } else {
-                    AddBikeStateScreen {
-                        viewModel.onBikeAdded(it) {
-                            onNavigateToHomeScreen()
-                        }
-                    }
+                    AddBikeStateScreen(
+                        onNewBike = {
+                            viewModel.onBikeAdded(it) {
+                                onNavigateToHomeScreen()
+                            }
+                        },
+                        onBackClick = onNavigateToHomeScreen
+                    )
                 }
 
             }

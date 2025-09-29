@@ -53,7 +53,8 @@ fun AddOrUpdateConsumableScreen(
                     viewModel.onNewConsumable(it) {
                         goBackToBikeDetail()
                     }
-                }
+                },
+                onBackClick = goBackToBikeDetail
             )
 
             AddConsumableScreenUiState.LoadingState -> Box(

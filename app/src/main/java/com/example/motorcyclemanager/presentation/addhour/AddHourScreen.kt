@@ -45,7 +45,8 @@ fun AddHourScreen(
                     viewModel.onNewHour(addHour) {
                         goBackToBikeDetail()
                     }
-                }
+                },
+                onBackClick = goBackToBikeDetail
 
             )
 

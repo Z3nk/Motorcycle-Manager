@@ -2,10 +2,15 @@ package com.example.motorcyclemanager.presentation.addbike.screens;
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -26,70 +31,86 @@ import com.example.motorcyclemanager.presentation.addbike.models.BikeAdded
 
 @Composable
 fun AddBikeStateScreen(
-    onNewBike: (BikeAdded) -> Unit
+    onNewBike: (BikeAdded) -> Unit,
+    onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
     var name by remember { mutableStateOf("") }
     var time by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text(stringResource(R.string.bike_name)) },
-            modifier = Modifier.fillMaxWidth(),
-            isError = errorMessage != null
-        )
-
-        OutlinedTextField(
-            value = time,
-            onValueChange = {
-                if (it.isEmpty() || it.all { char -> char.isDigit() }) {
-                    time = it
-                }
-            },
-            label = { Text(stringResource(R.string.time_in_hour)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.fillMaxWidth(),
-            isError = errorMessage != null
-        )
-
-        errorMessage?.let {
-            Text(
-                text = it,
-                color = MaterialTheme.colorScheme.error,
-                modifier = Modifier.padding(top = 4.dp)
-            )
-        }
-
-        Button(
-            onClick = {
-                if (name.isBlank()) {
-                    errorMessage = context.getString(R.string.name_is_mandatory)
-                    return@Button
-                }
-                if (time.isBlank()) {
-                    errorMessage = context.getString(R.string.time_is_mandatory)
-                    return@Button
-                }
-                val fTime = time.toFloatOrNull()
-                if (fTime == null || fTime <= 0) {
-                    errorMessage = context.getString(R.string.time_should_be_above_0)
-                    return@Button
-                }
-                errorMessage = null
-                onNewBike(BikeAdded(name, fTime))
-            },
-            modifier = Modifier.padding(top = 16.dp)
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(stringResource(R.string.add_dirtbike))
+            IconButton(onClick = onBackClick) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = stringResource(R.string.back),
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
+        }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text(stringResource(R.string.bike_name)) },
+                modifier = Modifier.fillMaxWidth(),
+                isError = errorMessage != null
+            )
+
+            OutlinedTextField(
+                value = time,
+                onValueChange = {
+                    if (it.isEmpty() || it.all { char -> char.isDigit() }) {
+                        time = it
+                    }
+                },
+                label = { Text(stringResource(R.string.time_in_hour)) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth(),
+                isError = errorMessage != null
+            )
+
+            errorMessage?.let {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
+
+            Button(
+                onClick = {
+                    if (name.isBlank()) {
+                        errorMessage = context.getString(R.string.name_is_mandatory)
+                        return@Button
+                    }
+                    if (time.isBlank()) {
+                        errorMessage = context.getString(R.string.time_is_mandatory)
+                        return@Button
+                    }
+                    val fTime = time.toFloatOrNull()
+                    if (fTime == null || fTime <= 0) {
+                        errorMessage = context.getString(R.string.time_should_be_above_0)
+                        return@Button
+                    }
+                    errorMessage = null
+                    onNewBike(BikeAdded(name, fTime))
+                },
+                modifier = Modifier.padding(top = 16.dp)
+            ) {
+                Text(stringResource(R.string.add_dirtbike))
+            }
         }
     }
 }
@@ -100,6 +121,7 @@ fun AddBikeStateScreenPreview() {
     AddBikeStateScreen(
         onNewBike = { bike ->
             println("Preview: Nouvelle moto ajoutée : ${bike.name}, ${bike.time} heures")
-        }
+        },
+        onBackClick = {}
     )
 }
