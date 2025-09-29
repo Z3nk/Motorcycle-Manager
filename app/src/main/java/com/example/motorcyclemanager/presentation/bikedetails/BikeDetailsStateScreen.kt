@@ -195,7 +195,7 @@ private fun ConsumablesSection(
             .fillMaxWidth()
             .padding(top = 16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
         )
     ) {
         Column(
@@ -376,7 +376,7 @@ private fun ChecklistSection(
             .fillMaxWidth()
             .padding(top = 16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
         )
     ) {
         Column(

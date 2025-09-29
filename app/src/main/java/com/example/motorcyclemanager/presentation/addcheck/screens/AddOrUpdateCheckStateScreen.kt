@@ -1,8 +1,13 @@
 package com.example.motorcyclemanager.presentation.addcheck.screens;
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -21,12 +26,12 @@ import com.example.motorcyclemanager.R
 import com.example.motorcyclemanager.presentation.addcheck.models.AddOrUpdateCheck
 
 @Composable
-fun AddCheckStateScreen(
+fun AddOrUpdateCheckStateScreen(
     checkName: String?,
     onNewCheck: (AddOrUpdateCheck) -> Unit
 ) {
     val context = LocalContext.current
-    var name by remember { mutableStateOf(checkName?:"") }
+    var name by remember { mutableStateOf(checkName ?: "") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
     Column(
@@ -35,6 +40,21 @@ fun AddCheckStateScreen(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f), shape = RoundedCornerShape(8.dp))
+                .padding(12.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.checks_examples),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
@@ -65,5 +85,4 @@ fun AddCheckStateScreen(
             Text(stringResource(R.string.validate))
         }
     }
-
 }

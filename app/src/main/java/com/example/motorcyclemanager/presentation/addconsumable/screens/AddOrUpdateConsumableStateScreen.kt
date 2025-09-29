@@ -1,8 +1,13 @@
 package com.example.motorcyclemanager.presentation.addconsumable.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -23,7 +28,7 @@ import com.example.motorcyclemanager.R
 import com.example.motorcyclemanager.presentation.addconsumable.models.AddOrUpdateConsumable
 
 @Composable
-fun AddConsumableStateScreen(
+fun AddOrUpdateConsumableStateScreen(
     consumableName: String?,
     consumableTime: Float?,
     consumableCurrentTime: Float?,
@@ -41,6 +46,24 @@ fun AddConsumableStateScreen(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .padding(12.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.consumables_examples),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
@@ -117,5 +140,4 @@ fun AddConsumableStateScreen(
             Text(stringResource(R.string.add_consumable))
         }
     }
-
 }

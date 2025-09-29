@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.motorcyclemanager.presentation.addconsumable.screens.AddConsumableStateScreen
+import com.example.motorcyclemanager.presentation.addconsumable.screens.AddOrUpdateConsumableStateScreen
 
 sealed class AddConsumableScreenUiState {
 
@@ -45,7 +45,7 @@ fun AddOrUpdateConsumableScreen(
         shadowElevation = 2.dp
     ) {
         when (uiState) {
-            is AddConsumableScreenUiState.AddConsumableScreenState -> AddConsumableStateScreen(
+            is AddConsumableScreenUiState.AddConsumableScreenState -> AddOrUpdateConsumableStateScreen(
                 (uiState as AddConsumableScreenUiState.AddConsumableScreenState).name,
                 (uiState as AddConsumableScreenUiState.AddConsumableScreenState).time,
                 (uiState as AddConsumableScreenUiState.AddConsumableScreenState).currentTime,

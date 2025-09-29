@@ -7,9 +7,10 @@
     <string name="consommables">Consommables</string>
     <string name="add_consumable">Ajouter consommable</string>
     <string name="no_consumables">Aucun consommables</string>
-    <string name="consumables_examples">Exemple : vidanges, filtre à huile, pistons, etc.. Un consommable, c\'est simplement quelque chose qui à une durée de vie sur votre moto et dont vous voulez savoir à combien vous en êtes</string>
+    <string name="consumables_examples">Un consommable, c\'est simplement quelque chose qui à une durée de vie sur votre moto et dont vous voulez savoir à combien vous en êtes\nExemple : vidanges, filtre à huile, pistons, etc.. </string>
     <string name="no_check_points">Aucun points de contrôles</string>
-    <string name="checks_examples">Exemple : contrôler serrage, verifier tensions chaine, etc.. Toutes actions que vous voulez faire avant et/ou après une sortie</string>
+    <string name="checks_examples">Toutes actions que vous voulez faire avant ou après une sortie\nExemple : contrôler serrage, verifier tensions chaine, etc..</string>
+    <string name="add_hours_examples">En rajoutant des heures de roulage, vous rajouterez également des heures à vos consommables</string>
     <string name="checklist">Points de contrôle</string>
     <string name="add_check">Ajouter check</string>
     <string name="more_options">Plus d\'options</string>

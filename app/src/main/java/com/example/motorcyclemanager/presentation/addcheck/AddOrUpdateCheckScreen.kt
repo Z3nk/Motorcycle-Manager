@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.motorcyclemanager.presentation.addcheck.screens.AddCheckStateScreen
+import com.example.motorcyclemanager.presentation.addcheck.screens.AddOrUpdateCheckStateScreen
 
 sealed class AddCheckScreenUiState {
 
@@ -42,7 +42,7 @@ fun AddOrUpdateCheckScreen(
         shadowElevation = 2.dp
     ) {
         when (uiState) {
-            is AddCheckScreenUiState.AddCheckScreenState -> AddCheckStateScreen(
+            is AddCheckScreenUiState.AddCheckScreenState -> AddOrUpdateCheckStateScreen(
                 checkName = (uiState as AddCheckScreenUiState.AddCheckScreenState).checkName,
                 onNewCheck = {
                     viewModel.onNewCheck(it) {
