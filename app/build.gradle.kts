@@ -1,4 +1,7 @@
+val useFirebase = project.file("google-services.json").exists()
+
 plugins {
+
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
@@ -66,9 +69,11 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.material.extended)
     implementation(libs.androidx.room.ktx)
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
+    if (useFirebase) {
+        implementation(platform(libs.firebase.bom))
+        implementation(libs.firebase.analytics)
+        implementation(libs.firebase.crashlytics)
+    }
     ksp(libs.hilt.compiler)
     ksp(libs.androidx.room.compiler)
     testImplementation(libs.junit)
