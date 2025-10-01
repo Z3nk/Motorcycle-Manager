@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Motocross manager</string>
     <string name="bike_list">Vos motocross :</string>
     <string name="validate">Valider</string>
     <string name="back">Retour</string>
@@ -8,7 +9,7 @@
     <string name="consommables">Consommables</string>
     <string name="add_consumable">Ajouter consommable</string>
     <string name="no_consumables">Aucun consommables</string>
-    <string name="consumables_examples">Un consommable, c\'est simplement quelque chose qui à une durée de vie sur votre moto et dont vous voulez savoir à combien vous en êtes\nExemple : vidanges, filtre à huile, pistons, etc.. </string>
+    <string name="consumables_examples">Un consommable, c\'est quelque chose qui a une durée de vie sur votre motocross et dont vous souhaitez savoir à combien vous en êtes\nExemple : vidanges, filtre à huile, pistons, etc.. </string>
     <string name="no_check_points">Aucun points de contrôles</string>
     <string name="checks_examples">Toutes actions que vous voulez faire avant ou après une sortie\nExemple : contrôler serrage, verifier tensions chaine, etc..</string>
     <string name="add_hours_examples">En rajoutant des heures de roulage, vous rajouterez également des heures à vos consommables</string>
@@ -32,4 +33,7 @@
     <string name="time_remaining">%1$s heures restantes</string>
     <string name="time_remining_exceed">%1$s heures en trop</string>
     <string name="consommable_hours">%1$.1f heures</string>
+    <string name="consumables_number">Nombre de consommables : %1$d</string>
+    <string name="checks_number">Nombre de points de contrôles : %1$d</string>
+    <string name="times_number">Nombres d\'heures de la moto : %1$s</string>
 </resources>

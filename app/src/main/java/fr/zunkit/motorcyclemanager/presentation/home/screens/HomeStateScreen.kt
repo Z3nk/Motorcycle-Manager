@@ -1,9 +1,13 @@
 package fr.zunkit.motorcyclemanager.presentation.home.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,8 +39,15 @@ fun HomeStateScreen(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+        Text(
+            modifier = Modifier,
+            text = stringResource(R.string.app_name),
+            style = MaterialTheme.typography.headlineLarge
+        )
+
         Button(
             onClick = { onNavigateToAddBike() },
             modifier = Modifier.clip(RoundedCornerShape(12.dp)),
@@ -65,6 +76,7 @@ fun HomeStateScreen(
                     )
                 }
             })
+
 
         homeScreenState.bikeList?.let { lBikeList ->
             LazyColumn(modifier = Modifier) {

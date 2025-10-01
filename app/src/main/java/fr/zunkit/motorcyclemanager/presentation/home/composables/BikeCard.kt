@@ -24,12 +24,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import fr.zunkit.motorcyclemanager.R
 import fr.zunkit.motorcyclemanager.presentation.home.models.BikeWithConsumableAndChecks
 
 @Composable
-fun BikeCard(bike: BikeWithConsumableAndChecks, onClick: () -> Unit, onEditClick: () -> Unit, onDeleteCLick: () -> Unit) {
+fun BikeCard(
+    bike: BikeWithConsumableAndChecks,
+    onClick: () -> Unit,
+    onEditClick: () -> Unit,
+    onDeleteCLick: () -> Unit
+) {
 
     var showMenu by remember { mutableStateOf(false) }
     Card(
@@ -40,43 +46,43 @@ fun BikeCard(bike: BikeWithConsumableAndChecks, onClick: () -> Unit, onEditClick
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = { showMenu = true }),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+        )
     ) {
         Row() {
-            Box(
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = bike.name,
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.align(Alignment.TopStart)
+                    modifier = Modifier,
+                    fontWeight = FontWeight.Bold
                 )
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.BottomStart),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.End
                 ) {
-                    Column {
-                        Text(
-                            text = "Nombre de consommable : ${bike.consumablesSize}",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurface,
-                        )
-                        Text(
-                            text = "Nombre de check : ${bike.checksSize}",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurface,
-                        )
-                    }
                     Text(
-                        text = "Nombre d'heure : ${bike.time}",
-                        style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.align(Alignment.Bottom),
+                        text = stringResource(R.string.consumables_number, bike.consumablesSize),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
+                    Text(
+                        text = stringResource(R.string.checks_number, bike.checksSize),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
+                    Text(
+                        text = stringResource(R.string.times_number, bike.time),
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier,
                         color = MaterialTheme.colorScheme.onSurface,
                     )
                 }

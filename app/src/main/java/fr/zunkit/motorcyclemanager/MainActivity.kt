@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MotorcycleManagerTheme {
+            MotorcycleManagerTheme(darkTheme = true) {
                 MotorcycleManager()
             }
         }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Dirtbike Manager</string>
+    <string name="app_name">Dirtbike Manager</string>
     <string name="bike_list">Your dirtbikes :</string>
     <string name="back">Back</string>
     <string name="validate">Validate</string>
@@ -32,4 +32,7 @@
     <string name="time_remaining">%1$.1f hours remaining</string>
     <string name="time_remining_exceed">%1$.1f hours over</string>
     <string name="consommable_hours">%1$.1f hours</string>
+    <string name="consumables_number">Number of consumables : %1$d</string>
+    <string name="checks_number">Number of checkpoints : %1$d</string>
+    <string name="times_number">Dirtbike\'s number of hours : %1$s</string>
 </resources>
