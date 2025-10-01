@@ -44,7 +44,7 @@ fun AddOrUpdateConsumableStateScreen(
     val context = LocalContext.current
     var name by remember { mutableStateOf(consumableName ?: "") }
     var time by remember { mutableStateOf(consumableTime?.toString() ?: "") }
-    var currentTime by remember { mutableStateOf(consumableCurrentTime?.toString()) }
+    var currentTime by remember { mutableStateOf(consumableCurrentTime?.toString() ?: "") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     Column {
         Row(
@@ -96,30 +96,28 @@ fun AddOrUpdateConsumableStateScreen(
             OutlinedTextField(
                 value = time,
                 onValueChange = {
-                    if (it.isEmpty() || it.all { char -> char.isDigit() }) {
+                    if (it.isEmpty() || it.matches(Regex("^[0-9]*[.,]?[0-9]*$"))) {
                         time = it
                     }
                 },
                 label = { Text(stringResource(R.string.time_in_hour)) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 modifier = Modifier.fillMaxWidth(),
                 isError = errorMessage != null
             )
 
-            currentTime?.let { lCurrentTime ->
-                OutlinedTextField(
-                    value = lCurrentTime,
-                    onValueChange = {
-                        if (it.isEmpty() || it.all { char -> char.isDigit() }) {
-                            currentTime = it
-                        }
-                    },
-                    label = { Text(stringResource(R.string.time_already_spent)) },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    modifier = Modifier.fillMaxWidth(),
-                    isError = errorMessage != null
-                )
-            }
+            OutlinedTextField(
+                value = currentTime,
+                onValueChange = {
+                    if (it.isEmpty() || it.matches(Regex("^[0-9]*[.,]?[0-9]*$"))) {
+                        currentTime = it
+                    }
+                },
+                label = { Text(stringResource(R.string.time_already_spent)) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                modifier = Modifier.fillMaxWidth(),
+                isError = errorMessage != null
+            )
 
             errorMessage?.let {
                 Text(
@@ -139,22 +137,20 @@ fun AddOrUpdateConsumableStateScreen(
                         errorMessage = context.getString(R.string.time_is_mandatory)
                         return@Button
                     }
-                    val fTime = time.toFloatOrNull()
+                    val fTime = time.replace(",", ".").toFloatOrNull()
                     if (fTime == null || fTime <= 0) {
                         errorMessage = context.getString(R.string.time_should_be_above_0)
                         return@Button
                     }
 
-                    val currentTime = currentTime?.toFloatOrNull()
-                    if (consumableCurrentTime != null) {
-                        if (currentTime == null || currentTime < 0) {
-                            errorMessage = context.getString(R.string.time_should_not_be_negative)
-                            return@Button
-                        }
+                    val fcurrentTime = currentTime.replace(",", ".").toFloatOrNull()
+                    if (fcurrentTime == null || fcurrentTime < 0) {
+                        errorMessage = context.getString(R.string.time_should_not_be_negative)
+                        return@Button
                     }
 
                     errorMessage = null
-                    onNewConsumable(AddOrUpdateConsumable(name, fTime, currentTime ?: 0.0f))
+                    onNewConsumable(AddOrUpdateConsumable(name, fTime, fcurrentTime))
                 },
                 modifier = Modifier.padding(top = 16.dp)
             ) {

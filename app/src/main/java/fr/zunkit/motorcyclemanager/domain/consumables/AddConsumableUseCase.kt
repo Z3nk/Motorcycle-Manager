@@ -18,7 +18,7 @@ class AddConsumableUseCase @Inject constructor(val consumableRepository: Consuma
                         bikeId = bikeId,
                         name = addOrUpdateConsumable.name,
                         time = addOrUpdateConsumable.time,
-                        currentTime = 0.0f
+                        currentTime = addOrUpdateConsumable.currentTime
                     )
                 )
                 emit(Resource.Success(Unit))

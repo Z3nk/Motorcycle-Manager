@@ -74,12 +74,12 @@ fun AddHourStateScreen(
                 OutlinedTextField(
                     value = time,
                     onValueChange = {
-                        if (it.isEmpty() || it.all { char -> char.isDigit() }) {
+                        if (it.isEmpty() || it.matches(Regex("^[0-9]*[.,]?[0-9]*$"))) {
                             time = it
                         }
                     },
                     label = { Text(stringResource(R.string.time_in_hour)) },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                     modifier = Modifier.fillMaxWidth(),
                     isError = errorMessage != null
                 )
@@ -115,7 +115,7 @@ fun AddHourStateScreen(
                             errorMessage = context.getString(R.string.time_is_mandatory)
                             return@Button
                         }
-                        val fTime = time.toFloatOrNull()
+                        val fTime = time.replace(",", ".").toFloatOrNull()
                         if (fTime == null || fTime <= 0) {
                             errorMessage = context.getString(R.string.time_should_be_above_0)
                             return@Button
