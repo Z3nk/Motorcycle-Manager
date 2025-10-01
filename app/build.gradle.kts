@@ -13,11 +13,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.motorcyclemanager"
+    namespace = "fr.zunkit.motorcyclemanager"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.motorcyclemanager"
+        applicationId = "fr.zunkit.motorcyclemanager"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
