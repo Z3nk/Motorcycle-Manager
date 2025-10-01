@@ -51,6 +51,7 @@ fun BikeCard(bike: BikeWithConsumableAndChecks, onClick: () -> Unit, onEditClick
                 Text(
                     text = bike.name,
                     style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.align(Alignment.TopStart)
                 )
 
@@ -63,17 +64,20 @@ fun BikeCard(bike: BikeWithConsumableAndChecks, onClick: () -> Unit, onEditClick
                     Column {
                         Text(
                             text = "Nombre de consommable : ${bike.consumablesSize}",
-                            style = MaterialTheme.typography.bodySmall
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface,
                         )
                         Text(
                             text = "Nombre de check : ${bike.checksSize}",
-                            style = MaterialTheme.typography.bodySmall
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface,
                         )
                     }
                     Text(
                         text = "Nombre d'heure : ${bike.time}",
                         style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.align(Alignment.Bottom)
+                        modifier = Modifier.align(Alignment.Bottom),
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                 }
             }
