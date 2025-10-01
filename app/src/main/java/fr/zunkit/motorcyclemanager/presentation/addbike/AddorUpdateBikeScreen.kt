@@ -6,6 +6,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -18,7 +19,9 @@ import fr.zunkit.motorcyclemanager.presentation.addbike.screens.AddBikeStateScre
 sealed class AddBikeScreenUiState {
 
     data class AddBikeScreenState(
-        val loading: Boolean
+        val loading: Boolean,
+        val bikeName: String?,
+        val bikeTime: Float?
     ) : AddBikeScreenUiState()
 
     object LoadingState : AddBikeScreenUiState()
@@ -26,10 +29,14 @@ sealed class AddBikeScreenUiState {
 
 @Composable
 fun AddBikeScreen(
-    viewModel: AddBikeViewModel = hiltViewModel(),
+    bikeId: Long?,
+    viewModel: AddorUpdateBikeViewModel = hiltViewModel(),
     onNavigateToHomeScreen: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    LaunchedEffect(bikeId, ) {
+        viewModel.initScreen(bikeId)
+    }
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background,
@@ -47,6 +54,8 @@ fun AddBikeScreen(
 
                 } else {
                     AddBikeStateScreen(
+                        (uiState as AddBikeScreenUiState.AddBikeScreenState).bikeName,
+                        (uiState as AddBikeScreenUiState.AddBikeScreenState).bikeTime,
                         onNewBike = {
                             viewModel.onBikeAdded(it) {
                                 onNavigateToHomeScreen()

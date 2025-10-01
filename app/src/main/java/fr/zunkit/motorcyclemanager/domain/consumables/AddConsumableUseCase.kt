@@ -26,6 +26,5 @@ class AddConsumableUseCase @Inject constructor(val consumableRepository: Consuma
                 emit(Resource.Error(e))
             }
         }
-
     }
 }

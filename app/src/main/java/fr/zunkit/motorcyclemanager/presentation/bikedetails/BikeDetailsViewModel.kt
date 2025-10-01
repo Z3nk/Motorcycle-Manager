@@ -2,7 +2,6 @@ package fr.zunkit.motorcyclemanager.presentation.bikedetails;
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import fr.zunkit.motorcyclemanager.data.repositories.bikes.BikeRepository
 import fr.zunkit.motorcyclemanager.domain.checks.CheckCheckUseCase
 import fr.zunkit.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
 import fr.zunkit.motorcyclemanager.domain.checks.DeleteCheckUseCase
@@ -12,6 +11,7 @@ import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Bike
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Check
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Consumable
 import dagger.hilt.android.lifecycle.HiltViewModel
+import fr.zunkit.motorcyclemanager.domain.bikes.GetBikeUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -26,7 +26,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BikeDetailsViewModel @Inject constructor(
-    private val bikeRepository: BikeRepository,
+    private val getBikeUseCase: GetBikeUseCase,
     private val checkCheckUseCase: CheckCheckUseCase,
     private val deleteCheckUseCase: DeleteCheckUseCase,
     private val deleteConsumableUseCase: DeleteConsumableUseCase,
@@ -110,7 +110,17 @@ class BikeDetailsViewModel @Inject constructor(
 
     private fun refreshBikeWith(bikeId: Long) {
         viewModelScope.launch(Dispatchers.Main) {
-            bikeWithConsumablesAndChecksDomain.update { bikeRepository.getBikeById(bikeId) }
+            getBikeUseCase(bikeId).collectLatest { res ->
+                when (res) {
+                    is Resource.Error<*> -> loading.update { false }
+                    is Resource.Loading<*> -> loading.update { true }
+                    is Resource.Success<*> -> {
+                        bikeWithConsumablesAndChecksDomain.update { res.data }
+                        loading.update { false }
+                    }
+                }
+            }
+
         }
     }
 }

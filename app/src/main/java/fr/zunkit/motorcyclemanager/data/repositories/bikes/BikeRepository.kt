@@ -8,7 +8,6 @@ import fr.zunkit.motorcyclemanager.data.models.BikeEntity
 import fr.zunkit.motorcyclemanager.data.models.BikeWithConsumablesAndChecksEntity
 import fr.zunkit.motorcyclemanager.data.models.CheckEntity
 import fr.zunkit.motorcyclemanager.data.models.ConsumableEntity
-import fr.zunkit.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -45,11 +44,19 @@ class BikeRepository @Inject constructor(
     fun getAllBikes(): Flow<List<BikeWithConsumablesAndChecksEntity>> =
         bikeDao.getAllBikesWithDetails()
 
-    suspend fun getBikeById(id: Long): BikeWithConsumablesAndChecksDomain? {
-        val entity = bikeDao.getBikeWithDetails(id)
-        return if (entity != null)
-            BikeWithConsumablesAndChecksDomain(entity)
-        else null
+    suspend fun getBikeById(id: Long): BikeWithConsumablesAndChecksEntity? {
+        return bikeDao.getBikeWithDetails(id)
+    }
+
+    suspend fun updateBike(bikeEntity: BikeEntity) {
+        bikeDao.updateBike(bikeEntity)
+    }
+
+    @Transaction
+    suspend fun deleteBikeById(bikeId: Long) {
+        consumableDao.deleteConsumableByBikeId(bikeId)
+        checkDao.deleteCheckByBikeId(bikeId)
+        bikeDao.deleteBikeById(bikeId)
     }
 
 }

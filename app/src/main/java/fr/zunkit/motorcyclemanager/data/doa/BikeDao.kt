@@ -28,4 +28,7 @@ interface BikeDao {
     @Query("SELECT * FROM bikes WHERE id = :bikeId")
     suspend fun getBikeWithDetails(bikeId: Long): BikeWithConsumablesAndChecksEntity?
 
+    @Query("DELETE FROM bikes WHERE id = :bikeId")
+    suspend fun deleteBikeById(bikeId: Long)
+
 }

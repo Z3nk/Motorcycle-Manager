@@ -23,12 +23,15 @@ import androidx.compose.ui.unit.dp
 import fr.zunkit.motorcyclemanager.R
 import fr.zunkit.motorcyclemanager.presentation.home.HomeScreenUiState
 import fr.zunkit.motorcyclemanager.presentation.home.composables.BikeCard
+import fr.zunkit.motorcyclemanager.presentation.home.models.BikeWithConsumableAndChecks
 
 @Composable
 fun HomeStateScreen(
     homeScreenState: HomeScreenUiState.HomeScreenState,
     onNavigateToBikeDetail: (Long) -> Unit,
-    onNavigateToAddBike: () -> Unit
+    onNavigateToAddBike: () -> Unit,
+    onNavigateToEditBike: (BikeWithConsumableAndChecks) -> Unit,
+    onDeleteBike: (BikeWithConsumableAndChecks) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,9 +69,17 @@ fun HomeStateScreen(
         homeScreenState.bikeList?.let { lBikeList ->
             LazyColumn(modifier = Modifier) {
                 items(lBikeList.size) { index ->
-                    BikeCard(lBikeList[index], onClick = {
-                        onNavigateToBikeDetail(lBikeList[index].id)
-                    })
+                    BikeCard(
+                        lBikeList[index],
+                        onClick = {
+                            onNavigateToBikeDetail(lBikeList[index].id)
+                        },
+                        onEditClick = {
+                            onNavigateToEditBike(lBikeList[index])
+                        },
+                        onDeleteCLick = {
+                            onDeleteBike(lBikeList[index])
+                        })
                 }
             }
         }

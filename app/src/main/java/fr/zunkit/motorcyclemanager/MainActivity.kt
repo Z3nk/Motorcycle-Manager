@@ -16,7 +16,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import fr.zunkit.motorcyclemanager.composables.bottombar.MotorCycleBottomBar
 import fr.zunkit.motorcyclemanager.design.theme.MotorcycleManagerTheme
 import fr.zunkit.motorcyclemanager.presentation.addbike.AddBikeScreen
 import fr.zunkit.motorcyclemanager.presentation.addcheck.AddOrUpdateCheckScreen
@@ -32,7 +31,7 @@ import kotlinx.serialization.Serializable
 object Home
 
 @Serializable
-object AddBike
+data class AddOrUpdateBike(val bikeId: Long? = null)
 
 @Serializable
 data class BikeDetail(val id: Long)
@@ -76,11 +75,17 @@ private fun MotorcycleManager() {
                             navController.navigate(route = BikeDetail(id))
                         },
                         onNavigateToAddBike = {
-                            navController.navigate(route = AddBike)
+                            navController.navigate(route = AddOrUpdateBike())
+                        },
+                        onNavigateToEditBike = { bike ->
+                            navController.navigate(route = AddOrUpdateBike(bike.id))
                         })
                 }
-                composable<AddBike> {
-                    AddBikeScreen(onNavigateToHomeScreen = {
+                composable<AddOrUpdateBike> { backStackEntry ->
+                    val addOrUpdateBike: AddOrUpdateBike = backStackEntry.toRoute()
+                    AddBikeScreen(
+                        bikeId = addOrUpdateBike.bikeId,
+                        onNavigateToHomeScreen = {
                         navController.navigate(Home) {
                             popUpTo(Home) {
                                 saveState = true

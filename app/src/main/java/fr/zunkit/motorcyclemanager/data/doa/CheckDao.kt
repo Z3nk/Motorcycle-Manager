@@ -43,4 +43,7 @@ interface CheckDao {
 
     @Query("SELECT COUNT(*) FROM checks WHERE bikeId = :bikeId AND done = 0")
     suspend fun countPendingChecksForBike(bikeId: Long): Int
+
+    @Query("DELETE FROM checks WHERE bikeId = :bikeId")
+    suspend fun deleteCheckByBikeId(bikeId: Long)
 }

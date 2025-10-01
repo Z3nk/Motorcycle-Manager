@@ -27,16 +27,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.zunkit.motorcyclemanager.R
-import fr.zunkit.motorcyclemanager.presentation.addbike.models.BikeAdded
+import fr.zunkit.motorcyclemanager.presentation.addbike.models.AddOrUpdateBike
 
 @Composable
 fun AddBikeStateScreen(
-    onNewBike: (BikeAdded) -> Unit,
+    bikeName: String?,
+    bikeTime: Float?,
+    onNewBike: (AddOrUpdateBike) -> Unit,
     onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
-    var name by remember { mutableStateOf("") }
-    var time by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf(bikeName?:"") }
+    var time by remember { mutableStateOf(bikeTime?.toString()?:"") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     Column {
         Row(
@@ -105,7 +107,7 @@ fun AddBikeStateScreen(
                         return@Button
                     }
                     errorMessage = null
-                    onNewBike(BikeAdded(name, fTime))
+                    onNewBike(AddOrUpdateBike(name, fTime))
                 },
                 modifier = Modifier.padding(top = 16.dp)
             ) {
@@ -119,6 +121,8 @@ fun AddBikeStateScreen(
 @Composable
 fun AddBikeStateScreenPreview() {
     AddBikeStateScreen(
+        bikeName = "SXF",
+        bikeTime = 50.0f,
         onNewBike = { bike ->
             println("Preview: Nouvelle moto ajoutée : ${bike.name}, ${bike.time} heures")
         },

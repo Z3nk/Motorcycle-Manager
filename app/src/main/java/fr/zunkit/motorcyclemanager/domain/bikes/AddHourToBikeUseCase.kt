@@ -4,7 +4,6 @@ import fr.zunkit.motorcyclemanager.data.repositories.bikes.BikeRepository
 import fr.zunkit.motorcyclemanager.data.repositories.checks.CheckRepository
 import fr.zunkit.motorcyclemanager.data.repositories.consumables.ConsumableRepository
 import fr.zunkit.motorcyclemanager.models.Resource
-import fr.zunkit.motorcyclemanager.presentation.addbike.models.BikeAdded
 import fr.zunkit.motorcyclemanager.presentation.addhour.models.AddHour
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

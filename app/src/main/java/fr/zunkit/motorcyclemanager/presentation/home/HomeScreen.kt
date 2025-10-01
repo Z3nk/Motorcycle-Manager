@@ -28,7 +28,8 @@ sealed class HomeScreenUiState {
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     onNavigateToBikeDetail: (Long) -> Unit,
-    onNavigateToAddBike: () -> Unit
+    onNavigateToAddBike: () -> Unit,
+    onNavigateToEditBike: (BikeWithConsumableAndChecks) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()
     Surface(
@@ -40,7 +41,9 @@ fun HomeScreen(
             is HomeScreenUiState.HomeScreenState -> HomeStateScreen(
                 homeScreenState = uiState as HomeScreenUiState.HomeScreenState,
                 onNavigateToBikeDetail = onNavigateToBikeDetail,
-                onNavigateToAddBike= onNavigateToAddBike
+                onNavigateToAddBike = onNavigateToAddBike,
+                onNavigateToEditBike = onNavigateToEditBike,
+                onDeleteBike = { bike -> viewModel.onDeleteBike(bike) }
             )
 
             HomeScreenUiState.LoadingState -> Box(
