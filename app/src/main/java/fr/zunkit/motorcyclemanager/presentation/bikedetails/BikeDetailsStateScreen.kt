@@ -34,6 +34,7 @@ fun BikeDetailsStateScreen(
     onAddConsumable: () -> Unit,
     onEditConsumable: (Consumable) -> Unit,
     onDeleteConsumable: (Consumable) -> Unit,
+    onRenewConsumable: (Consumable) -> Unit,
     onAddCheck: () -> Unit,
     onEditCheck: (Check) -> Unit,
     onDeleteCheck: (Check) -> Unit,
@@ -75,7 +76,8 @@ fun BikeDetailsStateScreen(
                     consumables = screenState.bike.consumables,
                     onEditConsumable = onEditConsumable,
                     onAddConsumable = onAddConsumable,
-                    onDeleteConsumable = onDeleteConsumable
+                    onDeleteConsumable = onDeleteConsumable,
+                    onRenewConsumable = onRenewConsumable
                 )
             }
             item {
@@ -119,11 +121,12 @@ fun BikeDetailsPreview() {
             onAddConsumable = {},
             onEditConsumable = {},
             onDeleteConsumable = {},
+            onRenewConsumable = {},
             onAddCheck = {},
             onEditCheck = {},
             onDeleteCheck = {},
             onAddHours = {},
-            onClickCheck = {}
+            onClickCheck = {},
         )
     }
 }

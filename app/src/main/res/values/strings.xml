@@ -11,6 +11,7 @@
     <string name="no_consumables">No consumables</string>
     <string name="consumables_examples">A consumable is simply something that has a lifespan on your dirtbike and you want to know how much you\re up to\nExample : oil change, oil filter, pistons, etc. </string>
     <string name="no_check_points">No check points</string>
+    <string name="renew">Renew</string>
     <string name="checks_examples">Any actions you want to do before or after a ride\nExample : check torque, check chain tension, etc.</string>
     <string name="add_hours_examples">By adding hours spend riding your dirtbike, you will add hours to your consumables too</string>
     <string name="checklist">Check list</string>

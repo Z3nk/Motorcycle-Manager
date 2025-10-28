@@ -1,12 +1,17 @@
 package fr.zunkit.motorcyclemanager.presentation.bikedetails.composables
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Repeat
+import androidx.compose.material.icons.filled.Timelapse
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -27,7 +32,8 @@ fun ConsumablesSection(
     consumables: List<Consumable>,
     onEditConsumable: (Consumable) -> Unit,
     onDeleteConsumable: (Consumable) -> Unit,
-    onAddConsumable: () -> Unit
+    onAddConsumable: () -> Unit,
+    onRenewConsumable: (Consumable) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -73,11 +79,38 @@ fun ConsumablesSection(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     consumables.forEach { consumable ->
-                        ConsumableItem(
-                            consumable = consumable,
-                            onEditClick = { onEditConsumable(consumable) },
-                            onDeleteClick = { onDeleteConsumable(consumable) }
-                        )
+                        Row(
+                            Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            ConsumableItem(
+                                modifier = Modifier.weight(1f),
+                                consumable = consumable,
+                                onEditClick = { onEditConsumable(consumable) },
+                                onDeleteClick = { onDeleteConsumable(consumable) }
+                            )
+                            Column(
+                                modifier = Modifier
+                                    .padding(start = 6.dp, bottom = 1.dp)
+                                    .clickable(onClick = { onRenewConsumable(consumable) }),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    modifier = Modifier.padding(6.dp),
+                                    text = stringResource(R.string.renew),
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+
+                                Icon(
+                                    imageVector = Icons.Default.Repeat,
+                                    contentDescription = null,
+                                    modifier = Modifier,
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
                     }
                 }
             }

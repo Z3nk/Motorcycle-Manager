@@ -12,6 +12,7 @@ import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Check
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Consumable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.zunkit.motorcyclemanager.domain.bikes.GetBikeUseCase
+import fr.zunkit.motorcyclemanager.domain.consumables.RenewConsumableUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -30,6 +31,7 @@ class BikeDetailsViewModel @Inject constructor(
     private val checkCheckUseCase: CheckCheckUseCase,
     private val deleteCheckUseCase: DeleteCheckUseCase,
     private val deleteConsumableUseCase: DeleteConsumableUseCase,
+    private val renewConsumableUseCase: RenewConsumableUseCase
 ) :
     ViewModel() {
     private val bikeWithConsumablesAndChecksDomain =
@@ -74,6 +76,22 @@ class BikeDetailsViewModel @Inject constructor(
         }
     }
 
+    fun onRenewConsumable(consumable: Consumable) {
+        viewModelScope.launch(Dispatchers.Main) {
+            bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->
+                renewConsumableUseCase(consumable, bikeId).collectLatest { res ->
+                    when (res) {
+                        is Resource.Error<*> -> {}
+                        is Resource.Loading<*> -> {}
+                        is Resource.Success<*> -> {
+                            refreshBikeWith(bikeId)
+                        }
+                    }
+                }
+
+            }
+        }
+    }
     fun onDeleteConsumable(consumable: Consumable) {
         viewModelScope.launch(Dispatchers.Main) {
             bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->

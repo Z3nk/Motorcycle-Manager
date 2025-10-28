@@ -36,6 +36,7 @@ import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Consumable
 
 @Composable
 fun ConsumableItem(
+    modifier: Modifier,
     consumable: Consumable,
     onEditClick: () -> Unit,
     onDeleteClick: () -> Unit
@@ -50,7 +51,7 @@ fun ConsumableItem(
     val isUrgent = hoursRemaining <= 2f
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .combinedClickable(
                 onClick = onEditClick,
