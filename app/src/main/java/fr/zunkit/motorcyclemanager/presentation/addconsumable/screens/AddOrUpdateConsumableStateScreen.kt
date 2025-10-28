@@ -100,7 +100,7 @@ fun AddOrUpdateConsumableStateScreen(
                         time = it
                     }
                 },
-                label = { Text(stringResource(R.string.time_in_hour)) },
+                label = { Text(stringResource(R.string.timelife_of_consumable)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 modifier = Modifier.fillMaxWidth(),
                 isError = errorMessage != null
@@ -139,7 +139,7 @@ fun AddOrUpdateConsumableStateScreen(
                     }
                     val fTime = time.replace(",", ".").toFloatOrNull()
                     if (fTime == null || fTime <= 0) {
-                        errorMessage = context.getString(R.string.time_should_be_above_0)
+                        errorMessage = context.getString(R.string.lifetime_should_be_above_0)
                         return@Button
                     }
 

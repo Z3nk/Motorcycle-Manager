@@ -18,7 +18,8 @@ import fr.zunkit.motorcyclemanager.presentation.addhour.screens.AddHourStateScre
 sealed class AddHourScreenUiState {
 
     data class AddHourScreenState(
-        val loading: Boolean
+        val loading: Boolean,
+        val currentBikeTime: Float
     ) : AddHourScreenUiState()
 
     object LoadingState : AddHourScreenUiState()
@@ -41,6 +42,7 @@ fun AddHourScreen(
     ) {
         when (uiState) {
             is AddHourScreenUiState.AddHourScreenState -> AddHourStateScreen(
+                (uiState as AddHourScreenUiState.AddHourScreenState).currentBikeTime,
                 onNewHour = { addHour ->
                     viewModel.onNewHour(addHour) {
                         goBackToBikeDetail()

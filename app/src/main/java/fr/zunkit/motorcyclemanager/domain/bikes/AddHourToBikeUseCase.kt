@@ -21,14 +21,19 @@ class AddHourToBikeUseCase @Inject constructor(
         return flow {
             try {
                 emit(Resource.Loading())
+                var hoursToAdd = addHour.hour
+                if(!addHour.isTimeRidingBike){
+                    hoursToAdd = addHour.hour- (bikeRepository.getBikeById(bikeId)?.bike?.time?:0.0f)
+                }
+
                 bikeRepository.addHourToBike(
                     bikeId = bikeId,
-                    hoursToAdd = addHour.hour
+                    hoursToAdd = hoursToAdd
                 )
 
                 consumableRepository.addTimeTo(
                     bikeId = bikeId,
-                    hoursToAdd = addHour.hour
+                    hoursToAdd = hoursToAdd
                 )
 
                 if (addHour.resetChecks) {

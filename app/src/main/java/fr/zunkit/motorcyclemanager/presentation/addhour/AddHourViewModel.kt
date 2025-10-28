@@ -6,6 +6,8 @@ import fr.zunkit.motorcyclemanager.domain.bikes.AddHourToBikeUseCase
 import fr.zunkit.motorcyclemanager.models.Resource
 import fr.zunkit.motorcyclemanager.presentation.addhour.models.AddHour
 import dagger.hilt.android.lifecycle.HiltViewModel
+import fr.zunkit.motorcyclemanager.domain.bikes.GetBikeUseCase
+import fr.zunkit.motorcyclemanager.domain.bikes.models.BikeWithConsumablesAndChecksDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -19,19 +21,24 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddHourViewModel @Inject constructor(private val addHourUseCase: AddHourToBikeUseCase) :
+class AddHourViewModel @Inject constructor(
+    private val addHourUseCase: AddHourToBikeUseCase,
+    private val getBikeUseCase: GetBikeUseCase
+) :
     ViewModel() {
     private val loading = MutableStateFlow(false)
     private val mBikeId = MutableStateFlow<Long?>(null)
+    private val bikeWithConsumablesAndChecksDomain =
+        MutableStateFlow<BikeWithConsumablesAndChecksDomain?>(null)
 
     val uiState: StateFlow<AddHourScreenUiState> = combine(
         loading,
-        MutableStateFlow(Unit)
-    ) { mLoading, i2 ->
+        bikeWithConsumablesAndChecksDomain
+    ) { mLoading, mBikeWithConsumablesAndChecksDomain ->
         if (mLoading) {
             AddHourScreenUiState.LoadingState
         } else {
-            AddHourScreenUiState.AddHourScreenState(mLoading)
+            AddHourScreenUiState.AddHourScreenState(loading = mLoading, currentBikeTime = mBikeWithConsumablesAndChecksDomain?.bike?.time?:0.0f)
         }
 
     }.flowOn(Dispatchers.Main).stateIn(
@@ -42,6 +49,22 @@ class AddHourViewModel @Inject constructor(private val addHourUseCase: AddHourTo
 
     fun initScreen(bikeId: Long) {
         mBikeId.update { bikeId }
+        refreshBikeWith(bikeId)
+    }
+
+    private fun refreshBikeWith(bikeId: Long) {
+        viewModelScope.launch(Dispatchers.Main) {
+            getBikeUseCase(bikeId).collectLatest { res ->
+                when (res) {
+                    is Resource.Error<*> -> {}
+                    is Resource.Loading<*> -> {}
+                    is Resource.Success<*> -> {
+                        bikeWithConsumablesAndChecksDomain.update { res.data }
+                    }
+                }
+            }
+
+        }
     }
 
     fun onNewHour(addHour: AddHour, onSuccess: () -> Unit) {

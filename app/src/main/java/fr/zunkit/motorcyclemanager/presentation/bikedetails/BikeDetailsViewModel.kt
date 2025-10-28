@@ -112,11 +112,10 @@ class BikeDetailsViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             getBikeUseCase(bikeId).collectLatest { res ->
                 when (res) {
-                    is Resource.Error<*> -> loading.update { false }
-                    is Resource.Loading<*> -> loading.update { true }
+                    is Resource.Error<*> -> {}
+                    is Resource.Loading<*> -> {}
                     is Resource.Success<*> -> {
                         bikeWithConsumablesAndChecksDomain.update { res.data }
-                        loading.update { false }
                     }
                 }
             }

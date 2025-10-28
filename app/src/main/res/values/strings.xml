@@ -6,6 +6,7 @@
     <string name="add_a_dirtbike">Add a dirtbike</string>
     <string name="add_hours">Add time spent on the dirtbike</string>
     <string name="consommables">Consumables</string>
+    <string name="or">OR</string>
     <string name="add_consumable">Add consumable</string>
     <string name="no_consumables">No consumables</string>
     <string name="consumables_examples">A consumable is simply something that has a lifespan on your dirtbike and you want to know how much you\re up to\nExample : oil change, oil filter, pistons, etc. </string>
@@ -17,13 +18,17 @@
     <string name="more_options">More options</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
-    <string name="time_in_hour">Time (in hours)</string>
+    <string name="time_in_hour">How long was your last ride (in hours)</string>
+    <string name="timelife_of_consumable">What should be the lifespan in hours of this consumable?</string>
+    <string name="time_of_the_bike">Current time of the bike(we calculate for you how long did you ride)</string>
     <string name="reset_checklist">Unchecked every checks points</string>
     <string name="time_is_mandatory">Time is mandatory</string>
+    <string name="lifetime_should_be_above_0">Lifespan of your consumable should be above 0 hours</string>
     <string name="time_should_be_above_0">Time should be above 0</string>
+    <string name="new_time_cannot_be_less_than_current">You cannot set fewer hours on the hour meter than your bike already has.</string>
     <string name="add_ride_time">Add ride time on the bike</string>
     <string name="name_consumable">Name of the consumable</string>
-    <string name="time_already_spent">Time already spent</string>
+    <string name="time_already_spent">Hours already spent</string>
     <string name="name_is_mandatory">Name is mandatory</string>
     <string name="time_should_not_be_negative">Time already spent should not be negative</string>
     <string name="name_checkpoint">Checkpoint name</string>
@@ -35,4 +40,6 @@
     <string name="consumables_number">Number of consumables : %1$d</string>
     <string name="checks_number">Number of checkpoints : %1$d</string>
     <string name="times_number">Dirtbike\'s number of hours : %1$s</string>
+    <string name="your_bike_has_X_hours_now">Your bike has %1$s hours, you define than your bike has now %2$s hours on the hour meter, so we calculate that you rode %3$s hours</string>
+    <string name="you_rode_X_hours_last_ride">You rode %1$s hours on your last ride, we will add them to your bike\'s current %2$s hours as well as your consumables</string>
 </resources>
