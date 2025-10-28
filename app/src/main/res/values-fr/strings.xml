@@ -20,7 +20,7 @@
     <string name="update">Modifier</string>
     <string name="delete">Supprimer</string>
     <string name="time_in_hour">Combien de temps avez vous roulé lors de la dernière sortie (en heures)</string>
-    <string name="time_of_the_bike">Heure actuelle de la moto (nous calculons pour vous combien de temps vous avez roulé)</string>
+    <string name="time_of_the_bike">Heures actuelle de la moto (nous calculons pour vous combien de temps vous avez roulé)</string>
     <string name="new_time_cannot_be_less_than_current">Vous ne pouvez pas définir moins d\'heure au compteur que votre moto n\'en possède deja</string>
     <string name="reset_checklist">Décocher tous les points de contrôle</string>
     <string name="time_is_mandatory">Le temps est requis</string>

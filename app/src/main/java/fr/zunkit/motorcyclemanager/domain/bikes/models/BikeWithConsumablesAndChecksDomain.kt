@@ -19,7 +19,7 @@ data class BikeWithConsumablesAndChecksDomain(
                 it.id,
                 it.name,
                 it.time,
-                it.currentTime
+                (it.currentTime * 10.0f).roundToInt() / 10f
             )
         },
         checks = entity.checks.map { CheckDomain(it.id, it.name, it.done) }
