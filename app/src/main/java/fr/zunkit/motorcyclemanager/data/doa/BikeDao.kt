@@ -31,4 +31,10 @@ interface BikeDao {
     @Query("DELETE FROM bikes WHERE id = :bikeId")
     suspend fun deleteBikeById(bikeId: Long)
 
+    @Query("UPDATE bikes SET photoUri = :photoUri WHERE id = :bikeId")
+    suspend fun updateBikePhoto(bikeId: Long, photoUri: String)
+
+    @Query("SELECT photoUri FROM bikes WHERE id = :bikeId")
+    suspend fun getPhotoPath(bikeId: Long): String?
+
 }

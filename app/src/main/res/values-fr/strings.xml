@@ -36,8 +36,8 @@
     <string name="name_checkpoint">Nom du point de controle</string>
     <string name="bike_name">Nom de votre motocross</string>
     <string name="add_dirtbike">Ajouter la moto</string>
-    <string name="time_remaining">%1$s heures restantes</string>
-    <string name="time_remining_exceed">%1$s heures en trop</string>
+    <string name="time_remaining">%1$sh restantes</string>
+    <string name="time_remining_exceed">%1$sh en trop</string>
     <string name="consommable_hours">%1$.1f heures</string>
     <string name="consumables_number">Nombre de consommables : %1$d</string>
     <string name="checks_number">Nombre de points de contrôles : %1$d</string>

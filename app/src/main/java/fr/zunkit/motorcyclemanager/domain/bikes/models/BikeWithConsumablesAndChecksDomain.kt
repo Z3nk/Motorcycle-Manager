@@ -12,7 +12,8 @@ data class BikeWithConsumablesAndChecksDomain(
         bike = BikeDomain(
             entity.bike.id,
             entity.bike.name,
-            (entity.bike.time * 10.0f).roundToInt() / 10f
+            (entity.bike.time * 10.0f).roundToInt() / 10f,
+            photoUri = entity.bike.photoUri
         ),
         consumables = entity.consumables.map {
             ConsumableDomain(

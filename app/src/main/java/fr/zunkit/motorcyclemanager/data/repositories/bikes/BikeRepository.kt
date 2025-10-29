@@ -59,4 +59,12 @@ class BikeRepository @Inject constructor(
         bikeDao.deleteBikeById(bikeId)
     }
 
+    suspend fun addPictureToBike(bikeId: Long, uri: String) {
+        bikeDao.updateBikePhoto(bikeId, uri)
+    }
+
+    suspend fun getCurrentPhotoPath(bikeId: Long): String? {
+        return bikeDao.getPhotoPath(bikeId)
+    }
+
 }

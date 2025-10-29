@@ -73,6 +73,8 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.material.extended)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.coil.compose)
+    implementation(libs.androidx.camera.core)
     if (useFirebase) {
         implementation(platform(libs.firebase.bom))
         implementation(libs.firebase.analytics)

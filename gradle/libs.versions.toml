@@ -19,6 +19,8 @@ materialExtended = "1.7.8"
 firebase-bom = "34.3.0"
 google-services = "4.4.2"
 firebase-crashlytics = "3.0.6"
+coil = "2.6.0"
+cameraCore = "1.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,6 +49,8 @@ material-extended = { group = "androidx.compose.material", name = "material-icon
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+androidx-camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

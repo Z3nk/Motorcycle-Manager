@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class BikeEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,
-    val time: Float
+    val time: Float,
+    val photoUri: String? = null
 )

@@ -39,7 +39,8 @@ fun BikeDetailsStateScreen(
     onEditCheck: (Check) -> Unit,
     onDeleteCheck: (Check) -> Unit,
     onClickCheck: (Check) -> Unit,
-    onAddHours: () -> Unit
+    onAddHours: () -> Unit,
+    onEditPhoto: () -> Unit
 ) {
     Column {
         Row(
@@ -67,7 +68,8 @@ fun BikeDetailsStateScreen(
             item {
                 BikeSection(
                     bike = screenState.bike,
-                    onAddHours = onAddHours
+                    onAddHours = onAddHours,
+                    onEditPhoto = onEditPhoto
                 )
             }
 
@@ -114,7 +116,8 @@ fun BikeDetailsPreview() {
                         Check(2, "WD40 on engine", false),
                         Check(3, "Blow bike", false),
                         Check(4, "Blow bike", false),
-                    )
+                    ),
+                    photoUri = null
                 )
             ),
             onBackClick = {},
@@ -127,6 +130,7 @@ fun BikeDetailsPreview() {
             onDeleteCheck = {},
             onAddHours = {},
             onClickCheck = {},
+            onEditPhoto = {}
         )
     }
 }

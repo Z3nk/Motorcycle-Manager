@@ -1,5 +1,8 @@
 package fr.zunkit.motorcyclemanager.presentation.bikedetails;
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -35,6 +38,7 @@ fun BikeDetailsScreen(
     onNavigateToAddCheckScreen: (idBike: Long) -> Unit,
     onNavigateToEditCheckScreen: (idCheck: Long) -> Unit,
 ) {
+
     val uiState by viewModel.uiState.collectAsState()
     LaunchedEffect(bikeId) {
         viewModel.initScreen(bikeId)
@@ -46,6 +50,12 @@ fun BikeDetailsScreen(
     ) {
         when (uiState) {
             is BikeDetailsScreenUiState.BikeDetailsScreenState -> {
+                val pickImageLauncher = rememberLauncherForActivityResult(
+                    contract = ActivityResultContracts.GetContent()
+                ) { uri: Uri? ->
+                    uri?.let { viewModel.onPhotoPicked(it, bikeId) }
+                }
+
                 BikeDetailsStateScreen(
                     uiState as BikeDetailsScreenUiState.BikeDetailsScreenState,
                     onBackClick = onNavigateToHomeScreen,
@@ -76,6 +86,9 @@ fun BikeDetailsScreen(
                     },
                     onClickCheck = { check ->
                         viewModel.checkOn(check)
+                    },
+                    onEditPhoto = {
+                        pickImageLauncher.launch("image/*")
                     }
                 )
             }

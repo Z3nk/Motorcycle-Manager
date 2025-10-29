@@ -24,7 +24,9 @@ object DatabaseModule {
             context,
             MotorCycleDatabase::class.java,
             "app_database"
-        ).build() // Add migrations if needed later
+        )
+            .addMigrations(MotorCycleDatabase.MIGRATION_1_2)
+            .build()
     }
 
     @Provides
