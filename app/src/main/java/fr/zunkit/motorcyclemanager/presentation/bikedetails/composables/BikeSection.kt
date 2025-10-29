@@ -75,7 +75,7 @@ fun BikeSection(
                     imageVector = Icons.Default.AddAPhoto,
                     contentDescription = "Add a picture",
                     modifier = Modifier.size(64.dp),
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -102,13 +102,13 @@ fun BikeSection(
             Text(
                 text = bike.name,
                 style = MaterialTheme.typography.headlineMedium,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 text = "${bike.totalHours} h",
                 style = MaterialTheme.typography.titleLarge,
-                color = Color.White.copy(alpha = 0.9f)
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
 
@@ -121,7 +121,7 @@ fun BikeSection(
         ) {
             Icon(Icons.Default.Add,
                 contentDescription = "Add hours",
-                tint = Color.White)
+                tint = MaterialTheme.colorScheme.onPrimary)
         }
 
         IconButton(
@@ -130,12 +130,12 @@ fun BikeSection(
                 .align(Alignment.TopEnd)
                 .padding(16.dp)
                 .size(40.dp)
-                .background(Color.White.copy(alpha = 0.3f), CircleShape)
+                .background(MaterialTheme.colorScheme.surface, CircleShape)
         ) {
             Icon(
                 imageVector = if (bike.photoUri != null) Icons.Default.PhotoCamera else Icons.Default.AddAPhoto,
                 contentDescription = "Change picture",
-                tint = Color.White
+                tint = MaterialTheme.colorScheme.onSurface
             )
         }
     }
