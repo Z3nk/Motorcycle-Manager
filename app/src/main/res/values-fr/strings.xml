@@ -19,6 +19,7 @@
     <string name="more_options">Plus d\'options</string>
     <string name="update">Modifier</string>
     <string name="delete">Supprimer</string>
+    <string name="time_on_hour_meter">Combien de temps a elle sur son compteur d\'heure ?</string>
     <string name="time_in_hour">Combien de temps avez vous roulé lors de la dernière sortie (en heures)</string>
     <string name="time_of_the_bike">Heures actuelle de la moto (nous calculons pour vous combien de temps vous avez roulé)</string>
     <string name="new_time_cannot_be_less_than_current">Vous ne pouvez pas définir moins d\'heure au compteur que votre moto n\'en possède deja</string>

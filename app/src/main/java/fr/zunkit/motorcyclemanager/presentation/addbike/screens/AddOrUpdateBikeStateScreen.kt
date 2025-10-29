@@ -77,7 +77,7 @@ fun AddBikeStateScreen(
                         time = it
                     }
                 },
-                label = { Text(stringResource(R.string.time_in_hour)) },
+                label = { Text(stringResource(R.string.time_on_hour_meter)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 modifier = Modifier.fillMaxWidth(),
                 isError = errorMessage != null

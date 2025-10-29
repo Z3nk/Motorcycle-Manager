@@ -20,7 +20,7 @@ class FileManagerImpl @Inject constructor(
 
     override fun copyImageToPersistentStorage(uri: Uri, bikeId: Long): String {
         val bikeDir = getBikePhotoDirectory()
-        val file = File(bikeDir, "bike_${bikeId}.jpg")
+        val file = File(bikeDir, "bike_${bikeId}_${System.currentTimeMillis()}.jpg")
 
         context.contentResolver.openInputStream(uri)?.use { input ->
             FileOutputStream(file).use { output ->

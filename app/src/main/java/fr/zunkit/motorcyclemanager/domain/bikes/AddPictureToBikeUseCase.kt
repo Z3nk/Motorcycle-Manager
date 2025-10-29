@@ -28,9 +28,9 @@ class AddPictureToBikeUseCase @Inject constructor(
 
         try {
             val oldPath = bikeRepository.getCurrentPhotoPath(bikeId)
+            oldPath?.let { oldPath -> File(oldPath).takeIf { file -> file.exists() }?.delete() }
             val newPath = fileManager.copyImageToPersistentStorage(uri, bikeId)
 
-            oldPath?.let { oldPath -> File(oldPath).takeIf { file -> file.exists() }?.delete() }
 
             bikeRepository.addPictureToBike(bikeId, newPath)
 

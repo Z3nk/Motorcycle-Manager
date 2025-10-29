@@ -19,6 +19,7 @@
     <string name="more_options">More options</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="time_on_hour_meter">How much time is on the hour meter?</string>
     <string name="time_in_hour">How long was your last ride (in hours)</string>
     <string name="timelife_of_consumable">What should be the lifespan in hours of this consumable?</string>
     <string name="time_of_the_bike">Current time of the bike(we calculate for you how long did you ride)</string>
