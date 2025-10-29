@@ -20,8 +20,8 @@ android {
         applicationId = "fr.zunkit.motorcyclemanager"
         minSdk = 26
         targetSdk = 36
-        versionCode = 15
-        versionName = "1.5"
+        versionCode = 151
+        versionName = "1.5.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
