@@ -75,6 +75,8 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.coil.compose)
     implementation(libs.androidx.camera.core)
+    implementation(libs.play.review)
+    implementation(libs.play.review.ktx)
     if (useFirebase) {
         implementation(platform(libs.firebase.bom))
         implementation(libs.firebase.analytics)
