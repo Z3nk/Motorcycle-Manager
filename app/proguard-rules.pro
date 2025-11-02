@@ -39,3 +39,4 @@
 # Garder les classes générées par Kotlinx Serialization (généralement dans le même package)
 -keepnames class kotlinx.serialization.** { *; }
 -dontwarn kotlinx.serialization.**
+-dontwarn com.google.android.gms.common.annotation.NoNullnessRewrite

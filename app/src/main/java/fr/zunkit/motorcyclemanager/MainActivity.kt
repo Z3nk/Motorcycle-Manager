@@ -66,127 +66,123 @@ private fun MotorcycleManager() {
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
 
-    Scaffold(bottomBar = {  }) { padding ->
-        Column(modifier = Modifier.padding(padding)) {
-            NavHost(navController = navController, startDestination = Home) {
-                composable<Home> { backStackEntry ->
-                    HomeScreen(
-                        onNavigateToBikeDetail = { id ->
-                            navController.navigate(route = BikeDetail(id))
-                        },
-                        onNavigateToAddBike = {
-                            navController.navigate(route = AddOrUpdateBike())
-                        },
-                        onNavigateToEditBike = { bike ->
-                            navController.navigate(route = AddOrUpdateBike(bike.id))
-                        })
-                }
-                composable<AddOrUpdateBike> { backStackEntry ->
-                    val addOrUpdateBike: AddOrUpdateBike = backStackEntry.toRoute()
-                    AddBikeScreen(
-                        bikeId = addOrUpdateBike.bikeId,
-                        onNavigateToHomeScreen = {
-                        navController.navigate(Home) {
-                            popUpTo(Home) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
+    NavHost(navController = navController, startDestination = Home) {
+        composable<Home> { backStackEntry ->
+            HomeScreen(
+                onNavigateToBikeDetail = { id ->
+                    navController.navigate(route = BikeDetail(id))
+                },
+                onNavigateToAddBike = {
+                    navController.navigate(route = AddOrUpdateBike())
+                },
+                onNavigateToEditBike = { bike ->
+                    navController.navigate(route = AddOrUpdateBike(bike.id))
+                })
+        }
+        composable<AddOrUpdateBike> { backStackEntry ->
+            val addOrUpdateBike: AddOrUpdateBike = backStackEntry.toRoute()
+            AddBikeScreen(
+                bikeId = addOrUpdateBike.bikeId,
+                onNavigateToHomeScreen = {
+                    navController.navigate(Home) {
+                        popUpTo(Home) {
+                            saveState = true
                         }
-                    })
-                }
-                composable<AddOrUpdateCheck> { backStackEntry ->
-                    val addOrUpdateCheck: AddOrUpdateCheck = backStackEntry.toRoute()
-                    AddOrUpdateCheckScreen(
-                        bikeId = addOrUpdateCheck.bikeId,
-                        checkId = addOrUpdateCheck.checkId,
-                        goBackToBikeDetail = {
-                            navController.navigate(BikeDetail(addOrUpdateCheck.bikeId)) {
-                                popUpTo(BikeDetail(addOrUpdateCheck.bikeId)) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                            }
+                        launchSingleTop = true
+                    }
+                })
+        }
+        composable<AddOrUpdateCheck> { backStackEntry ->
+            val addOrUpdateCheck: AddOrUpdateCheck = backStackEntry.toRoute()
+            AddOrUpdateCheckScreen(
+                bikeId = addOrUpdateCheck.bikeId,
+                checkId = addOrUpdateCheck.checkId,
+                goBackToBikeDetail = {
+                    navController.navigate(BikeDetail(addOrUpdateCheck.bikeId)) {
+                        popUpTo(BikeDetail(addOrUpdateCheck.bikeId)) {
+                            saveState = true
                         }
-                    )
+                        launchSingleTop = true
+                    }
                 }
+            )
+        }
 
-                composable<AddHour> { backStackEntry ->
-                    val addHour: AddHour = backStackEntry.toRoute()
-                    AddHourScreen(
-                        bikeId = addHour.bikeId,
-                        goBackToBikeDetail = {
-                            navController.navigate(BikeDetail(addHour.bikeId)) {
-                                popUpTo(BikeDetail(addHour.bikeId)) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                            }
+        composable<AddHour> { backStackEntry ->
+            val addHour: AddHour = backStackEntry.toRoute()
+            AddHourScreen(
+                bikeId = addHour.bikeId,
+                goBackToBikeDetail = {
+                    navController.navigate(BikeDetail(addHour.bikeId)) {
+                        popUpTo(BikeDetail(addHour.bikeId)) {
+                            saveState = true
                         }
-                    )
+                        launchSingleTop = true
+                    }
                 }
+            )
+        }
 
-                composable<AddOrUpdateConsumable> { backStackEntry ->
-                    val addOrUpdateConsumable: AddOrUpdateConsumable = backStackEntry.toRoute()
-                    AddOrUpdateConsumableScreen(
-                        bikeId = addOrUpdateConsumable.bikeId,
-                        consumableId = addOrUpdateConsumable.consumableId,
-                        goBackToBikeDetail = {
-                            navController.navigate(BikeDetail(addOrUpdateConsumable.bikeId)) {
-                                popUpTo(BikeDetail(addOrUpdateConsumable.bikeId)) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                            }
+        composable<AddOrUpdateConsumable> { backStackEntry ->
+            val addOrUpdateConsumable: AddOrUpdateConsumable = backStackEntry.toRoute()
+            AddOrUpdateConsumableScreen(
+                bikeId = addOrUpdateConsumable.bikeId,
+                consumableId = addOrUpdateConsumable.consumableId,
+                goBackToBikeDetail = {
+                    navController.navigate(BikeDetail(addOrUpdateConsumable.bikeId)) {
+                        popUpTo(BikeDetail(addOrUpdateConsumable.bikeId)) {
+                            saveState = true
                         }
-                    )
+                        launchSingleTop = true
+                    }
                 }
-                composable<BikeDetail> { backStackEntry ->
-                    val bikeDetail: BikeDetail = backStackEntry.toRoute()
-                    BikeDetailsScreen(
-                        bikeId = bikeDetail.id,
-                        onNavigateToHomeScreen = {
-                            navController.navigate(
-                                route = Home
-                            )
-                        },
-                        onNavigateToAddHourScreen = { bikeId ->
-                            navController.navigate(
-                                route = AddHour(bikeId)
-                            )
-                        },
-                        onNavigateToAddConsumableScreen = { bikeId ->
-                            navController.navigate(
-                                route = AddOrUpdateConsumable(bikeId = bikeId)
-                            )
-                        },
-                        onNavigateToAddCheckScreen = { bikeId ->
-                            navController.navigate(
-                                route = AddOrUpdateCheck(bikeId = bikeId)
-                            )
-                        },
-                        onNavigateToEditCheckScreen = { checkId ->
-                            navController.navigate(
-                                route = AddOrUpdateCheck(bikeId = bikeDetail.id, checkId = checkId)
-                            )
-                        },
-                        onNavigateToEditConsumableScreen = { consumableId ->
-                            navController.navigate(
-                                route = AddOrUpdateConsumable(
-                                    bikeId = bikeDetail.id,
-                                    consumableId = consumableId
-                                )
-                            )
-                        },
+            )
+        }
+        composable<BikeDetail> { backStackEntry ->
+            val bikeDetail: BikeDetail = backStackEntry.toRoute()
+            BikeDetailsScreen(
+                bikeId = bikeDetail.id,
+                onNavigateToHomeScreen = {
+                    navController.navigate(
+                        route = Home
                     )
-                }
-                composable<Settings> {
-                    SettingsScreen(onNavigateToHomeScreen = {
-                        navController.navigate(
-                            route = Home
+                },
+                onNavigateToAddHourScreen = { bikeId ->
+                    navController.navigate(
+                        route = AddHour(bikeId)
+                    )
+                },
+                onNavigateToAddConsumableScreen = { bikeId ->
+                    navController.navigate(
+                        route = AddOrUpdateConsumable(bikeId = bikeId)
+                    )
+                },
+                onNavigateToAddCheckScreen = { bikeId ->
+                    navController.navigate(
+                        route = AddOrUpdateCheck(bikeId = bikeId)
+                    )
+                },
+                onNavigateToEditCheckScreen = { checkId ->
+                    navController.navigate(
+                        route = AddOrUpdateCheck(bikeId = bikeDetail.id, checkId = checkId)
+                    )
+                },
+                onNavigateToEditConsumableScreen = { consumableId ->
+                    navController.navigate(
+                        route = AddOrUpdateConsumable(
+                            bikeId = bikeDetail.id,
+                            consumableId = consumableId
                         )
-                    })
-                }
-            }
+                    )
+                },
+            )
+        }
+        composable<Settings> {
+            SettingsScreen(onNavigateToHomeScreen = {
+                navController.navigate(
+                    route = Home
+                )
+            })
         }
     }
 }
