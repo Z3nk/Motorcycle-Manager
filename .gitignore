@@ -31,3 +31,4 @@ Thumbs.db
 *.jks
 google-services.json
 google-services-debug.json
+.kotlin
