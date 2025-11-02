@@ -1,33 +1,37 @@
 package fr.zunkit.motorcyclemanager.presentation.home.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import fr.zunkit.motorcyclemanager.R
 import fr.zunkit.motorcyclemanager.presentation.home.HomeScreenUiState
-import fr.zunkit.motorcyclemanager.presentation.home.composables.BikeCard
 import fr.zunkit.motorcyclemanager.presentation.home.models.BikeWithConsumableAndChecks
+import fr.zunkit.motorcyclemanager.presentation.home.screens.tabs.HomeTab
+import fr.zunkit.motorcyclemanager.presentation.home.screens.tabs.SettingsTab
+
 
 @Composable
 fun HomeStateScreen(
@@ -37,63 +41,56 @@ fun HomeStateScreen(
     onNavigateToEditBike: (BikeWithConsumableAndChecks) -> Unit,
     onDeleteBike: (BikeWithConsumableAndChecks) -> Unit
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth().padding(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Text(
-            modifier = Modifier,
-            text = stringResource(R.string.app_name),
-            style = MaterialTheme.typography.headlineLarge
-        )
+    var selectedTab by remember { mutableIntStateOf(0) }
 
-        Button(
-            onClick = { onNavigateToAddBike() },
-            modifier = Modifier.clip(RoundedCornerShape(12.dp)),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
-            ),
-            content = {
-                Row(
-                    modifier = Modifier.padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(
-                        12.dp,
-                        Alignment.CenterHorizontally
-                    ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = stringResource(R.string.add_a_dirtbike)
-                    )
-                    Text(
-                        modifier = Modifier,
-                        text = stringResource(R.string.add_a_dirtbike),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                }
-            })
-
-
-        homeScreenState.bikeList?.let { lBikeList ->
-            LazyColumn(modifier = Modifier) {
-                items(lBikeList.size) { index ->
-                    BikeCard(
-                        lBikeList[index],
-                        onClick = {
-                            onNavigateToBikeDetail(lBikeList[index].id)
-                        },
-                        onEditClick = {
-                            onNavigateToEditBike(lBikeList[index])
-                        },
-                        onDeleteCLick = {
-                            onDeleteBike(lBikeList[index])
-                        })
-                }
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(12.dp),
+        bottomBar = {
+            NavigationBar(
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onSurface
+            ) {
+                NavigationBarItem(
+                    selected = selectedTab == 0,
+                    onClick = { selectedTab = 0 },
+                    icon = { Icon(Icons.Default.Home, contentDescription = null) },
+                    label = { Text(stringResource(R.string.home), fontWeight = FontWeight.Bold) },
+                    alwaysShowLabel = true
+                )
+                NavigationBarItem(
+                    selected = selectedTab == 1,
+                    onClick = { selectedTab = 1 },
+                    icon = { Icon(Icons.Default.Info, contentDescription = null) },
+                    label = {
+                        Text(
+                            stringResource(R.string.about),
+                            fontWeight = FontWeight.Bold
+                        )
+                    },
+                    alwaysShowLabel = true
+                )
             }
+        }
+    ) { paddingValues ->
+        if (selectedTab == 0) {
+            HomeTab(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxSize(),
+                onNavigateToAddBike = onNavigateToAddBike,
+                homeScreenState = homeScreenState,
+                onNavigateToBikeDetail = onNavigateToBikeDetail,
+                onNavigateToEditBike = onNavigateToEditBike,
+                onDeleteBike = onDeleteBike
+            )
+        } else {
+            SettingsTab(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxSize()
+            )
         }
     }
 }

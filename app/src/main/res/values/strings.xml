@@ -13,6 +13,7 @@
     <string name="no_check_points">No check points</string>
     <string name="renew">Renew</string>
     <string name="checks_examples">Any actions you want to do before or after a ride\nExample : check torque, check chain tension, etc.</string>
+    <string name="home_user_statisfaction">Give us your opinion of this app</string>
     <string name="add_hours_examples">By adding hours spend riding your dirtbike, you will add hours to your consumables too</string>
     <string name="checklist">Check list</string>
     <string name="add_check">Add check point</string>
@@ -44,4 +45,10 @@
     <string name="times_number">Dirtbike\'s number of hours : %1$s</string>
     <string name="your_bike_has_X_hours_now">Your bike has %1$s hours, you define than your bike has now %2$s hours on the hour meter, so we calculate that you rode %3$s hours</string>
     <string name="you_rode_X_hours_last_ride">You rode %1$s hours on your last ride, we will add them to your bike\'s current %2$s hours as well as your consumables</string>
+    <string name="home">Home</string>
+    <string name="about">About</string>
+    <string name="app_explain">Dirtbike Manager is a <b>100% free</b> app built by a passionate rider.</string>
+    <string name="app_explain2">GitHub: <a href="https://github.com/Z3nk/Motorcycle-Manager">https://github.com/Z3nk/Motorcycle-Manager</a></string>
+    <string name="app_explain3">Developer email: <a href="mailto:dirtbikemanager@gmail.com">dirtbikemanager@gmail.com</a></string>
+    <string name="app_explain4">You can also support my work by leaving a <b>5-star review</b> on the Play Store!</string>
 </resources>

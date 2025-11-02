@@ -19,6 +19,7 @@
     <string name="more_options">Plus d\'options</string>
     <string name="update">Modifier</string>
     <string name="delete">Supprimer</string>
+    <string name="home_user_statisfaction">Donnez votre avis sur l\'application</string>
     <string name="time_on_hour_meter">Combien de temps a elle sur son compteur d\'heure ?</string>
     <string name="time_in_hour">Combien de temps avez vous roulé lors de la dernière sortie (en heures)</string>
     <string name="time_of_the_bike">Heures actuelle de la moto (nous calculons pour vous combien de temps vous avez roulé)</string>
@@ -45,4 +46,10 @@
     <string name="times_number">Nombres d\'heures de la moto : %1$s</string>
     <string name="your_bike_has_X_hours_now">Votre moto a %1$s heures au compteur, vous définissez que votre moto a maintenant %2$s heures sur le compteur d\'heure, nous calculons donc que vous avez roulé %3$s heures</string>
     <string name="you_rode_X_hours_last_ride">Vous avez roulé %1$s heures lors de votre dernière sortie, nous allons les ajouter aux %2$s heures actuel de votre moto ainsi qu\'à vos consommables</string>
+    <string name="home">Accueil</string>
+    <string name="about">A propos</string>
+    <string name="app_explain">Motocrboss Manager est une application <b>100 % gratuite</b> créée par un pilote passioné.</string>
+    <string name="app_explain2">GitHub : <a href="https://github.com/Z3nk/Motorcycle-Manager">https://github.com/Z3nk/Motorcycle-Manager</a></string>
+    <string name="app_explain3">Contact développeur : <a href="mailto:dirtbikemanager@gmail.com">dirtbikemanager@gmail.com</a></string>
+    <string name="app_explain4">Vous pouvez aussi soutenir mon travail en laissant un <b>avis 5 étoiles</b> sur le Play Store !</string>
 </resources>
