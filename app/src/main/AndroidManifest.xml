@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".MotorCycleApp"
+        android:name="fr.zunkit.motorcyclemanager.MotorCycleApp"
         android:allowBackup="true"
         android:screenOrientation="portrait"
         android:dataExtractionRules="@xml/data_extraction_rules"
