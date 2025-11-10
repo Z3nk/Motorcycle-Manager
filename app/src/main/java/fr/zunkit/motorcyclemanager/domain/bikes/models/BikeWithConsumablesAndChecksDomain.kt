@@ -6,7 +6,8 @@ import kotlin.math.roundToInt
 data class BikeWithConsumablesAndChecksDomain(
     val bike: BikeDomain,
     val consumables: List<ConsumableDomain>,
-    val checks: List<CheckDomain>
+    val checks: List<CheckDomain>,
+    val histories: List<HistoryDomain>
 ) {
     constructor(entity: BikeWithConsumablesAndChecksEntity) : this(
         bike = BikeDomain(
@@ -21,6 +22,14 @@ data class BikeWithConsumablesAndChecksDomain(
                 it.name,
                 it.time,
                 (it.currentTime * 10.0f).roundToInt() / 10f
+            )
+        },
+        histories = entity.histories.map {
+            HistoryDomain(
+                it.id,
+                it.date,
+                it.title,
+                it.description
             )
         },
         checks = entity.checks.map { CheckDomain(it.id, it.name, it.done) }

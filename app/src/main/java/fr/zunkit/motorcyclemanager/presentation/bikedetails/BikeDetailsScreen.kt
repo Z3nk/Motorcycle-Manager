@@ -80,8 +80,8 @@ fun BikeDetailsScreen(
                     onDeleteConsumable = { consumable ->
                         viewModel.onDeleteConsumable(consumable)
                     },
-                    onRenewConsumable = { consumable ->
-                        viewModel.onRenewConsumable(consumable)
+                    onRenewConsumable = { consumable, note ->
+                        viewModel.onRenewConsumable(consumable, note)
 
                     },
                     onClickCheck = { check ->

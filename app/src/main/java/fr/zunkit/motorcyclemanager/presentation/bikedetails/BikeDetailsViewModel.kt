@@ -79,10 +79,10 @@ class BikeDetailsViewModel @Inject constructor(
         }
     }
 
-    fun onRenewConsumable(consumable: Consumable) {
+    fun onRenewConsumable(consumable: Consumable,  note: String) {
         viewModelScope.launch(Dispatchers.Main) {
             bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->
-                renewConsumableUseCase(consumable, bikeId).collectLatest { res ->
+                renewConsumableUseCase(consumable, bikeId, note).collectLatest { res ->
                     when (res) {
                         is Resource.Error<*> -> {}
                         is Resource.Loading<*> -> {}

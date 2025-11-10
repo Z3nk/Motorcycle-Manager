@@ -39,7 +39,10 @@
     <string name="bike_name">Nom de votre motocross</string>
     <string name="add_dirtbike">Ajouter la moto</string>
     <string name="time_remaining">%1$sh restantes</string>
+    <string name="history_section">Historique des consommables</string>
     <string name="time_remining_exceed">%1$sh en trop</string>
+    <string name="history">Historique</string>
+    <string name="details">Détails</string>
     <string name="consommable_hours">%1$.1f heures</string>
     <string name="consumables_number">Nombre de consommables : %1$d</string>
     <string name="checks_number">Nombre de points de contrôle : %1$d</string>
@@ -52,4 +55,7 @@
     <string name="app_explain2">GitHub : <a href="https://github.com/Z3nk/Motorcycle-Manager">https://github.com/Z3nk/Motorcycle-Manager</a></string>
     <string name="app_explain3">Contact développeur : <a href="mailto:dirtbikemanager@gmail.com">dirtbikemanager@gmail.com</a></string>
     <string name="app_explain4">Vous pouvez aussi soutenir mon travail en laissant un <b>avis 5 étoiles</b> sur le Play Store !</string>
+    <string name="cancel">Annuler</string>
+    <string name="add_com_or_not">Ajoutez un commentaire ou laissez vide</string>
+    <string name="comment">Commentaire</string>
 </resources>

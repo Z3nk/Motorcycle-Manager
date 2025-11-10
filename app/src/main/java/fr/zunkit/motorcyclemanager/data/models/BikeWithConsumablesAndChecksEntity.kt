@@ -14,5 +14,10 @@ data class BikeWithConsumablesAndChecksEntity(
         parentColumn = "id",
         entityColumn = "bikeId"
     )
-    val checks: List<CheckEntity>
+    val checks: List<CheckEntity>,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "bikeId"
+    )
+    val histories: List<HistoryEntity>,
 )
