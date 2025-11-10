@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bike_list">Suas motos de trilha:</string>
+    <string name="back">Voltar</string>
+    <string name="validate">Validar</string>
+    <string name="add_a_dirtbike">Adicionar uma moto de trilha</string>
+    <string name="add_hours">Adicionar horas de pilotagem</string>
+    <string name="consommables">Consumíveis</string>
+    <string name="history">Histórico</string>
+    <string name="history_section">Histórico de consumíveis</string>
+    <string name="details">Detalhes</string>
+    <string name="or">OU</string>
+    <string name="add_consumable">Adicionar consumível</string>
+    <string name="no_consumables">Nenhum consumível</string>
+    <string name="consumables_examples">Um consumível é qualquer peça com vida útil na sua moto que você quer acompanhar.\nExemplos: troca de óleo, filtro de óleo, pistão, etc.</string>
+    <string name="no_check_points">Nenhum ponto de verificação</string>
+    <string name="renew">Renovar</string>
+    <string name="checks_examples">Qualquer tarefa que você queira fazer antes ou depois de um rolê.\nExemplos: checar torque, tensão da corrente, etc.</string>
+    <string name="home_user_statisfaction">Avalie este app</string>
+    <string name="add_hours_examples">Ao adicionar horas de pilotagem, seus consumíveis também são atualizados.</string>
+    <string name="checklist">Checklist</string>
+    <string name="add_check">Adicionar ponto de verificação</string>
+    <string name="more_options">Mais opções</string>
+    <string name="update">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="time_on_hour_meter">Quantas horas estão marcadas no hodômetro?</string>
+    <string name="time_in_hour">Quantas horas você pilotou na última saída?</string>
+    <string name="timelife_of_consumable">Qual é a vida útil esperada deste consumível (em horas)?</string>
+    <string name="time_of_the_bike">Horas atuais da moto (calculamos o tempo de pilotagem para você)</string>
+    <string name="reset_checklist">Desmarcar todos os itens</string>
+    <string name="time_is_mandatory">O tempo é obrigatório.</string>
+    <string name="lifetime_should_be_above_0">A vida útil do consumível deve ser maior que 0 horas.</string>
+    <string name="time_should_be_above_0">O tempo deve ser maior que 0.</string>
+    <string name="new_time_cannot_be_less_than_current">Você não pode definir menos horas do que as atuais no hodômetro.</string>
+    <string name="add_ride_time">Adicionar horas de pilotagem</string>
+    <string name="name_consumable">Nome do consumível</string>
+    <string name="time_already_spent">Horas já usadas</string>
+    <string name="name_is_mandatory">O nome é obrigatório.</string>
+    <string name="time_should_not_be_negative">As horas usadas não podem ser negativas.</string>
+    <string name="name_checkpoint">Nome do ponto de verificação</string>
+    <string name="bike_name">Nome da moto</string>
+    <string name="add_dirtbike">Adicionar moto</string>
+    <string name="time_remaining">%1$.1f horas restantes</string>
+    <string name="time_remining_exceed">%1$.1f horas excedidas</string>
+    <string name="consommable_hours">%1$.1f horas</string>
+    <string name="consumables_number">Consumíveis: %1$d</string>
+    <string name="checks_number">Pontos de verificação: %1$d</string>
+    <string name="times_number">Horas da moto: %1$s</string>
+    <string name="your_bike_has_X_hours_now">Sua moto tem %1$s horas. Você está ajustando para %2$s horas, então calculamos que você pilotou %3$s horas.</string>
+    <string name="you_rode_X_hours_last_ride">Você pilotou %1$s horas na última saída. Vamos somá-las às %2$s horas atuais e atualizar seus consumíveis.</string>
+    <string name="home">Início</string>
+    <string name="about">Sobre</string>
+    <string name="app_explain">Dirtbike Maintenance é um app <b>100% gratuito</b> feito por um piloto apaixonado.</string>
+    <string name="app_explain2">GitHub: <a href="https://github.com/Z3nk/Motorcycle-Manager">https://github.com/Z3nk/Motorcycle-Manager</a></string>
+    <string name="app_explain3">Contato: <a href="mailto:dirtbikemanager@gmail.com">dirtbikemanager@gmail.com</a></string>
+    <string name="app_explain4">Apoie o projeto deixando uma <b>avaliação 5 estrelas</b> na Play Store!</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add_com_or_not">Adicione uma nota ou deixe em branco</string>
+    <string name="comment">Nota</string>
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bike_list">Le tue dirt bike:</string>
+    <string name="back">Indietro</string>
+    <string name="validate">Conferma</string>
+    <string name="add_a_dirtbike">Aggiungi una dirt bike</string>
+    <string name="add_hours">Aggiungi ore di guida</string>
+    <string name="consommables">Consumabili</string>
+    <string name="history">Cronologia</string>
+    <string name="history_section">Cronologia dei consumabili</string>
+    <string name="details">Dettagli</string>
+    <string name="or">OPPURE</string>
+    <string name="add_consumable">Aggiungi consumabile</string>
+    <string name="no_consumables">Nessun consumabile</string>
+    <string name="consumables_examples">Un consumabile è qualsiasi componente con durata limitata sulla tua moto da tracciare.\nEsempi: cambio olio, filtro olio, pistone, ecc.</string>
+    <string name="no_check_points">Nessun punto di controllo</string>
+    <string name="renew">Rinnova</string>
+    <string name="checks_examples">Qualsiasi attività da fare prima o dopo un’uscita.\nEsempi: controllo coppia, tensione catena, ecc.</string>
+    <string name="home_user_statisfaction">Valuta questa app</string>
+    <string name="add_hours_examples">Aggiungendo ore di guida, aggiorni anche i tuoi consumabili.</string>
+    <string name="checklist">Checklist</string>
+    <string name="add_check">Aggiungi punto di controllo</string>
+    <string name="more_options">Altre opzioni</string>
+    <string name="update">Modifica</string>
+    <string name="delete">Elimina</string>
+    <string name="time_on_hour_meter">Quante ore segna il contatore orario?</string>
+    <string name="time_in_hour">Quante ore hai guidato nell’ultima uscita?</string>
+    <string name="timelife_of_consumable">Qual è la durata prevista di questo consumabile (in ore)?</string>
+    <string name="time_of_the_bike">Ore attuali della moto (calcoliamo noi il tempo di guida)</string>
+    <string name="reset_checklist">Deseleziona tutti gli elementi</string>
+    <string name="time_is_mandatory">Il tempo è obbligatorio.</string>
+    <string name="lifetime_should_be_above_0">La durata del consumabile deve essere maggiore di 0 ore.</string>
+    <string name="time_should_be_above_0">Il tempo deve essere maggiore di 0.</string>
+    <string name="new_time_cannot_be_less_than_current">Non puoi impostare meno ore di quelle attuali sul contatore.</string>
+    <string name="add_ride_time">Aggiungi ore di guida</string>
+    <string name="name_consumable">Nome del consumabile</string>
+    <string name="time_already_spent">Ore già utilizzate</string>
+    <string name="name_is_mandatory">Il nome è obbligatorio.</string>
+    <string name="time_should_not_be_negative">Le ore utilizzate non possono essere negative.</string>
+    <string name="name_checkpoint">Nome del punto di controllo</string>
+    <string name="bike_name">Nome della moto</string>
+    <string name="add_dirtbike">Aggiungi moto</string>
+    <string name="time_remaining">%1$.1f ore rimanenti</string>
+    <string name="time_remining_exceed">%1$.1f ore in eccesso</string>
+    <string name="consommable_hours">%1$.1f ore</string>
+    <string name="consumables_number">Consumabili: %1$d</string>
+    <string name="checks_number">Punti di controllo: %1$d</string>
+    <string name="times_number">Ore moto: %1$s</string>
+    <string name="your_bike_has_X_hours_now">La tua moto ha %1$s ore. La stai impostando a %2$s ore, quindi calcoliamo che hai guidato %3$s ore.</string>
+    <string name="you_rode_X_hours_last_ride">Hai guidato %1$s ore nell’ultima uscita. Le aggiungeremo alle %2$s ore attuali e aggiorneremo i consumabili.</string>
+    <string name="home">Home</string>
+    <string name="about">Informazioni</string>
+    <string name="app_explain">Dirtbike Maintenance è un’app <b>100% gratuita</b> creata da un pilota appassionato.</string>
+    <string name="app_explain2">GitHub: <a href="https://github.com/Z3nk/Motorcycle-Manager">https://github.com/Z3nk/Motorcycle-Manager</a></string>
+    <string name="app_explain3">Contatto: <a href="mailto:dirtbikemanager@gmail.com">dirtbikemanager@gmail.com</a></string>
+    <string name="app_explain4">Sostieni il progetto lasciando una <b>recensione a 5 stelle</b> su Play Store!</string>
+    <string name="cancel">Annulla</string>
+    <string name="add_com_or_not">Aggiungi una nota o lascia vuoto</string>
+    <string name="comment">Nota</string>
+</resources>

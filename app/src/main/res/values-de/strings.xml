@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bike_list">Deine Dirtbikes:</string>
+    <string name="back">Zurück</string>
+    <string name="validate">Bestätigen</string>
+    <string name="add_a_dirtbike">Dirtbike hinzufügen</string>
+    <string name="add_hours">Fahrzeit hinzufügen</string>
+    <string name="consommables">Verschleißteile</string>
+    <string name="history">Verlauf</string>
+    <string name="history_section">Verlauf der Verschleißteile</string>
+    <string name="details">Details</string>
+    <string name="or">ODER</string>
+    <string name="add_consumable">Verschleißteil hinzufügen</string>
+    <string name="no_consumables">Keine Verschleißteile</string>
+    <string name="consumables_examples">Ein Verschleißteil ist alles mit einer Lebensdauer an deinem Dirtbike, das du überwachen möchtest.\nBeispiele: Ölwechsel, Ölfilter, Kolben usw.</string>
+    <string name="no_check_points">Keine Kontrollpunkte</string>
+    <string name="renew">Erneuern</string>
+    <string name="checks_examples">Alle Aufgaben, die du vor oder nach einer Fahrt erledigen möchtest.\nBeispiele: Drehmoment prüfen, Kettenspannung kontrollieren usw.</string>
+    <string name="home_user_statisfaction">Diese App bewerten</string>
+    <string name="add_hours_examples">Beim Hinzufügen von Fahrzeit werden auch deine Verschleißteile aktualisiert.</string>
+    <string name="checklist">Checkliste</string>
+    <string name="add_check">Kontrollpunkt hinzufügen</string>
+    <string name="more_options">Weitere Optionen</string>
+    <string name="update">Bearbeiten</string>
+    <string name="delete">Löschen</string>
+    <string name="time_on_hour_meter">Wie viele Stunden zeigt der Stundenzähler an?</string>
+    <string name="time_in_hour">Wie viele Stunden warst du bei der letzten Fahrt unterwegs?</string>
+    <string name="timelife_of_consumable">Wie hoch ist die erwartete Lebensdauer dieses Verschleißteils (in Stunden)?</string>
+    <string name="time_of_the_bike">Aktuelle Betriebsstunden des Bikes (wir berechnen die Fahrzeit für dich)</string>
+    <string name="reset_checklist">Alle Punkte abwählen</string>
+    <string name="time_is_mandatory">Die Zeit ist erforderlich.</string>
+    <string name="lifetime_should_be_above_0">Die Lebensdauer des Verschleißteils muss größer als 0 Stunden sein.</string>
+    <string name="time_should_be_above_0">Die Zeit muss größer als 0 sein.</string>
+    <string name="new_time_cannot_be_less_than_current">Du kannst nicht weniger Stunden einstellen als aktuell am Zähler stehen.</string>
+    <string name="add_ride_time">Fahrzeit hinzufügen</string>
+    <string name="name_consumable">Name des Verschleißteils</string>
+    <string name="time_already_spent">Bereits genutzte Stunden</string>
+    <string name="name_is_mandatory">Der Name ist erforderlich.</string>
+    <string name="time_should_not_be_negative">Die genutzten Stunden dürfen nicht negativ sein.</string>
+    <string name="name_checkpoint">Name des Kontrollpunkts</string>
+    <string name="bike_name">Name des Dirtbikes</string>
+    <string name="add_dirtbike">Bike hinzufügen</string>
+    <string name="time_remaining">%1$.1f Stunden verbleibend</string>
+    <string name="time_remining_exceed">%1$.1f Stunden überzogen</string>
+    <string name="consommable_hours">%1$.1f Stunden</string>
+    <string name="consumables_number">Verschleißteile: %1$d</string>
+    <string name="checks_number">Kontrollpunkte: %1$d</string>
+    <string name="times_number">Betriebsstunden: %1$s</string>
+    <string name="your_bike_has_X_hours_now">Dein Bike hat %1$s Stunden. Du stellst es auf %2$s Stunden ein, also berechnen wir %3$s gefahrene Stunden.</string>
+    <string name="you_rode_X_hours_last_ride">Du bist %1$s Stunden bei deiner letzten Fahrt gefahren. Wir addieren sie zu den aktuellen %2$s Stunden und aktualisieren deine Verschleißteile.</string>
+    <string name="home">Start</string>
+    <string name="about">Über</string>
+    <string name="app_explain">Dirtbike Maintenance ist eine <b>100 % kostenlose</b> App, entwickelt von einem leidenschaftlichen Fahrer.</string>
+    <string name="app_explain2">GitHub: <a href="https://github.com/Z3nk/Motorcycle-Manager">https://github.com/Z3nk/Motorcycle-Manager</a></string>
+    <string name="app_explain3">Kontakt: <a href="mailto:dirtbikemanager@gmail.com">dirtbikemanager@gmail.com</a></string>
+    <string name="app_explain4">Unterstütze das Projekt mit einer <b>5-Sterne-Bewertung</b> im Play Store!</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="add_com_or_not">Füge eine Notiz hinzu oder lasse es leer</string>
+    <string name="comment">Notiz</string>
+</resources>

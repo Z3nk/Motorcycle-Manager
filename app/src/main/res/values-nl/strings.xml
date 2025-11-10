@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bike_list">Je dirt bikes:</string>
+    <string name="back">Terug</string>
+    <string name="validate">Bevestigen</string>
+    <string name="add_a_dirtbike">Dirt bike toevoegen</string>
+    <string name="add_hours">Rijtijd toevoegen</string>
+    <string name="consommables">Verbruiksonderdelen</string>
+    <string name="history">Geschiedenis</string>
+    <string name="history_section">Geschiedenis van verbruiksonderdelen</string>
+    <string name="details">Details</string>
+    <string name="or">OF</string>
+    <string name="add_consumable">Verbruiksonderdeel toevoegen</string>
+    <string name="no_consumables">Geen verbruiksonderdelen</string>
+    <string name="consumables_examples">Een verbruiksonderdeel is alles met een levensduur op je dirt bike dat je wilt bijhouden.\nVoorbeelden: olieverversing, oliefilter, zuiger, enz.</string>
+    <string name="no_check_points">Geen controlepunten</string>
+    <string name="renew">Vernieuwen</string>
+    <string name="checks_examples">Alle taken die je voor of na een rit wilt uitvoeren.\nVoorbeelden: koppel controleren, kettingspanning checken, enz.</string>
+    <string name="home_user_statisfaction">Beoordeel deze app</string>
+    <string name="add_hours_examples">Door rijtijd toe te voegen, worden ook je verbruiksonderdelen bijgewerkt.</string>
+    <string name="checklist">Controlelijst</string>
+    <string name="add_check">Controlepunt toevoegen</string>
+    <string name="more_options">Meer opties</string>
+    <string name="update">Bewerken</string>
+    <string name="delete">Verwijderen</string>
+    <string name="time_on_hour_meter">Hoeveel uur staat er op de urenteller?</string>
+    <string name="time_in_hour">Hoeveel uur heb je bij je laatste rit gereden?</string>
+    <string name="timelife_of_consumable">Wat is de verwachte levensduur van dit verbruiksonderdeel (in uren)?</string>
+    <string name="time_of_the_bike">Huidige uren van de motor (wij berekenen de rijtijd voor je)</string>
+    <string name="reset_checklist">Alle items uitvinken</string>
+    <string name="time_is_mandatory">Tijd is verplicht.</string>
+    <string name="lifetime_should_be_above_0">De levensduur van het verbruiksonderdeel moet groter zijn dan 0 uur.</string>
+    <string name="time_should_be_above_0">Tijd moet groter zijn dan 0.</string>
+    <string name="new_time_cannot_be_less_than_current">Je kunt niet minder uren instellen dan momenteel op de teller staan.</string>
+    <string name="add_ride_time">Rijtijd toevoegen</string>
+    <string name="name_consumable">Naam verbruiksonderdeel</string>
+    <string name="time_already_spent">Reeds gebruikte uren</string>
+    <string name="name_is_mandatory">Naam is verplicht.</string>
+    <string name="time_should_not_be_negative">Gebruikte uren mogen niet negatief zijn.</string>
+    <string name="name_checkpoint">Naam controlepunt</string>
+    <string name="bike_name">Naam van de dirt bike</string>
+    <string name="add_dirtbike">Motor toevoegen</string>
+    <string name="time_remaining">%1$.1f uur resterend</string>
+    <string name="time_remining_exceed">%1$.1f uur overschreden</string>
+    <string name="consommable_hours">%1$.1f uur</string>
+    <string name="consumables_number">Verbruiksonderdelen: %1$d</string>
+    <string name="checks_number">Controlepunten: %1$d</string>
+    <string name="times_number">Motoruren: %1$s</string>
+    <string name="your_bike_has_X_hours_now">Je motor heeft %1$s uur. Je stelt hem in op %2$s uur, dus berekenen we dat je %3$s uur hebt gereden.</string>
+    <string name="you_rode_X_hours_last_ride">Je hebt %1$s uur gereden bij je laatste rit. We voegen ze toe aan de huidige %2$s uur en werken je verbruiksonderdelen bij.</string>
+    <string name="home">Start</string>
+    <string name="about">Over</string>
+    <string name="app_explain">Dirtbike Maintenance is een <b>100% gratis</b> app gemaakt door een gepassioneerde rijder.</string>
+    <string name="app_explain2">GitHub: <a href="https://github.com/Z3nk/Motorcycle-Manager">https://github.com/Z3nk/Motorcycle-Manager</a></string>
+    <string name="app_explain3">Contact: <a href="mailto:dirtbikemanager@gmail.com">dirtbikemanager@gmail.com</a></string>
+    <string name="app_explain4">Steun het project door een <b>5-sterren recensie</b> achter te laten in de Play Store!</string>
+    <string name="cancel">Annuleren</string>
+    <string name="add_com_or_not">Voeg een notitie toe of laat leeg</string>
+    <string name="comment">Notitie</string>
+</resources>

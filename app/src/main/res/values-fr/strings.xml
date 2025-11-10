@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Motocross Manager</string>
     <string name="bike_list">Vos motocross :</string>
     <string name="validate">Valider</string>
     <string name="back">Retour</string>
@@ -51,7 +50,7 @@
     <string name="you_rode_X_hours_last_ride">Vous avez roulé %1$s heures lors de votre dernière sortie. Nous allons les ajouter aux %2$s heures actuelles de votre moto ainsi qu’à vos consommables.</string>
     <string name="home">Accueil</string>
     <string name="about">À propos</string>
-    <string name="app_explain">Motocross Manager est une application <b>100 % gratuite</b> créée par un pilote passionné.</string>
+    <string name="app_explain">Dirtbike Maintenance est une application <b>100 % gratuite</b> créée par un pilote passionné.</string>
     <string name="app_explain2">GitHub : <a href="https://github.com/Z3nk/Motorcycle-Manager">https://github.com/Z3nk/Motorcycle-Manager</a></string>
     <string name="app_explain3">Contact développeur : <a href="mailto:dirtbikemanager@gmail.com">dirtbikemanager@gmail.com</a></string>
     <string name="app_explain4">Vous pouvez aussi soutenir mon travail en laissant un <b>avis 5 étoiles</b> sur le Play Store !</string>
