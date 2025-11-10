@@ -8,6 +8,7 @@ data class Bike(
     val totalHours: Float,
     val consumables: List<Consumable>,
     val checks: List<Check>,
+    val histories: List<History>,
     val photoUri: String?
 ) {
     constructor(entity: BikeWithConsumablesAndChecksDomain) : this(
@@ -16,6 +17,7 @@ data class Bike(
         totalHours = entity.bike.time,
         consumables = entity.consumables.map { Consumable(it) },
         checks = entity.checks.map { Check(it) },
+        histories = entity.histories.map { History(it) },
         photoUri = entity.bike.photoUri
     )
 }

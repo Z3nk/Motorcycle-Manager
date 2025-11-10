@@ -5,7 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 @Entity(
-    tableName = "consumables",
+    tableName = "histories",
     foreignKeys = [
         ForeignKey(
             entity = BikeEntity::class,
@@ -16,10 +16,10 @@ import androidx.room.PrimaryKey
     ],
     indices = [Index(value = ["bikeId"])]
 )
-data class ConsumableEntity(
+data class HistoryEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val bikeId: Long,
-    val name: String,
-    val time: Float,
-    val currentTime: Float
+    val date: String,
+    val title: String,
+    val description: String
 )

@@ -3,10 +3,13 @@
     <string name="app_name">Dirtbike Manager</string>
     <string name="bike_list">Your dirtbikes:</string>
     <string name="back">Back</string>
-    <string name="validate">Save</string>
+    <string name="validate">Validate</string>
     <string name="add_a_dirtbike">Add a dirtbike</string>
     <string name="add_hours">Add ride time</string>
     <string name="consommables">Consumables</string>
+    <string name="history">History</string>
+    <string name="history_section">History of consumables</string>
+    <string name="details">Details</string>
     <string name="or">OR</string>
     <string name="add_consumable">Add consumable</string>
     <string name="no_consumables">No consumables</string>
@@ -52,4 +55,7 @@
     <string name="app_explain2">GitHub: <a href="https://github.com/Z3nk/Motorcycle-Manager">https://github.com/Z3nk/Motorcycle-Manager</a></string>
     <string name="app_explain3">Contact: <a href="mailto:dirtbikemanager@gmail.com">dirtbikemanager@gmail.com</a></string>
     <string name="app_explain4">Support the project by leaving a <b>5-star review</b> on the Play Store!</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_com_or_not">Add a note or leave it blank</string>
+    <string name="comment">Note</string>
 </resources>

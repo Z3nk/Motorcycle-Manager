@@ -4,6 +4,7 @@ import androidx.room.Transaction
 import fr.zunkit.motorcyclemanager.data.doa.BikeDao
 import fr.zunkit.motorcyclemanager.data.doa.CheckDao
 import fr.zunkit.motorcyclemanager.data.doa.ConsumableDao
+import fr.zunkit.motorcyclemanager.data.doa.HistoryDao
 import fr.zunkit.motorcyclemanager.data.models.BikeEntity
 import fr.zunkit.motorcyclemanager.data.models.BikeWithConsumablesAndChecksEntity
 import fr.zunkit.motorcyclemanager.data.models.CheckEntity
@@ -14,7 +15,8 @@ import javax.inject.Inject
 class BikeRepository @Inject constructor(
     private val bikeDao: BikeDao,
     private val consumableDao: ConsumableDao,
-    private val checkDao: CheckDao
+    private val checkDao: CheckDao,
+    private val historyDao: HistoryDao
 ) {
     suspend fun createBike(
         name: String,
@@ -56,7 +58,9 @@ class BikeRepository @Inject constructor(
     suspend fun deleteBikeById(bikeId: Long) {
         consumableDao.deleteConsumableByBikeId(bikeId)
         checkDao.deleteCheckByBikeId(bikeId)
+        historyDao.deleteHistoryByBikeId(bikeId)
         bikeDao.deleteBikeById(bikeId)
+
     }
 
     suspend fun addPictureToBike(bikeId: Long, uri: String) {
