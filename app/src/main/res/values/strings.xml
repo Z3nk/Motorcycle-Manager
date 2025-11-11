@@ -43,7 +43,7 @@
     <string name="add_dirtbike">Add dirtbike</string>
     <string name="time_remaining">%1$.1f hours remaining</string>
     <string name="time_remining_exceed">%1$.1f hours overdue</string>
-    <string name="consommable_hours">%1$.1f hours</string>
+    <string name="x_hours">%1$.1f hours</string>
     <string name="consumables_number">Consumables: %1$d</string>
     <string name="checks_number">Checkpoints: %1$d</string>
     <string name="times_number">Bike hours: %1$s</string>
@@ -59,4 +59,5 @@
     <string name="add_com_or_not">Add a note or leave it blank</string>
     <string name="comment">Note</string>
     <string name="explain_lifespan_optional">Do you want to be alerted when to change this part based on its lifespan?</string>
+    <string name="renew_after_x_hours">renew after %1$.1f hours</string>
 </resources>

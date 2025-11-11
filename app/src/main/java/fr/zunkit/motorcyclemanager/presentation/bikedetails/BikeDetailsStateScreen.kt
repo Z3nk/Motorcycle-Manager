@@ -176,7 +176,8 @@ fun BikeDetailsPreview() {
                             1,
                             "25-02-2025",
                             "engine oil",
-                            "oil was a bit dirty"
+                            "oil was a bit dirty",
+                            null
                         )
                     )
                 )

@@ -42,7 +42,7 @@
     <string name="add_dirtbike">Bike hinzufügen</string>
     <string name="time_remaining">%1$.1f Stunden verbleibend</string>
     <string name="time_remining_exceed">%1$.1f Stunden überzogen</string>
-    <string name="consommable_hours">%1$.1f Stunden</string>
+    <string name="x_hours">%1$.1f Stunden</string>
     <string name="consumables_number">Verschleißteile: %1$d</string>
     <string name="checks_number">Kontrollpunkte: %1$d</string>
     <string name="times_number">Betriebsstunden: %1$s</string>
@@ -58,4 +58,5 @@
     <string name="add_com_or_not">Füge eine Notiz hinzu oder lasse es leer</string>
     <string name="comment">Notiz</string>
     <string name="explain_lifespan_optional">Möchtest du benachrichtigt werden, wenn dieses Teil je nach Lebensdauer gewechselt werden muss?</string>
+    <string name="renew_after_x_hours">nach %1$.1f Stunden erneuern</string>
 </resources>

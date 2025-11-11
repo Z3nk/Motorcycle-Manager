@@ -21,5 +21,6 @@ data class HistoryEntity(
     val bikeId: Long,
     val date: String,
     val title: String,
+    val time: Float?,
     val description: String
 )

@@ -7,12 +7,14 @@ data class History(
     val id: Long,
     val date: String,
     val title: String,
-    val description: String
+    val description: String,
+    val time: Float?
 ) {
     constructor(entity: HistoryDomain) : this(
         id = entity.id,
         date = entity.date,
         title = entity.title,
-        description = entity.description
+        description = entity.description,
+        time = entity.time
     )
 }

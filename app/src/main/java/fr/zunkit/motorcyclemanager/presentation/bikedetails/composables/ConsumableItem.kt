@@ -81,7 +81,7 @@ fun ConsumableItem(
                 consumable.time?.let { time ->
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = stringResource(R.string.consommable_hours, time),
+                        text = stringResource(R.string.x_hours, time),
                         style = MaterialTheme.typography.bodySmall,
                         color = if (isUrgent)
                             MaterialTheme.colorScheme.onErrorContainer
@@ -141,7 +141,7 @@ fun ConsumableItem(
                 }
                 Text(
                     text = stringResource(
-                        R.string.consommable_hours,
+                        R.string.x_hours,
                         consumable.currentTime ?: 0.0f
                     ),
                     style = MaterialTheme.typography.bodySmall,

@@ -42,7 +42,7 @@
     <string name="add_dirtbike">Adicionar moto</string>
     <string name="time_remaining">%1$.1f horas restantes</string>
     <string name="time_remining_exceed">%1$.1f horas excedidas</string>
-    <string name="consommable_hours">%1$.1f horas</string>
+    <string name="x_hours">%1$.1f horas</string>
     <string name="consumables_number">Consumíveis: %1$d</string>
     <string name="checks_number">Pontos de verificação: %1$d</string>
     <string name="times_number">Horas da moto: %1$s</string>
@@ -58,4 +58,5 @@
     <string name="add_com_or_not">Adicione uma nota ou deixe em branco</string>
     <string name="comment">Nota</string>
     <string name="explain_lifespan_optional">Quer ser alertado quando trocar esta peça com base na sua vida útil?</string>
+    <string name="renew_after_x_hours">renovar após %1$.1f horas</string>
 </resources>
