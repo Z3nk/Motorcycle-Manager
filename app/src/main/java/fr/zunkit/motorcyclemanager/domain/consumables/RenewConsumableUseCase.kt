@@ -36,6 +36,7 @@ class RenewConsumableUseCase @Inject constructor(
                         bikeId = bikeId,
                         title = consumable.name,
                         description = note,
+                        time = consumable.currentTime,
                         date = getTodayAutoFormatted()
                     )
                 )

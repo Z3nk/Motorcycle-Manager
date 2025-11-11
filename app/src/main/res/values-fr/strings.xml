@@ -42,7 +42,7 @@
     <string name="time_remining_exceed">%1$sh en trop</string>
     <string name="history">Historique</string>
     <string name="details">Détails</string>
-    <string name="consommable_hours">%1$.1f heures</string>
+    <string name="x_hours">%1$.1f heures</string>
     <string name="consumables_number">Nombre de consommables : %1$d</string>
     <string name="checks_number">Nombre de points de contrôle : %1$d</string>
     <string name="times_number">Heures de la moto : %1$s</string>
@@ -58,4 +58,5 @@
     <string name="add_com_or_not">Ajoutez un commentaire ou laissez vide</string>
     <string name="comment">Commentaire</string>
     <string name="explain_lifespan_optional">Voulez vous être alerté quand changer cette pièce en fonction de sa durée de vie ?</string>
+    <string name="renew_after_x_hours">renouveler après %1$.1f heures</string>
 </resources>

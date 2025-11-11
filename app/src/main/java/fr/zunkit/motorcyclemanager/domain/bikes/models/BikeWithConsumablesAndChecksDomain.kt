@@ -29,7 +29,8 @@ data class BikeWithConsumablesAndChecksDomain(
                 it.id,
                 it.date,
                 it.title,
-                it.description
+                it.description,
+                it.time
             )
         },
         checks = entity.checks.map { CheckDomain(it.id, it.name, it.done) }

@@ -5,5 +5,6 @@ data class HistoryDomain(
     val id: Long,
     val date: String,
     val title: String,
-    val description: String
+    val description: String,
+    val time: Float?
 )

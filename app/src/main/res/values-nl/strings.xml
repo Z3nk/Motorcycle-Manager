@@ -42,7 +42,7 @@
     <string name="add_dirtbike">Motor toevoegen</string>
     <string name="time_remaining">%1$.1f uur resterend</string>
     <string name="time_remining_exceed">%1$.1f uur overschreden</string>
-    <string name="consommable_hours">%1$.1f uur</string>
+    <string name="x_hours">%1$.1f uur</string>
     <string name="consumables_number">Verbruiksonderdelen: %1$d</string>
     <string name="checks_number">Controlepunten: %1$d</string>
     <string name="times_number">Motoruren: %1$s</string>
@@ -58,4 +58,5 @@
     <string name="add_com_or_not">Voeg een notitie toe of laat leeg</string>
     <string name="comment">Notitie</string>
     <string name="explain_lifespan_optional">Wil je een melding krijgen wanneer je dit onderdeel moet vervangen op basis van zijn levensduur?</string>
+    <string name="renew_after_x_hours">vernieuw na %1$.1f uur</string>
 </resources>
