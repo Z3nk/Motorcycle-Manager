@@ -13,7 +13,11 @@ import fr.zunkit.motorcyclemanager.data.models.CheckEntity
 import fr.zunkit.motorcyclemanager.data.models.ConsumableEntity
 import fr.zunkit.motorcyclemanager.data.models.HistoryEntity
 
-@Database(entities = [BikeEntity::class, ConsumableEntity::class, CheckEntity::class, HistoryEntity::class], version = 3, exportSchema = true)
+@Database(
+    entities = [BikeEntity::class, ConsumableEntity::class, CheckEntity::class, HistoryEntity::class],
+    version = 4,
+    exportSchema = true
+)
 abstract class MotorCycleDatabase : RoomDatabase() {
     abstract fun bikeDao(): BikeDao
 
@@ -32,7 +36,8 @@ abstract class MotorCycleDatabase : RoomDatabase() {
 
         val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL("""
+                db.execSQL(
+                    """
             CREATE TABLE histories (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 bikeId INTEGER NOT NULL,
@@ -41,10 +46,38 @@ abstract class MotorCycleDatabase : RoomDatabase() {
                 description TEXT NOT NULL,
                 FOREIGN KEY (bikeId) REFERENCES bikes(id) ON DELETE CASCADE
             )
-        """.trimIndent())
+        """.trimIndent()
+                )
 
-                // Index pour perf
                 db.execSQL("CREATE INDEX IF NOT EXISTS index_histories_bikeId ON histories(bikeId)")
+            }
+        }
+
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+            CREATE TABLE consumable_entity_new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                bikeId INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                time REAL,
+                currentTime REAL NOT NULL
+            )
+        """.trimIndent()
+                )
+
+                db.execSQL(
+                    """
+            INSERT INTO consumable_entity_new (id, bikeId, name, time, currentTime)
+            SELECT id, bikeId, name, time, currentTime
+            FROM ConsumableEntity
+        """.trimIndent()
+                )
+
+                db.execSQL("DROP TABLE ConsumableEntity")
+
+                db.execSQL("ALTER TABLE consumable_entity_new RENAME TO ConsumableEntity")
             }
         }
     }

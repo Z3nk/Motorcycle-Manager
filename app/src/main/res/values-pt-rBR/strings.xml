@@ -12,7 +12,7 @@
     <string name="or">OU</string>
     <string name="add_consumable">Adicionar consumível</string>
     <string name="no_consumables">Nenhum consumível</string>
-    <string name="consumables_examples">Um consumível é qualquer peça com vida útil na sua moto que você quer acompanhar.\nExemplos: troca de óleo, filtro de óleo, pistão, etc.</string>
+    <string name="consumables_examples">Um consumível é uma peça ou qualquer coisa na sua moto de trilha que você deseja acompanhar o desgaste em horas.\nVocê pode adicionar opcionalmente uma vida útil para ver facilmente e ser alertado quando precisar renovar.\n\nExemplos: troca de óleo, filtro de óleo, pistão, etc.</string>
     <string name="no_check_points">Nenhum ponto de verificação</string>
     <string name="renew">Renovar</string>
     <string name="checks_examples">Qualquer tarefa que você queira fazer antes ou depois de um rolê.\nExemplos: checar torque, tensão da corrente, etc.</string>
@@ -57,4 +57,5 @@
     <string name="cancel">Cancelar</string>
     <string name="add_com_or_not">Adicione uma nota ou deixe em branco</string>
     <string name="comment">Nota</string>
+    <string name="explain_lifespan_optional">Quer ser alertado quando trocar esta peça com base na sua vida útil?</string>
 </resources>

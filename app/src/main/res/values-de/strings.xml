@@ -12,7 +12,7 @@
     <string name="or">ODER</string>
     <string name="add_consumable">Verschleißteil hinzufügen</string>
     <string name="no_consumables">Keine Verschleißteile</string>
-    <string name="consumables_examples">Ein Verschleißteil ist alles mit einer Lebensdauer an deinem Dirtbike, das du überwachen möchtest.\nBeispiele: Ölwechsel, Ölfilter, Kolben usw.</string>
+    <string name="consumables_examples">Ein Verschleißteil ist ein Bauteil oder etwas an deinem Dirtbike, dessen Abnutzung in Stunden du verfolgen möchtest.\nDu kannst optional eine Lebensdauer hinzufügen, um leicht zu sehen und benachrichtigt zu werden, wenn es ersetzt werden muss.\n\nBeispiele: Ölwechsel, Ölfilter, Kolben, usw.</string>
     <string name="no_check_points">Keine Kontrollpunkte</string>
     <string name="renew">Erneuern</string>
     <string name="checks_examples">Alle Aufgaben, die du vor oder nach einer Fahrt erledigen möchtest.\nBeispiele: Drehmoment prüfen, Kettenspannung kontrollieren usw.</string>
@@ -57,4 +57,5 @@
     <string name="cancel">Abbrechen</string>
     <string name="add_com_or_not">Füge eine Notiz hinzu oder lasse es leer</string>
     <string name="comment">Notiz</string>
+    <string name="explain_lifespan_optional">Möchtest du benachrichtigt werden, wenn dieses Teil je nach Lebensdauer gewechselt werden muss?</string>
 </resources>
