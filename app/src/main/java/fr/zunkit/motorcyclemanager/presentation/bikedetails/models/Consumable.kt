@@ -6,7 +6,7 @@ import fr.zunkit.motorcyclemanager.domain.bikes.models.ConsumableDomain
 data class Consumable(
     val id: Long,
     val name: String,
-    val time: Float,
+    val time: Float?,
     val currentTime: Float? = null
 ) {
     constructor(entity: ConsumableDomain) : this(

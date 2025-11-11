@@ -12,7 +12,7 @@
     <string name="or">OF</string>
     <string name="add_consumable">Verbruiksonderdeel toevoegen</string>
     <string name="no_consumables">Geen verbruiksonderdelen</string>
-    <string name="consumables_examples">Een verbruiksonderdeel is alles met een levensduur op je dirt bike dat je wilt bijhouden.\nVoorbeelden: olieverversing, oliefilter, zuiger, enz.</string>
+    <string name="consumables_examples">Een verbruiksdeel is een onderdeel of iets aan je crossmotor waarvan je de slijtage in uren wilt bijhouden.\nJe kunt optioneel een levensduur toevoegen om makkelijk te zien en een melding te krijgen wanneer het vervangen moet worden.\nVoorbeelden: oliewissel, oliefilter, zuiger, enz.</string>
     <string name="no_check_points">Geen controlepunten</string>
     <string name="renew">Vernieuwen</string>
     <string name="checks_examples">Alle taken die je voor of na een rit wilt uitvoeren.\nVoorbeelden: koppel controleren, kettingspanning checken, enz.</string>
@@ -57,4 +57,5 @@
     <string name="cancel">Annuleren</string>
     <string name="add_com_or_not">Voeg een notitie toe of laat leeg</string>
     <string name="comment">Notitie</string>
+    <string name="explain_lifespan_optional">Wil je een melding krijgen wanneer je dit onderdeel moet vervangen op basis van zijn levensduur?</string>
 </resources>

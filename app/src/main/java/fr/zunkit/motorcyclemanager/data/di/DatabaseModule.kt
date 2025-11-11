@@ -28,6 +28,7 @@ object DatabaseModule {
         )
             .addMigrations(MotorCycleDatabase.MIGRATION_1_2)
             .addMigrations(MotorCycleDatabase.MIGRATION_2_3)
+            .addMigrations(MotorCycleDatabase.MIGRATION_3_4)
             .build()
     }
 

@@ -9,7 +9,7 @@
     <string name="or">OU</string>
     <string name="add_consumable">Ajouter un consommable</string>
     <string name="no_consumables">Aucun consommable</string>
-    <string name="consumables_examples">Un consommable, c’est quelque chose qui a une durée de vie sur votre motocross et dont vous souhaitez suivre l’usure.\nExemple : vidange, filtre à huile, piston, etc.</string>
+    <string name="consumables_examples">Un consommable, c’est une pièce ou quelque chose sur votre motocross dont vous souhaitez suivre l’usure en heure.\nVous pouvez ajouter si vous le souhaitez, une durée de vie pour voir facilement et être alerté quand vous devrez le renouveller.\n\nExemple de consommables : vidange, filtre à huile, piston, etc.</string>
     <string name="no_check_points">Aucun point de contrôle</string>
     <string name="checks_examples">Toutes les actions que vous souhaitez effectuer avant ou après une sortie.\nExemple : contrôler le serrage, vérifier la tension de chaîne, etc.</string>
     <string name="add_hours_examples">En ajoutant des heures de roulage, vous les ajoutez aussi à vos consommables.</string>
@@ -57,4 +57,5 @@
     <string name="cancel">Annuler</string>
     <string name="add_com_or_not">Ajoutez un commentaire ou laissez vide</string>
     <string name="comment">Commentaire</string>
+    <string name="explain_lifespan_optional">Voulez vous être alerté quand changer cette pièce en fonction de sa durée de vie ?</string>
 </resources>

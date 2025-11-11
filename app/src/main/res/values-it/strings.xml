@@ -12,7 +12,7 @@
     <string name="or">OPPURE</string>
     <string name="add_consumable">Aggiungi consumabile</string>
     <string name="no_consumables">Nessun consumabile</string>
-    <string name="consumables_examples">Un consumabile è qualsiasi componente con durata limitata sulla tua moto da tracciare.\nEsempi: cambio olio, filtro olio, pistone, ecc.</string>
+    <string name="consumables_examples">Un consumabile è un pezzo o qualsiasi cosa sulla tua moto da cross di cui vuoi monitorare l’usura in ore.\nPuoi aggiungere facoltativamente una durata di vita per vedere facilmente e ricevere un avviso quando dovrai sostituirlo.\n\nEsempi: cambio olio, filtro olio, pistone, ecc.</string>
     <string name="no_check_points">Nessun punto di controllo</string>
     <string name="renew">Rinnova</string>
     <string name="checks_examples">Qualsiasi attività da fare prima o dopo un’uscita.\nEsempi: controllo coppia, tensione catena, ecc.</string>
@@ -57,4 +57,5 @@
     <string name="cancel">Annulla</string>
     <string name="add_com_or_not">Aggiungi una nota o lascia vuoto</string>
     <string name="comment">Nota</string>
+    <string name="explain_lifespan_optional">Vuoi essere avvisato quando cambiare questo pezzo in base alla sua durata?</string>
 </resources>

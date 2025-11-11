@@ -20,6 +20,6 @@ data class ConsumableEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val bikeId: Long,
     val name: String,
-    val time: Float,
-    val currentTime: Float
+    val time: Float?,
+    val currentTime: Float,
 )

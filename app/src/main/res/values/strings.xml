@@ -13,7 +13,7 @@
     <string name="or">OR</string>
     <string name="add_consumable">Add consumable</string>
     <string name="no_consumables">No consumables</string>
-    <string name="consumables_examples">A consumable is anything with a lifespan on your dirtbike that you want to track.\nExamples: oil change, oil filter, piston, etc.</string>
+    <string name="consumables_examples">A consumable is a part or anything on your dirtbike that you want to track wear in hours.\nYou can optionally add a lifespan to easily see and get alerted when it needs to be replaced.\n\nExamples of consumables: oil change, oil filter, piston, etc.</string>
     <string name="no_check_points">No checkpoints</string>
     <string name="renew">Renew</string>
     <string name="checks_examples">Any tasks you want to do before or after a ride.\nExamples: check torque, check chain tension, etc.</string>
@@ -58,4 +58,5 @@
     <string name="cancel">Cancel</string>
     <string name="add_com_or_not">Add a note or leave it blank</string>
     <string name="comment">Note</string>
+    <string name="explain_lifespan_optional">Do you want to be alerted when to change this part based on its lifespan?</string>
 </resources>

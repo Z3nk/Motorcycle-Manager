@@ -42,12 +42,7 @@ fun ConsumableItem(
     onDeleteClick: () -> Unit
 ) {
     var showMenu by remember { mutableStateOf(false) }
-    val hoursRemaining = consumable.time - (consumable.currentTime ?: 0.0f)
-    val progress = if (consumable.time > 0 && consumable.currentTime != null) {
-        (consumable.currentTime / consumable.time).coerceIn(0f, 1f)
-    } else {
-        0f
-    }
+    val hoursRemaining = (consumable.time ?: 0.0f) - (consumable.currentTime ?: 0.0f)
     val isUrgent = hoursRemaining <= 2f
 
     Card(
@@ -57,7 +52,7 @@ fun ConsumableItem(
                 onClick = onEditClick,
                 onLongClick = { showMenu = true }),
         colors = CardDefaults.cardColors(
-            containerColor = if (isUrgent)
+            containerColor = if (consumable.time != null && isUrgent)
                 MaterialTheme.colorScheme.errorContainer
             else
                 MaterialTheme.colorScheme.surfaceVariant
@@ -83,59 +78,67 @@ fun ConsumableItem(
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
-
-                Text(
-                    text = stringResource(R.string.consommable_hours, consumable.time),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = if (isUrgent)
-                        MaterialTheme.colorScheme.onErrorContainer
-                    else
-                        MaterialTheme.colorScheme.onSurface
-                )
+                consumable.time?.let { time ->
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = stringResource(R.string.consommable_hours, time),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = if (isUrgent)
+                            MaterialTheme.colorScheme.onErrorContainer
+                        else
+                            MaterialTheme.colorScheme.onSurface
+                    )
+                }
             }
 
             Column(
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
             ) {
-                if (hoursRemaining > 0) {
-                    Text(
-                        text = stringResource(
-                            R.string.time_remaining,
-                            hoursRemaining
-                        ),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        textAlign = TextAlign.End
-                    )
-                } else {
-                    Text(
-                        text = stringResource(
-                            R.string.time_remining_exceed,
-                            ((consumable.currentTime ?: 0.0f) - consumable.time)
-                        ),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        textAlign = TextAlign.End
+                consumable.time?.let { time ->
+                    val progress = if (time > 0 && consumable.currentTime != null) {
+                        (consumable.currentTime / time).coerceIn(0f, 1f)
+                    } else {
+                        0f
+                    }
+                    if (hoursRemaining > 0) {
+                        Text(
+                            text = stringResource(
+                                R.string.time_remaining,
+                                hoursRemaining
+                            ),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            textAlign = TextAlign.End
+                        )
+                    } else {
+                        Text(
+                            text = stringResource(
+                                R.string.time_remining_exceed,
+                                ((consumable.currentTime ?: 0.0f) - time)
+                            ),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            textAlign = TextAlign.End
+                        )
+                    }
+                    LinearProgressIndicator(
+                        progress = { progress },
+                        modifier = Modifier
+                            .width(60.dp)
+                            .height(4.dp),
+                        color = if (isUrgent)
+                            MaterialTheme.colorScheme.error
+                        else if (progress < 0.5f)
+                            Color.Green
+                        else
+                            Color(0xFFFFA500),
+                        trackColor = MaterialTheme.colorScheme.onSurface,
+                        strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
+                        gapSize = 0.dp,
+                        drawStopIndicator = {}
                     )
                 }
-                LinearProgressIndicator(
-                    progress = { progress },
-                    modifier = Modifier
-                        .width(60.dp)
-                        .height(4.dp),
-                    color = if (isUrgent)
-                        MaterialTheme.colorScheme.error
-                    else if (progress < 0.5f)
-                        Color.Green
-                    else
-                        Color(0xFFFFA500),
-                    trackColor = MaterialTheme.colorScheme.onSurface,
-                    strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
-                    gapSize = 0.dp,
-                    drawStopIndicator = {}
-                )
                 Text(
                     text = stringResource(
                         R.string.consommable_hours,

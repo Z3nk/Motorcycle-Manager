@@ -12,7 +12,7 @@
     <string name="or">O</string>
     <string name="add_consumable">Añadir consumible</string>
     <string name="no_consumables">Sin consumibles</string>
-    <string name="consumables_examples">Un consumible es cualquier pieza con vida útil en tu moto que quieras seguir.\nEjemplos: cambio de aceite, filtro de aceite, pistón, etc.</string>
+    <string name="consumables_examples">Un consumible es una pieza o cualquier cosa en tu moto de cross que deseas seguir en horas de uso.\nPuedes añadir opcionalmente una vida útil para ver fácilmente y recibir una alerta cuando debas renovarlo.\n\nEjemplos: cambio de aceite, filtro de aceite, pistón, etc.</string>
     <string name="no_check_points">Sin puntos de control</string>
     <string name="renew">Renovar</string>
     <string name="checks_examples">Cualquier tarea que quieras hacer antes o después de salir.\nEjemplos: verificar par de apriete, tensión de cadena, etc.</string>
@@ -57,4 +57,5 @@
     <string name="cancel">Cancelar</string>
     <string name="add_com_or_not">Añade una nota o déjalo en blanco</string>
     <string name="comment">Nota</string>
+    <string name="explain_lifespan_optional">¿Quieres que se te avise cuándo cambiar esta pieza según su vida útil?</string>
 </resources>

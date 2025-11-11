@@ -1,5 +1,6 @@
 package fr.zunkit.motorcyclemanager.presentation.addconsumable.screens
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,6 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,9 +45,10 @@ fun AddOrUpdateConsumableStateScreen(
 ) {
     val context = LocalContext.current
     var name by remember { mutableStateOf(consumableName ?: "") }
-    var time by remember { mutableStateOf(consumableTime?.toString() ?: "") }
+    var time by remember { mutableStateOf(consumableTime?.toString()) }
     var currentTime by remember { mutableStateOf(consumableCurrentTime?.toString() ?: "") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
+    var showTime by remember { mutableStateOf(consumableTime?.toString() != null) }
     Column {
         Row(
             modifier = Modifier
@@ -94,19 +97,6 @@ fun AddOrUpdateConsumableStateScreen(
             )
 
             OutlinedTextField(
-                value = time,
-                onValueChange = {
-                    if (it.isEmpty() || it.matches(Regex("^[0-9]*[.,]?[0-9]*$"))) {
-                        time = it
-                    }
-                },
-                label = { Text(stringResource(R.string.timelife_of_consumable)) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                modifier = Modifier.fillMaxWidth(),
-                isError = errorMessage != null
-            )
-
-            OutlinedTextField(
                 value = currentTime,
                 onValueChange = {
                     if (it.isEmpty() || it.matches(Regex("^[0-9]*[.,]?[0-9]*$"))) {
@@ -118,6 +108,36 @@ fun AddOrUpdateConsumableStateScreen(
                 modifier = Modifier.fillMaxWidth(),
                 isError = errorMessage != null
             )
+
+
+            Row(
+                modifier = Modifier.padding(24.dp),
+                horizontalArrangement = Arrangement.spacedBy(24.dp)
+            ) {
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = stringResource(R.string.explain_lifespan_optional),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Switch(checked = showTime, onCheckedChange = {
+                    showTime = !showTime
+                })
+            }
+            AnimatedVisibility(showTime) {
+                OutlinedTextField(
+                    value = time ?: "",
+                    onValueChange = {
+                        if (it.isEmpty() || it.matches(Regex("^[0-9]*[.,]?[0-9]*$"))) {
+                            time = it
+                        }
+                    },
+                    label = { Text(stringResource(R.string.timelife_of_consumable)) },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                    modifier = Modifier.fillMaxWidth(),
+                    isError = errorMessage != null
+                )
+            }
 
             errorMessage?.let {
                 Text(
@@ -133,12 +153,8 @@ fun AddOrUpdateConsumableStateScreen(
                         errorMessage = context.getString(R.string.name_is_mandatory)
                         return@Button
                     }
-                    if (time.isBlank()) {
-                        errorMessage = context.getString(R.string.time_is_mandatory)
-                        return@Button
-                    }
-                    val fTime = time.replace(",", ".").toFloatOrNull()
-                    if (fTime == null || fTime <= 0) {
+                    val fTime = time?.takeIf { showTime }?.replace(",", ".")?.toFloatOrNull()
+                    if (showTime && (fTime == null || (fTime <= 0))) {
                         errorMessage = context.getString(R.string.lifetime_should_be_above_0)
                         return@Button
                     }
@@ -150,7 +166,13 @@ fun AddOrUpdateConsumableStateScreen(
                     }
 
                     errorMessage = null
-                    onNewConsumable(AddOrUpdateConsumable(name, fTime, fcurrentTime))
+                    onNewConsumable(
+                        AddOrUpdateConsumable(
+                            name,
+                            fTime,
+                            fcurrentTime
+                        )
+                    )
                 },
                 modifier = Modifier.padding(top = 16.dp)
             ) {
