@@ -32,9 +32,15 @@
 -keepclassmembers class * {
     @kotlinx.serialization.Serializable <fields>;
 }
-
+-keepattributes *Annotation*
 -keepnames class kotlinx.serialization.** { *; }
 -dontwarn kotlinx.serialization.**
 -dontwarn com.google.android.gms.common.annotation.NoNullnessRewrite
--keep class fr.zunkit.motorcyclemanager.MotorCycleApp { *; }
--keepnames class fr.zunkit.motorcyclemanager.MotorCycleApp
+
+# APPLICATION + HILT - RÈGLE OBLIGATOIRE 2025
+-keep class fr.zunkit.motorcyclemanager.MotorCycleApp {
+    public <init>(...);
+    public void onCreate();
+    public void attachBaseContext(android.content.Context);
+}
+-keep class **_Hilt* { *; }
