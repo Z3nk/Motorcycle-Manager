@@ -1,17 +1,9 @@
 package fr.zunkit.motorcyclemanager.domain.bikes
 
-import android.content.Context
 import android.net.Uri
-import androidx.camera.core.UseCase
-import dagger.hilt.android.qualifiers.ApplicationContext
 import fr.zunkit.motorcyclemanager.core.FileManager
-import fr.zunkit.motorcyclemanager.data.models.ConsumableEntity
 import fr.zunkit.motorcyclemanager.data.repositories.bikes.BikeRepository
-import fr.zunkit.motorcyclemanager.data.repositories.consumables.ConsumableRepository
 import fr.zunkit.motorcyclemanager.models.Resource
-import fr.zunkit.motorcyclemanager.presentation.addhour.models.AddHour
-import fr.zunkit.motorcyclemanager.presentation.bikedetails.extensions.copyImageToPersistentStorage
-import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Consumable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.File
@@ -29,7 +21,10 @@ class AddPictureToBikeUseCase @Inject constructor(
         try {
             val oldPath = bikeRepository.getCurrentPhotoPath(bikeId)
             oldPath?.let { oldPath -> File(oldPath).takeIf { file -> file.exists() }?.delete() }
-            val newPath = fileManager.copyImageToPersistentStorage(uri, bikeId)
+            val newPath = fileManager.copyImageToPersistentStorage(
+                uri,
+                "bike_${bikeId}_${System.currentTimeMillis()}.jpg"
+            )
 
 
             bikeRepository.addPictureToBike(bikeId, newPath)

@@ -68,7 +68,7 @@ fun BikeDetailsScreen(
                     onEditCheck = { check ->
                         onNavigateToEditCheckScreen(check.id)
                     },
-                    onDeleteCheck = { check->
+                    onDeleteCheck = { check ->
                         viewModel.onDeleteCheck(check)
                     },
                     onAddConsumable = {
@@ -89,6 +89,12 @@ fun BikeDetailsScreen(
                     },
                     onEditPhoto = {
                         pickImageLauncher.launch("image/*")
+                    },
+                    onAddInvoice = { uri ->
+                        viewModel.onAddInvoice(uri, bikeId)
+                    },
+                    onDeleteInvoice = { invoice ->
+                        viewModel.onDeleteInvoice(bikeId, invoice)
                     }
                 )
             }

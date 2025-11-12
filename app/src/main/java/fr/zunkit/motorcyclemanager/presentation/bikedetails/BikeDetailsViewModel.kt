@@ -12,9 +12,12 @@ import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Bike
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Check
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Consumable
 import dagger.hilt.android.lifecycle.HiltViewModel
+import fr.zunkit.motorcyclemanager.domain.bikes.AddInvoiceUseCase
 import fr.zunkit.motorcyclemanager.domain.bikes.GetBikeUseCase
 import fr.zunkit.motorcyclemanager.domain.bikes.AddPictureToBikeUseCase
 import fr.zunkit.motorcyclemanager.domain.consumables.RenewConsumableUseCase
+import fr.zunkit.motorcyclemanager.domain.invoices.DeleteInvoiceUseCase
+import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Invoice
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -25,6 +28,8 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,7 +39,9 @@ class BikeDetailsViewModel @Inject constructor(
     private val deleteCheckUseCase: DeleteCheckUseCase,
     private val deleteConsumableUseCase: DeleteConsumableUseCase,
     private val renewConsumableUseCase: RenewConsumableUseCase,
-    private val addPictureToBikeUseCase: AddPictureToBikeUseCase
+    private val addPictureToBikeUseCase: AddPictureToBikeUseCase,
+    private val addInvoiceUseCase: AddInvoiceUseCase,
+    private val deleteInvoiceUseCase: DeleteInvoiceUseCase,
 ) :
     ViewModel() {
     private val bikeWithConsumablesAndChecksDomain =
@@ -79,7 +86,7 @@ class BikeDetailsViewModel @Inject constructor(
         }
     }
 
-    fun onRenewConsumable(consumable: Consumable,  note: String) {
+    fun onRenewConsumable(consumable: Consumable, note: String) {
         viewModelScope.launch(Dispatchers.Main) {
             bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->
                 renewConsumableUseCase(consumable, bikeId, note).collectLatest { res ->
@@ -95,6 +102,7 @@ class BikeDetailsViewModel @Inject constructor(
             }
         }
     }
+
     fun onDeleteConsumable(consumable: Consumable) {
         viewModelScope.launch(Dispatchers.Main) {
             bikeWithConsumablesAndChecksDomain.value?.bike?.id?.let { bikeId ->
@@ -145,7 +153,6 @@ class BikeDetailsViewModel @Inject constructor(
     }
 
     fun onPhotoPicked(uri: Uri, bikeId: Long) {
-
         viewModelScope.launch(Dispatchers.Main) {
             addPictureToBikeUseCase(bikeId, uri).collectLatest { res ->
                 when (res) {
@@ -156,6 +163,36 @@ class BikeDetailsViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun onAddInvoice(uri: Uri, bikeId: Long) {
+        viewModelScope.launch(Dispatchers.Main) {
+            addInvoiceUseCase(bikeId, uri).collectLatest { res ->
+                when (res) {
+                    is Resource.Error<*> -> {}
+                    is Resource.Loading<*> -> {}
+                    is Resource.Success<*> -> {
+                        refreshBikeWith(bikeId)
+                    }
+                }
+            }
+
+        }
+    }
+
+    fun onDeleteInvoice(bikeId: Long, invoice: Invoice) {
+        viewModelScope.launch(Dispatchers.Main) {
+            deleteInvoiceUseCase(invoice).collectLatest { res ->
+                when (res) {
+                    is Resource.Error<*> -> {}
+                    is Resource.Loading<*> -> {}
+                    is Resource.Success<*> -> {
+                        refreshBikeWith(bikeId)
+                    }
+                }
+            }
+
         }
     }
 }

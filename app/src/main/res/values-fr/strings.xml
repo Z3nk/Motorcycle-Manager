@@ -59,4 +59,9 @@
     <string name="comment">Commentaire</string>
     <string name="explain_lifespan_optional">Voulez vous être alerté quand changer cette pièce en fonction de sa durée de vie ?</string>
     <string name="renew_after_x_hours">renouveler après %1$.1f heures</string>
+    <string name="invoices">Factures</string>
+    <string name="add_invoice">Ajouter une facture</string>
+    <string name="no_invoice">Pas de factures</string>
+    <string name="invoices_examples">Regroupez toutes vos factures pour votre moto ici !</string>
+    <string name="no_app_for_read_file">Aucune application trouvée pour ouvrir ce fichier.</string>
 </resources>

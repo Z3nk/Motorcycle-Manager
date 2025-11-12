@@ -24,7 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import fr.zunkit.motorcyclemanager.R
-import fr.zunkit.motorcyclemanager.core.OpenPlayStore
+import fr.zunkit.motorcyclemanager.core.openPlayStore
 import kotlinx.coroutines.launch
 
 @Composable
@@ -77,7 +77,7 @@ fun SettingsScreen(modifier: Modifier) {
             Button(
                 onClick = {
                     scope.launch {
-                        OpenPlayStore(context)
+                        openPlayStore(context)
                     }
                 },
                 modifier = Modifier.clip(RoundedCornerShape(6.dp)),
