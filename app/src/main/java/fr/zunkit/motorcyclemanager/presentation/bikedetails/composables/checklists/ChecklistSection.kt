@@ -1,4 +1,4 @@
-package fr.zunkit.motorcyclemanager.presentation.bikedetails.composables
+package fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.checklists
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -67,7 +67,7 @@ fun ChecklistSection(
             }
 
             if (checks.isEmpty()) {
-                EmptyChecklistState()
+                EmptyChecklistSection()
             } else {
                 Column(
                     modifier = Modifier.fillMaxWidth(),

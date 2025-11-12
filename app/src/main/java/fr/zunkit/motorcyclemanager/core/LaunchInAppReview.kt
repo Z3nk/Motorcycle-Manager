@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import com.google.android.play.core.review.ReviewManagerFactory
-import androidx.core.net.toUri
 import kotlinx.coroutines.tasks.await
 
 suspend fun launchInAppReview(context: Context) {
@@ -22,7 +21,7 @@ suspend fun launchInAppReview(context: Context) {
         flow.await()
     } catch (e: Exception) {
         Log.e("Review", "In-app review failed", e)
-        OpenPlayStore(context)
+        openPlayStore(context)
     }
 }
 

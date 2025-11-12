@@ -60,4 +60,10 @@
     <string name="comment">Note</string>
     <string name="explain_lifespan_optional">Do you want to be alerted when to change this part based on its lifespan?</string>
     <string name="renew_after_x_hours">renew after %1$.1f hours</string>
+    <string name="invoices">Invoices</string>
+    <string name="add_invoice">Add invoice</string>
+    <string name="no_invoice">No invoices</string>
+    <string name="invoices_examples">Regroup all your invoices for this bikes here !</string>
+    <string name="no_app_for_read_file">No app on your phone can open this file</string>
+
 </resources>

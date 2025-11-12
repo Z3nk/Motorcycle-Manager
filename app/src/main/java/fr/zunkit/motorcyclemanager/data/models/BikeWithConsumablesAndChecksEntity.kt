@@ -20,4 +20,9 @@ data class BikeWithConsumablesAndChecksEntity(
         entityColumn = "bikeId"
     )
     val histories: List<HistoryEntity>,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "bikeId"
+    )
+    val invoices: List<InvoiceEntity>,
 )

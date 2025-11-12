@@ -12,6 +12,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import fr.zunkit.motorcyclemanager.data.doa.HistoryDao
+import fr.zunkit.motorcyclemanager.data.doa.InvoiceDao
 import javax.inject.Singleton
 
 @Module
@@ -30,6 +31,7 @@ object DatabaseModule {
             .addMigrations(MotorCycleDatabase.MIGRATION_2_3)
             .addMigrations(MotorCycleDatabase.MIGRATION_3_4)
             .addMigrations(MotorCycleDatabase.MIGRATION_4_5)
+            .addMigrations(MotorCycleDatabase.MIGRATION_5_6)
             .build()
     }
 
@@ -55,5 +57,10 @@ object DatabaseModule {
     @Singleton
     fun provideHistoryDao(database: MotorCycleDatabase): HistoryDao {
         return database.historyDao()
+    }
+    @Provides
+    @Singleton
+    fun provideInvoiceDao(database: MotorCycleDatabase): InvoiceDao {
+        return database.invoiceDao()
     }
 }
