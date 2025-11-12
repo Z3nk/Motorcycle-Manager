@@ -7,7 +7,8 @@ data class BikeWithConsumablesAndChecksDomain(
     val bike: BikeDomain,
     val consumables: List<ConsumableDomain>,
     val checks: List<CheckDomain>,
-    val histories: List<HistoryDomain>
+    val histories: List<HistoryDomain>,
+    val invoices: List<InvoiceDomain>
 ) {
     constructor(entity: BikeWithConsumablesAndChecksEntity) : this(
         bike = BikeDomain(
@@ -31,6 +32,14 @@ data class BikeWithConsumablesAndChecksDomain(
                 it.title,
                 it.description,
                 it.time
+            )
+        },
+        invoices = entity.invoices.map {
+            InvoiceDomain(
+                it.id,
+                it.fileName,
+                it.filePath,
+                it.date
             )
         },
         checks = entity.checks.map { CheckDomain(it.id, it.name, it.done) }

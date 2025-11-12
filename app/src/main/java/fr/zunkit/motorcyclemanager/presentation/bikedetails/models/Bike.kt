@@ -9,6 +9,7 @@ data class Bike(
     val consumables: List<Consumable>,
     val checks: List<Check>,
     val histories: List<History>,
+    val invoices: List<Invoice>,
     val photoUri: String?
 ) {
     constructor(entity: BikeWithConsumablesAndChecksDomain) : this(
@@ -18,6 +19,7 @@ data class Bike(
         consumables = entity.consumables.map { Consumable(it) },
         checks = entity.checks.map { Check(it) },
         histories = entity.histories.map { History(it) },
+        invoices = entity.invoices.map { Invoice(it) },
         photoUri = entity.bike.photoUri
     )
 }

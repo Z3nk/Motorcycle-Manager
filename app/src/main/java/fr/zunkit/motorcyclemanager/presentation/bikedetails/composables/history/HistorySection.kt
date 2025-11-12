@@ -1,4 +1,4 @@
-package fr.zunkit.motorcyclemanager.presentation.bikedetails.composables
+package fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.history
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -1,5 +1,8 @@
 package fr.zunkit.motorcyclemanager.presentation.bikedetails;
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,14 +33,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.zunkit.motorcyclemanager.R
 import fr.zunkit.motorcyclemanager.design.theme.MotorcycleManagerTheme
-import fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.HistorySection
+import fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.history.HistorySection
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.BikeSection
-import fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.ChecklistSection
-import fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.ConsumablesSection
+import fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.checklists.ChecklistSection
+import fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.consumables.ConsumablesSection
+import fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.InvoiceSection
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Bike
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Check
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Consumable
 import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.History
+import fr.zunkit.motorcyclemanager.presentation.bikedetails.models.Invoice
 import fr.zunkit.motorcyclemanager.presentation.common.composables.TextInputDialog
 
 @Composable
@@ -53,7 +58,9 @@ fun BikeDetailsStateScreen(
     onDeleteCheck: (Check) -> Unit,
     onClickCheck: (Check) -> Unit,
     onAddHours: () -> Unit,
-    onEditPhoto: () -> Unit
+    onEditPhoto: () -> Unit,
+    onAddInvoice: (Uri) -> Unit,
+    onDeleteInvoice: (Invoice) -> Unit
 ) {
     var lastConsumableSelected by remember { mutableStateOf<Consumable?>(null) }
     var showDescriptionHistoryDialog by remember { mutableStateOf(false) }
@@ -101,6 +108,11 @@ fun BikeDetailsStateScreen(
                         onClick = { tabSelection = 1 },
                         text = { Text(stringResource(R.string.history)) }
                     )
+                    Tab(
+                        selected = tabSelection == 2,
+                        onClick = { tabSelection = 2 },
+                        text = { Text(stringResource(R.string.invoices)) }
+                    )
                 }
                 when (tabSelection) {
                     0 -> {
@@ -127,6 +139,21 @@ fun BikeDetailsStateScreen(
 
                     1 -> {
                         HistorySection(screenState.bike.histories)
+                    }
+
+                    2 -> {
+                        val pickInvoiceLauncher = rememberLauncherForActivityResult(
+                            contract = ActivityResultContracts.GetContent()
+                        ) { uri: Uri? ->
+                            uri?.let { onAddInvoice(it) }
+                        }
+
+                        InvoiceSection(
+                            invoices = screenState.bike.invoices,
+                            onDeleteInvoice = onDeleteInvoice,
+                            onAddInvoice = {
+                                pickInvoiceLauncher.launch("*/*")
+                            })
                     }
                 }
             }
@@ -179,20 +206,23 @@ fun BikeDetailsPreview() {
                             "oil was a bit dirty",
                             null
                         )
-                    )
+                    ),
+                    invoices = listOf()
                 )
             ),
             onBackClick = {},
             onAddConsumable = {},
             onEditConsumable = {},
             onDeleteConsumable = {},
-            onRenewConsumable = {_,_ -> },
+            onRenewConsumable = { _, _ -> },
             onAddCheck = {},
             onEditCheck = {},
             onDeleteCheck = {},
             onAddHours = {},
             onClickCheck = {},
-            onEditPhoto = {}
+            onEditPhoto = {},
+            onDeleteInvoice = {},
+            onAddInvoice = {_ ->}
         )
     }
 }

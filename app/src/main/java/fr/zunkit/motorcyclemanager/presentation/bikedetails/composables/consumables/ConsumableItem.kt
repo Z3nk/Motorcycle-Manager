@@ -1,4 +1,4 @@
-package fr.zunkit.motorcyclemanager.presentation.bikedetails.composables
+package fr.zunkit.motorcyclemanager.presentation.bikedetails.composables.consumables
 
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
